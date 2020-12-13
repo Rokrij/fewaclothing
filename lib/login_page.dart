@@ -1,7 +1,9 @@
+import 'package:fewaclothing/providers/user_auth_provider.dart';
 import 'package:fewaclothing/utils/constants.dart';
 import 'package:fewaclothing/widgets/loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
@@ -123,15 +125,11 @@ class _LoginPageState extends State<LoginPage> {
     var response = await http.get(url);
     Navigator.pop(context);
     if (response.body.contains("Login")) {
-      saveEmail();
+      Provider.of<UserAuthProvider>(context,listen:false).saveEmail(email);
       Navigator.pushNamedAndRemoveUntil(context, 'nav', (route) => false);
     } else {
       showSnackBar("Invalid Email or Password ! Please Try  Again");
     }
   }
 
-  void saveEmail() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('email', email);
-  }
 }

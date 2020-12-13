@@ -1,6 +1,7 @@
+import 'package:fewaclothing/providers/user_auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:provider/provider.dart';
 
 class ProfilePage extends StatelessWidget {
   @override
@@ -12,7 +13,7 @@ class ProfilePage extends StatelessWidget {
         iconTheme: IconThemeData(color: Colors.pink),
         title: Text(
           'Fewa Clothing',
-          style: GoogleFonts.dancingScript(textStyle: TextStyle(color: Colors.pink,fontSize: 35),),
+          style: GoogleFonts.greatVibes(textStyle: TextStyle(color: Colors.pink,fontSize: 35,fontWeight: FontWeight.bold),),
         ),),
       body:   ListView(
         children: [
@@ -23,7 +24,7 @@ class ProfilePage extends StatelessWidget {
               color: Colors.pink,
               textColor: Colors.white,
               onPressed: () {
-                removeEmail();
+                Provider.of<UserAuthProvider>(context,listen:false).saveEmail('');
                 Navigator.pushNamedAndRemoveUntil(
                     context, 'login', (route) => false);
               },
@@ -35,12 +36,6 @@ class ProfilePage extends StatelessWidget {
           ),
         ],
       ),
-
-
     );
   }
-}
-void removeEmail() async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  await prefs.setString('email', '');
 }

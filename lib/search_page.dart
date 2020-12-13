@@ -1,7 +1,6 @@
+import 'package:fewaclothing/widgets/search_bar_slider_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:google_fonts/google_fonts.dart';
-
 class SearchPage extends StatelessWidget {
 
   @override
@@ -34,50 +33,25 @@ class SearchPage extends StatelessWidget {
           ],
         ),
       ),
-      // actions: [
-      //   Padding(
-      //     padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
-      //     child: Icon(Icons.qr_code),
-      //   ),
-      // ],
-    ),
-      //body: Center(child: Text('Search Page')),
-      body: CustomScrollView(
-        slivers:<Widget> [
-          SliverToBoxAdapter(
-            child: Container(
-              height: 25,
-              margin: EdgeInsets.only(top: 15,left: 10,right: 10),
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: <Widget>[
-                  _tagItem("Hoodies"),
-                  _tagItem("Jackets"),
-                  _tagItem("Pants"),
-                  _tagItem("Shoes"),
-                  _tagItem("Shirts"),
-                  _tagItem("Caps"),
-                  _tagItem("Tees"),
-                  _tagItem("Jeans"),
-                  _tagItem("Bomber"),
-                ],
-              ),
-            ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 0, 5, 0),
+            child: IconButton(
+                icon: Icon(Icons.add_shopping_cart),
+                onPressed: () {
+                  Navigator.pushNamed(context, 'cart');
+                }),
           )
         ],
-      ),
+    ),
+      //body: Center(child: Text('Search Page')),
+      body:
+        ListView(
+          children: [
+            SearchBarSlider(),
+          ],
+        )
     );
   }
-  Widget _tagItem(String title){
-    return Container(
-      margin: EdgeInsets.only(left: 10,right: 10),
-      child: Container(child: Text(title,style: TextStyle(color: Colors.white), ),margin: EdgeInsets.all(5),),
-      decoration: BoxDecoration(
-        color: Colors.pink,
-        border:Border.all(width: 1, color: Colors.pink),
-        borderRadius: BorderRadius.all(Radius.circular(5),
-        ),
-      ),
-    );
-  }
+
 }

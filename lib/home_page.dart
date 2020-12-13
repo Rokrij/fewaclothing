@@ -1,7 +1,11 @@
+import 'dart:convert';
 import 'package:carousel_pro/carousel_pro.dart';
+import 'package:fewaclothing/models/category.dart';
+import 'package:fewaclothing/utils/constants.dart';
 import 'package:fewaclothing/widgets/category_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
   @override
@@ -9,6 +13,17 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  List<Category> categoryList = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    readCategory();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,8 +33,8 @@ class _HomePageState extends State<HomePage> {
         iconTheme: IconThemeData(color: Colors.pink),
         title: Text(
           'Fewa Clothing',
-          style: GoogleFonts.dancingScript(
-            textStyle: TextStyle(color: Colors.pink, fontSize: 35),
+          style: GoogleFonts.greatVibes(
+            textStyle: TextStyle(color: Colors.pink, fontSize: 35,fontWeight: FontWeight.bold),
           ),
         ),
         actions: [
@@ -76,13 +91,12 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            //CategoryWidget(),
             GridView.count(
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               crossAxisCount: 4,
-              children: List.generate(8, (index) {
-                return CategoryWidget();
+              children: List.generate(categoryList.length, (index) {
+                return CategoryWidget(categoryList[index]);
               }),
             ),
             Padding(
@@ -90,7 +104,7 @@ class _HomePageState extends State<HomePage> {
               child: Center(
                   child: Text(
                 'RECOMMENDED FOR YOU',
-                style: GoogleFonts.comfortaa(
+                style: GoogleFonts.roboto(
                   textStyle: TextStyle(
                       color: Colors.black,
                       fontSize: 25,
@@ -102,5 +116,21 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+  void readCategory() async {
+    // isLoading = true;
+    var url = "$READ_CATEGORY_URL";
+    var response = await http.get(url);
+
+    List<Category> tempList = [];
+    List data = json.decode(response.body);
+    data.forEach((element) {
+      var category = Category.fromJson(element);
+        tempList.add(category);
+    });
+    setState(() {
+      categoryList = tempList;
+    });
+
   }
 }

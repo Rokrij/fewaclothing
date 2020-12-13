@@ -1,13 +1,11 @@
 
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:fewaclothing/bottom_navigator_page.dart';
-import 'package:fewaclothing/home_page.dart';
 import 'package:fewaclothing/login_page.dart';
+import 'package:fewaclothing/providers/user_auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import 'signup_page.dart';
+import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -15,17 +13,10 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  String email;
-
-  getEmail() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    email = prefs.getString('email') ?? "";
-  }
 
   @override
   void initState() {
     super.initState();
-    getEmail();
   }
 
   @override
@@ -33,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
         body: AnimatedSplashScreen.withScreenFunction(
             screenFunction: () async {
-              return email.isEmpty ? LoginPage() : BottomNavPage();
+              return Provider.of<UserAuthProvider>(context,listen:false).email.isEmpty ? LoginPage() : BottomNavPage();
             },
             splash: Image.asset(
               'assets/images/download.jpg',
