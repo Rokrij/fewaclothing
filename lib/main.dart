@@ -35,6 +35,7 @@ class MyApp extends StatelessWidget {
       home: SignUpPage(),
       theme: ThemeData(
         primaryColor: Colors.pink,
+        highlightColor: Colors.pink,
         textTheme: GoogleFonts.josefinSansTextTheme(
           Theme.of(context).textTheme,),
         accentColor: Colors.pink[400],

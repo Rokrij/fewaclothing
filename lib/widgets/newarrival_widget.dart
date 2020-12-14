@@ -11,26 +11,32 @@ class _NewArrivalWidgetState extends State<NewArrivalWidget> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Align(
-        child: Column(
-          children: [
-            ClipRRect(
-              child:
-              Image(
-                image: AssetImage('assets/images/b.jpg'),
-                height: 275,
-                width: 250,
-              ),
-              borderRadius: BorderRadius.circular(40.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ClipRRect(
+            child:
+            Image(
+              image: AssetImage('assets/images/a.png'),
+              height: 275,
+              width: 250,
             ),
-            Text('Name',
+            borderRadius: BorderRadius.circular(40.0),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 15,bottom: 10),
+            child: Text('Name',
               style: GoogleFonts.nunito(
                 textStyle: TextStyle(color: Colors.pink, fontSize: 20,),)),
-            Text('Price',
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 15,bottom: 10),
+            child: Text('Price',
                 style: GoogleFonts.nunito(
                   textStyle: TextStyle(color: Colors.pink, fontSize: 20),
-                )),],
-        ),
+                )),
+          ),],
       ),
     );
   }

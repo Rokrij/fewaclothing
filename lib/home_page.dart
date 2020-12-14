@@ -99,18 +99,22 @@ class _HomePageState extends State<HomePage> {
                 return CategoryWidget(categoryList[index]);
               }),
             ),
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: Center(
-                  child: Text(
-                'RECOMMENDED FOR YOU',
-                style: GoogleFonts.roboto(
-                  textStyle: TextStyle(
-                      color: Colors.black,
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold),
-                ),
-              )),
+            Container(
+              height: 40,
+              color: Colors.pink,
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: Center(
+                    child: Text(
+                  'RECOMMENDED FOR YOU',
+                  style: GoogleFonts.josefinSans(
+                    textStyle: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  ),
+                )),
+              ),
             ),
           ],
         ),
