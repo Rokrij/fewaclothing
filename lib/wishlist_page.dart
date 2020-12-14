@@ -11,7 +11,7 @@ class WishListPage extends StatelessWidget {
         iconTheme: IconThemeData(color: Colors.pink),
       title: Text(
         'Fewa Clothing',
-        style: GoogleFonts.dancingScript(textStyle: TextStyle(color: Colors.pink,fontSize: 35),),
+        style: GoogleFonts.greatVibes(textStyle: TextStyle(color: Colors.pink,fontSize: 35),),
       ),),
       body: Text('This is WishList Page'),
     );

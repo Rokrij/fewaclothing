@@ -1,4 +1,6 @@
+import 'package:fewaclothing/widgets/staggered_grid_view.dart';
 import 'package:fewaclothing/widgets/search_bar_slider_widget.dart';
+import 'package:fewaclothing/widgets/staggered_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 class SearchPage extends StatelessWidget {
@@ -49,6 +51,8 @@ class SearchPage extends StatelessWidget {
         ListView(
           children: [
             SearchBarSlider(),
+            StaggeredImage(),
+
           ],
         )
     );

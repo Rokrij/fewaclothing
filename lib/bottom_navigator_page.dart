@@ -5,7 +5,7 @@ import 'package:fewaclothing/search_page.dart';
 import 'package:fewaclothing/wishlist_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
-import 'widgets/fewa_drawer.dart';
+
 
 class BottomNavPage extends StatefulWidget {
   @override
@@ -14,13 +14,10 @@ class BottomNavPage extends StatefulWidget {
 
 class _BottomNavPageState extends State<BottomNavPage> {
 
-  ShapeBorder bottomBarShape = RoundedRectangleBorder(
-    borderRadius: BorderRadius.all(Radius.circular(25)),
-  );
-  SnakeBarBehaviour snakeBarStyle = SnakeBarBehaviour.floating;
-  EdgeInsets padding = EdgeInsets.all(12);
 
-  SnakeShape snakeShape = SnakeShape.circle;
+  SnakeBarBehaviour snakeBarStyle = SnakeBarBehaviour.floating;
+
+
 
   bool showSelectedLabels = true;
   bool showUnselectedLabels = false;
@@ -45,9 +42,6 @@ class _BottomNavPageState extends State<BottomNavPage> {
       bottomNavigationBar: SnakeNavigationBar.color(
         elevation: 0,
         behaviour: snakeBarStyle,
-        snakeShape: snakeShape,
-        shape: bottomBarShape,
-         padding: padding,
         backgroundColor: Colors.pink,
         snakeViewColor: Colors.white,
         selectedItemColor: Colors.pink,
@@ -58,11 +52,11 @@ class _BottomNavPageState extends State<BottomNavPage> {
         currentIndex: _currentIndex,
         onTap: (index) => setState(() => _currentIndex = index),
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.notifications)),
-          BottomNavigationBarItem(icon: Icon(Icons.calculate)),
-          BottomNavigationBarItem(icon: Icon(Icons.home)),
-          BottomNavigationBarItem(icon: Icon(Icons.person)),
-          BottomNavigationBarItem(icon: Icon(Icons.search))
+          BottomNavigationBarItem(icon: Icon(Icons.home_sharp)),
+          BottomNavigationBarItem(icon: Icon(Icons.search_sharp)),
+          BottomNavigationBarItem(icon: Icon(Icons.new_releases_sharp)),
+          BottomNavigationBarItem(icon: Icon(Icons.favorite_border_sharp)),
+          BottomNavigationBarItem(icon: Icon(Icons.person_sharp)),
         ],
       ),
     );

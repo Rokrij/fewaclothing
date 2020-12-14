@@ -36,8 +36,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.pink,
         textTheme: GoogleFonts.josefinSansTextTheme(
-          Theme.of(context).textTheme,
-        ),
+          Theme.of(context).textTheme,),
+        accentColor: Colors.pink[400],
+        accentColorBrightness: Brightness.light,
       ),
       routes: <String, WidgetBuilder>{
         'login': (BuildContext context) => LoginPage(),
