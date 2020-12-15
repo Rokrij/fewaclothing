@@ -28,13 +28,11 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       key: _globalKeyScaffold,
-      //appBar: AppBar(title: Text('NOTES',style: TextStyle(fontSize: 40, color: Colors.pink))),
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/1291.jpg'),
+            image: AssetImage('assets/images/backpage.jpg'),
             fit: BoxFit.cover,
           ),
         ),

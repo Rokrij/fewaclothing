@@ -24,12 +24,11 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       key: _globalKeyScaffold,
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/1291.jpg'),
+            image: AssetImage('assets/images/backpage.jpg'),
             fit: BoxFit.cover,
           ),
         ),

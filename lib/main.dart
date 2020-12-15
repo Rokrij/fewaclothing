@@ -3,7 +3,12 @@ import 'package:fewaclothing/cart_page.dart';
 import 'package:fewaclothing/home_page.dart';
 import 'package:fewaclothing/login_page.dart';
 import 'package:fewaclothing/newarrival_page.dart';
+import 'package:fewaclothing/profile_items/about_us_page.dart';
+import 'package:fewaclothing/profile_items/my_account_page.dart';
+import 'package:fewaclothing/profile_items/notification_page.dart';
 import 'package:fewaclothing/profile_page.dart';
+import 'package:fewaclothing/providers/category_provider.dart';
+import 'package:fewaclothing/providers/product_provider.dart';
 import 'package:fewaclothing/providers/user_auth_provider.dart';
 import 'package:fewaclothing/search_page.dart';
 import 'package:fewaclothing/signup_page.dart';
@@ -23,14 +28,20 @@ void main() {
       ChangeNotifierProvider.value(
         value: UserAuthProvider(),
       ),
+      ChangeNotifierProvider.value(
+        value: CategoryProvider(),
+      ),ChangeNotifierProvider.value(
+        value: ProductProvider(),
+      ),
     ], child: MyApp()),
   );
 }
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Provider.of<UserAuthProvider>(context,listen:false).getEmail();
+    Provider.of<CategoryProvider>(context,listen:false).fetchCategory();
+    Provider.of<ProductProvider>(context,listen:false).fetchProduct();
     return MaterialApp(
       home: SignUpPage(),
       theme: ThemeData(
@@ -52,6 +63,9 @@ class MyApp extends StatelessWidget {
         'profile': (BuildContext context) => ProfilePage(),
         'cart': (BuildContext context) => CartPage(),
         'new': (BuildContext context) => NewArrivalPage(),
+        'account': (BuildContext context) => MyAccount(),
+        'notification': (BuildContext context) => NotificationPage(),
+        'aboutUs': (BuildContext context) => AboutUs(),
       },
       initialRoute: 'splash',
       debugShowCheckedModeBanner: false,

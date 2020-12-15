@@ -19,8 +19,7 @@ Widget customCupertinoActivityIndicator(bool isLight) {
                   brightness: isLight ? Brightness.light : Brightness.dark)),
           child: CupertinoActivityIndicator(
             radius: 30,
-          ))
-      // child:  CupertinoActivityIndicator(
-      //   radius: SizeConfig.imageSizeMultiplier * 10,),
+          ),
+      ),
       );
 }

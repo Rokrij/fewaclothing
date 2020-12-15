@@ -1,11 +1,13 @@
 import 'dart:convert';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:fewaclothing/models/category.dart';
+import 'package:fewaclothing/providers/category_provider.dart';
 import 'package:fewaclothing/utils/constants.dart';
 import 'package:fewaclothing/widgets/category_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -14,18 +16,16 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  List<Category> categoryList = [];
+  List<FewaCategory> categoryList = [];
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    readCategory();
   }
-
-
   @override
   Widget build(BuildContext context) {
+    categoryList= Provider.of<CategoryProvider>(context,listen:false).fewaCategoryList;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -120,21 +120,5 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
-  }
-  void readCategory() async {
-    // isLoading = true;
-    var url = "$READ_CATEGORY_URL";
-    var response = await http.get(url);
-
-    List<Category> tempList = [];
-    List data = json.decode(response.body);
-    data.forEach((element) {
-      var category = Category.fromJson(element);
-        tempList.add(category);
-    });
-    setState(() {
-      categoryList = tempList;
-    });
-
   }
 }
