@@ -46,7 +46,7 @@ class _NewArrivalPageState extends State<NewArrivalPage> {
                     fit: BoxFit.cover),
                   border: Border.all(
                     color: Colors.pink,
-                    width: 3,
+
                   ),),
                   ),
             ),

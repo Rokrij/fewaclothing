@@ -24,17 +24,31 @@ class ProfilePage extends StatelessWidget {
         child: Column(
           children: [
             Center(
-              child: ListTile(
-                  title: Padding(
-                padding: const EdgeInsets.only(bottom: 20),
-                child: CircleAvatar(
-                  radius: 70,
-                  backgroundImage: AssetImage('assets/images/pp.jpg'),
+              child: Stack(
+                alignment: Alignment.bottomRight,
+                children  :[
+                  ListTile(
+                    title: Padding(
+                  padding: const EdgeInsets.only(bottom: 20),
+                  child: CircleAvatar(
+                    radius: 70,
+                    backgroundImage: AssetImage('assets/images/pp.jpg'),
+                  ),
                 ),
-              )),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right:100,bottom: 25),
+                    child: IconButton(
+                      icon: (Icon(Icons.camera_alt_rounded,color: Colors.pink,size: 40,)),onPressed: () {
+                      print('Camera');
+                      },
+                    ),
+                  ),
+                ],
+              ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 20.0),
+              padding: const EdgeInsets.only(bottom: 20.0,top: 10),
               child: Column(
                 children: [
                   Text(
