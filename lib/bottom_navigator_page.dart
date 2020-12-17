@@ -15,24 +15,36 @@ class BottomNavPage extends StatefulWidget {
 class _BottomNavPageState extends State<BottomNavPage> {
   int _currentIndex=0;
 
-  final tabs=[
-    Center(child: HomePage()),
-    Center(child: SearchPage()),
-    Center(child: NewArrivalPage()),
-    Center(child: WishListPage()),
-    Center(child: ProfilePage()),
-  ];
+  PageController _pageController = PageController(initialPage: 0);
+
+  //final tabs=[
+    //];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: tabs[_currentIndex],
+      body: PageView(
+        controller: _pageController,
+        onPageChanged: (index){
+          setState(() {
+            _currentIndex = index;
+          });
+        },
+        children: [
+          Center(child: HomePage()),
+          Center(child: SearchPage()),
+          Center(child: NewArrivalPage()),
+          Center(child: WishListPage()),
+          Center(child: ProfilePage()),
+
+        ],
+      ),
       bottomNavigationBar: SnakeNavigationBar.color(
         backgroundColor: Colors.white,
         snakeViewColor: Colors.pink,
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.pink,
         currentIndex: _currentIndex,
-        onTap: (index) => setState(() => _currentIndex = index),
+        onTap: (index) => _pageController.animateToPage(index, duration: Duration(milliseconds: 350), curve: Curves.decelerate),
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home_filled)),
           BottomNavigationBarItem(icon: Icon(Icons.search)),
@@ -45,3 +57,6 @@ class _BottomNavPageState extends State<BottomNavPage> {
 
   }
 }
+
+
+// full restart gara ani check gara...video ma dekhako yeti nai ho

@@ -29,6 +29,8 @@ class _SearchBarSliderState extends State<SearchBarSlider> {
                 _tagItem("Tees"),
                 _tagItem("Jeans"),
                 _tagItem("Bomber"),
+                _tagItem("Watches"),
+                _tagItem("Belts")
               ],
             ),
           ),

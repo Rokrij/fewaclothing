@@ -81,13 +81,12 @@ class ProfilePage extends StatelessWidget {
                   ),
                 ),
                 onTap: () {
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, 'account', (route) => false);
+                  Navigator.pushNamed(context, 'account');
                 },
               ),
             ),
             SizedBox(
-              height: 15,
+              height: 12,
             ),
             Card(
               child: ListTile(
@@ -109,13 +108,12 @@ class ProfilePage extends StatelessWidget {
                   ),
                 ),
                 onTap: () {
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, 'notification', (route) => false);
+                  Navigator.pushNamed(context, 'notification');
                 },
               ),
             ),
             SizedBox(
-              height: 15,
+              height: 12,
             ),
             Card(
               child: ListTile(
@@ -137,13 +135,12 @@ class ProfilePage extends StatelessWidget {
                   ),
                 ),
                 onTap: () {
-                Navigator.pushNamedAndRemoveUntil(
-                    context, 'aboutUs', (route) => false);
+                  Navigator.pushNamed(context, 'aboutUs');
               },
               ),
             ),
             SizedBox(
-              height: 15,
+              height: 12,
             ),
             Card(
               child: ListTile(

@@ -1,4 +1,4 @@
-import 'package:fewaclothing/widgets/staggered_grid_view.dart';
+import 'package:fewaclothing/widgets/product_list_widget.dart';
 import 'package:fewaclothing/widgets/search_bar_slider_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -7,7 +7,6 @@ class SearchPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // leading: Icon(Icons.search),
       backgroundColor: Colors.transparent,
       elevation: 0,
       iconTheme: IconThemeData(color: Colors.pink),
@@ -46,12 +45,13 @@ class SearchPage extends StatelessWidget {
     ),
       //body: Center(child: Text('Search Page')),
       body:
-        ListView(
-          children: [
-            SearchBarSlider(),
-            StaggeredImage(),
-
-          ],
+        SingleChildScrollView(
+          child: Column(
+            children: [
+              SearchBarSlider(),
+              ProductListWidget(),
+            ],
+          ),
         )
     );
   }

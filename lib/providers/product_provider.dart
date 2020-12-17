@@ -5,8 +5,6 @@ import 'package:fewaclothing/utils/constants.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:http/http.dart' as http;
-
-
 class ProductProvider extends ChangeNotifier {
 
   List<FewaProduct> fewaProductList = [];

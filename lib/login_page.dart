@@ -4,7 +4,6 @@ import 'package:fewaclothing/widgets/loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -64,7 +63,8 @@ class _LoginPageState extends State<LoginPage> {
                             _obsecurePassword = !_obsecurePassword;
                           });
                         },
-                      )),
+                      ),
+                  ),
                   obscureText: _obsecurePassword,
                 ),
                 Padding(
@@ -109,7 +109,7 @@ class _LoginPageState extends State<LoginPage> {
                       )
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),
