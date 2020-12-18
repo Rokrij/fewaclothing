@@ -84,6 +84,7 @@ class ProfilePage extends StatelessWidget {
                 trailing: Icon(
                   Icons.arrow_forward_ios,
                   color: Colors.pink,
+                  size: 15,
                 ),
                 title: Text(
                   'My Account',
@@ -111,6 +112,7 @@ class ProfilePage extends StatelessWidget {
                 trailing: Icon(
                   Icons.arrow_forward_ios,
                   color: Colors.pink,
+                  size: 15,
                 ),
                 title: Text(
                   'Notifications',
@@ -138,6 +140,7 @@ class ProfilePage extends StatelessWidget {
                 trailing: Icon(
                   Icons.arrow_forward_ios,
                   color: Colors.pink,
+                  size: 15,
                 ),
                 title: Text(
                   'About Us',
@@ -165,6 +168,7 @@ class ProfilePage extends StatelessWidget {
                 trailing: Icon(
                   Icons.arrow_forward_ios,
                   color: Colors.pink,
+                  size: 15,
                 ),
                 title: Text(
                   'Log Out',

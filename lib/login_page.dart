@@ -40,9 +40,8 @@ class _LoginPageState extends State<LoginPage> {
               //mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image(
-                  image: AssetImage('assets/images/download.jpg'),
-                  height: 150,
-                  width: 150,
+                  image: AssetImage('assets/images/logo.png',),height: 200,
+                  fit: BoxFit.cover,
                 ),
                 TextField(
                   controller: emailController,
@@ -120,6 +119,7 @@ class _LoginPageState extends State<LoginPage> {
 
   void showSnackBar(String message) {
     final snackBar = SnackBar(
+      backgroundColor: Colors.pink,
       duration: const Duration(seconds: 3),
       content: Text(message),
     );

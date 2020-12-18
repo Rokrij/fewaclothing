@@ -27,7 +27,9 @@ class _SplashScreenState extends State<SplashScreen> {
               return Provider.of<UserAuthProvider>(context,listen:false).email.isEmpty ? LoginPage() : BottomNavPage();
             },
             splash: Image.asset(
-              'assets/images/download.jpg',
+              'assets/images/logo.png',
+              height: 200,
+              fit: BoxFit.cover,
             ),
             splashTransition: SplashTransition.scaleTransition,
             pageTransitionType: PageTransitionType.scale,

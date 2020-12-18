@@ -45,9 +45,10 @@ class _SignUpPageState extends State<SignUpPage> {
               //mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image(
-                  image: AssetImage('assets/images/download.jpg'),
-                  height: 150,
-                  width: 150,
+                  image: AssetImage('assets/images/logo.png'),
+                  height: 200,
+                  fit: BoxFit.cover,
+
                 ),
                 TextField(
                   controller: nameController,
@@ -156,7 +157,7 @@ class _SignUpPageState extends State<SignUpPage> {
   void showSnackBar(String message) {
     final snackBar = SnackBar(
       duration: const Duration(seconds: 3),
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.pink,
       content: Text(message),
     );
     _globalKeyScaffold.currentState.showSnackBar(snackBar);

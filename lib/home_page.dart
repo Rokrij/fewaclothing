@@ -2,6 +2,7 @@ import 'package:carousel_pro/carousel_pro.dart';
 import 'package:fewaclothing/models/category.dart';
 import 'package:fewaclothing/providers/category_provider.dart';
 import 'package:fewaclothing/widgets/category_widget.dart';
+import 'package:fewaclothing/widgets/home_dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -135,12 +136,18 @@ class _HomePageState extends State<HomePage> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Image(image:AssetImage('assets/images/home_page_1.jpg',),
-                    width: screenWidth / 2.25,),
+                    height: 200,
+                    width: screenWidth / 2.25,
+                      fit: BoxFit.fill
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Image(image:AssetImage('assets/images/home_page_1.jpg'),
-                      width: screenWidth / 2.25,),
+                  child: Image(image:AssetImage('assets/images/last.jpg'),
+                      height: 200,
+                      width: screenWidth / 2.25,
+                    fit: BoxFit.fill
+                  ),
                 ),
               ],
             ),
@@ -167,6 +174,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
+            HomeDashBoard(),
           ],
         ),
       ),
