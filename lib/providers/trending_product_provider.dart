@@ -9,6 +9,7 @@ class TrendingProduct extends ChangeNotifier {
   List<TrendingItems> trendingProductList = [];
 
   void fetchTrendingProduct() async {
+    trendingProductList = [];
     var url = '$READ_TRENDING_URL';
     var response = await http.get(url);
     var result = jsonDecode(response.body);

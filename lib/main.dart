@@ -3,6 +3,7 @@ import 'package:fewaclothing/cart_page.dart';
 import 'package:fewaclothing/home_page.dart';
 import 'package:fewaclothing/login_page.dart';
 import 'package:fewaclothing/newarrival_page.dart';
+import 'package:fewaclothing/product_details.dart';
 import 'package:fewaclothing/profile_items/about_us_page.dart';
 import 'package:fewaclothing/profile_items/my_account_page.dart';
 import 'package:fewaclothing/profile_items/notification_page.dart';

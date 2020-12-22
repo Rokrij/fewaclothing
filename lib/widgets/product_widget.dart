@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fewaclothing/models/product.dart';
+import 'package:fewaclothing/product_details.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 
 class ProductWidget extends StatefulWidget {
   final FewaProduct product;
@@ -19,7 +21,7 @@ class _ProductWidgetState extends State<ProductWidget> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        // go to product detail page and pass product.
+        Navigator.push(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: ProductDetails(widget.product)));
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -66,7 +68,7 @@ class _ProductWidgetState extends State<ProductWidget> {
               child: Text('Rs. ${widget.product.price}',
                   style: GoogleFonts.nunito(
                     textStyle: TextStyle(color: Colors.pink, fontSize: 15),
-                  )),
+                  ),),
             ),
           ],
         ),

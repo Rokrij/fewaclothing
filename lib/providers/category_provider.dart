@@ -10,6 +10,7 @@ class CategoryProvider extends ChangeNotifier {
   List<FewaCategory> fewaCategoryList = [];
 
   void fetchCategory() async {
+    fewaCategoryList = [];
     var url = '$READ_CATEGORY_URL';
     var response = await http.get(url);
     var result = jsonDecode(response.body);

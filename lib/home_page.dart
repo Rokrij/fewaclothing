@@ -1,4 +1,3 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:fewaclothing/models/category.dart';
 import 'package:fewaclothing/providers/category_provider.dart';
@@ -27,7 +26,7 @@ class _HomePageState extends State<HomePage> {
   }
   @override
   Widget build(BuildContext context) {
-    categoryList= Provider.of<CategoryProvider>(context,listen:false).fewaCategoryList;
+    categoryList= Provider.of<CategoryProvider>(context,listen:true).fewaCategoryList;
 
     screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -49,14 +48,14 @@ class _HomePageState extends State<HomePage> {
                 onPressed: () {
                   Navigator.pushNamed(context, 'cart');
                 }),
-          )
+          ),
         ],
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             Container(
-              height: 250,
+              height: 275,
               child: Padding(
                 padding: const EdgeInsets.all(10),
                 child: SizedBox(

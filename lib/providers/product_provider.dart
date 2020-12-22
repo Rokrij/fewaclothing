@@ -10,6 +10,7 @@ class ProductProvider extends ChangeNotifier {
   List<FewaProduct> fewaProductList = [];
 
   void fetchProduct() async {
+    fewaProductList = [];
     var url = '$READ_PRODUCT_URL';
     var response = await http.get(url);
     var result = jsonDecode(response.body);

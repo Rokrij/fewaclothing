@@ -10,7 +10,6 @@ class ProductListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     productList=Provider.of<ProductProvider>(context,listen:false).fewaProductList;
-    // productList = new List.from(productList.reversed);
     return Padding(
       padding: const EdgeInsets.all(16),
       child: StaggeredGridView.countBuilder(
