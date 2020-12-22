@@ -46,7 +46,7 @@ class _SignUpPageState extends State<SignUpPage> {
               children: [
                 Image(
                   image: AssetImage('assets/images/3.png'),
-                  height: 220,
+                  height: 225,
                   //fit: BoxFit.fill
                 ),
                 TextField(
@@ -102,6 +102,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(40, 40, 20, 10),
                   child: FlatButton(
+                    shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                     color: Colors.pink,
                     textColor: Colors.white,
                     disabledColor: Colors.grey,
@@ -130,12 +131,12 @@ class _SignUpPageState extends State<SignUpPage> {
                   padding: const EdgeInsets.fromLTRB(50, 0, 0, 0),
                   child: Row(
                     children: <Widget>[
-                      Text('Already have an account ? '),
+                      Text('Already have an account ? ',style: TextStyle(fontWeight: FontWeight.bold),),
                       FlatButton(
                         textColor: Colors.pink,
                         child: Text(
                           'Log In',
-                          style: TextStyle(fontSize: 20),
+                          style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),
                         ),
                         onPressed: () {
                           Navigator.pushNamedAndRemoveUntil(

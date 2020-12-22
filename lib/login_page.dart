@@ -39,10 +39,13 @@ class _LoginPageState extends State<LoginPage> {
               shrinkWrap: true,
               //mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image(
-                  image: AssetImage('assets/images/3.png'),
-                  height: 220,
-                  //fit: BoxFit.fill,
+                Padding(
+                  padding: const EdgeInsets.only(bottom:70),
+                  child: Image(
+                    image: AssetImage('assets/images/3.png'),
+                    height: 225,
+                    //fit: BoxFit.fill,
+                  ),
                 ),
                 TextField(
                   controller: emailController,
@@ -70,6 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(40, 40, 20, 10),
                   child: FlatButton(
+                    shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                     color: Colors.pink,
                     textColor: Colors.white,
                     disabledColor: Colors.grey,
@@ -95,12 +99,12 @@ class _LoginPageState extends State<LoginPage> {
                   padding: const EdgeInsets.fromLTRB(50, 10, 20, 10),
                   child: Row(
                     children: <Widget>[
-                      Text('Dont have an account ? '),
+                      Text('Dont have an account ? ',style: TextStyle( fontWeight: FontWeight.bold),),
                       FlatButton(
                         textColor: Colors.pink,
                         child: Text(
                           'Sign Up',
-                          style: TextStyle(fontSize: 20),
+                          style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                         ),
                         onPressed: () {
                           Navigator.pushNamedAndRemoveUntil(

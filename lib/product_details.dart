@@ -67,7 +67,7 @@ class _ProductDetailsState extends State<ProductDetails> {
               Padding(
                 padding: const EdgeInsets.only(top: 10,left: 10),
                 child: Container(
-                  width: 250,
+                  width: 260,
                   child: Text(widget.product.name,
                     style: GoogleFonts.dancingScript(
                     textStyle: TextStyle(color: Colors.pink, fontSize: 35,fontWeight: FontWeight.bold),),),
