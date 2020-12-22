@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:fewaclothing/widgets/newarrival_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -6,7 +7,6 @@ class NewArrivalPage extends StatefulWidget {
   @override
   _NewArrivalPageState createState() => _NewArrivalPageState();
 }
-
 class _NewArrivalPageState extends State<NewArrivalPage> {
   @override
   Widget build(BuildContext context) {
@@ -32,29 +32,21 @@ class _NewArrivalPageState extends State<NewArrivalPage> {
                   onPressed: () {
                     Navigator.pushNamed(context, 'cart');
                   }),
-            )
+            ),
           ],
         ),
         body: SingleChildScrollView(
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: Container(
-                  height: 250,
-                  decoration: BoxDecoration(
-                    color: const Color(
-                      (0xff7c94b6),
-                    ),
-                    image: DecorationImage(
-                        image: AssetImage('assets/images/fresh_arrival.jpg'),
-                        fit: BoxFit.cover),
-                    border: Border.all(
-                      color: Colors.pink,
-                    ),
-                  ),
-                ),
-              ),
+          Padding(
+          padding: const EdgeInsets.all(10),
+          child: TypewriterAnimatedTextKit(
+            speed: Duration(milliseconds: 100),
+            text: ["NEW ARRIVALS !!!", "SHOP NOW !!!"],
+            textStyle: TextStyle(fontSize: 25.0,color: Colors.pink,fontWeight: FontWeight.bold),
+            pause: Duration(milliseconds: 1000),
+          ),
+        ),
               NewArrivalWidget(),
             ],
           ),

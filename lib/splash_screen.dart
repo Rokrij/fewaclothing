@@ -23,16 +23,18 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: AnimatedSplashScreen.withScreenFunction(
+          // animationDuration: Duration(milliseconds: 500),
             screenFunction: () async {
               return Provider.of<UserAuthProvider>(context,listen:false).email.isEmpty ? LoginPage() : BottomNavPage();
             },
             splash: Image.asset(
-              'assets/images/logo.png',
+              'assets/images/3.png',
               height: 200,
-              fit: BoxFit.cover,
+              fit: BoxFit.fitWidth,
             ),
+            centered: true,
             splashTransition: SplashTransition.scaleTransition,
             pageTransitionType: PageTransitionType.scale,
-            backgroundColor: Colors.white));
+            backgroundColor: Colors.white),);
   }
 }

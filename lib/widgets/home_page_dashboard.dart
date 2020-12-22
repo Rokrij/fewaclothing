@@ -5,8 +5,8 @@ class HomeDashBoard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(10),
       margin: EdgeInsets.all(10),
+      padding: EdgeInsets.all(10),
       alignment: Alignment.center,
       constraints: BoxConstraints.expand(height: 200),
       child: imageSlider(context),
@@ -15,22 +15,12 @@ class HomeDashBoard extends StatelessWidget {
 }
 
 Swiper imageSlider(context) {
-  // return Swiper(
-  //   autoplay: false,
-  //   itemBuilder: (BuildContext context, int index) {
-  //     return Image.network(
-  //         "https://mi0.rightinthebox.com/images/dfp/202005/LITB_c71_200225_992320_cp_1_en.jpg?15",
-  //         fit: BoxFit.cover);
-  //   },
-  //   itemCount: 4,
-  //   // viewportFraction: 0.7,
-  //   // scale: 0.8,
-  // );
 
   return Swiper.children(
-    autoplay: false,
+    duration: 250,
+    autoplay: true,
     viewportFraction: 0.7,
-    scale: 0.8,
+    scale: 0.9,
     pagination: new SwiperPagination(
         margin: new EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 30.0),
         builder: new DotSwiperPaginationBuilder(
@@ -56,11 +46,3 @@ Swiper imageSlider(context) {
   );
 }
 
-var imageSliderList = [
-  Image.network(
-      "https://mi0.rightinthebox.com/images/dfp/202005/LITB_c71_200225_992320_cp_1_en.jpg?15",
-      fit: BoxFit.cover),
-  Image.network(
-      "https://i.pinimg.com/originals/53/4b/23/534b23f26ccba86efdf270ada6523266.jpg",
-      fit: BoxFit.cover),
-];

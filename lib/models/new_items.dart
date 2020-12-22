@@ -1,4 +1,4 @@
-class FewaProduct {
+class NewItems {
   String id;
   String name;
   String description;
@@ -10,7 +10,7 @@ class FewaProduct {
   String category;
   String type;
 
-  FewaProduct(
+  NewItems(
       {this.id,
         this.name,
         this.description,
@@ -22,7 +22,7 @@ class FewaProduct {
         this.category,
         this.type});
 
-  FewaProduct.fromJson(Map<String, dynamic> json) {
+  NewItems.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     description = json['description'];

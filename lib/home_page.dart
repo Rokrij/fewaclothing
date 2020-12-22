@@ -1,8 +1,10 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:fewaclothing/models/category.dart';
 import 'package:fewaclothing/providers/category_provider.dart';
 import 'package:fewaclothing/widgets/category_widget.dart';
-import 'package:fewaclothing/widgets/home_dashboard.dart';
+import 'package:fewaclothing/widgets/home_page_dashboard.dart';
+import 'package:fewaclothing/widgets/home_page_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -53,38 +55,42 @@ class _HomePageState extends State<HomePage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: SizedBox(
-                  height: 250.0,
-                  child: Carousel(
-                    images: [
-                      NetworkImage(
-                          'https://cdn.flightclub.com/1800/TEMPLATE/181573/1.jpg'),
-                      NetworkImage(
-                          'https://cdn.flightclub.com/1800/TEMPLATE/178193/1.jpg'),
-                      NetworkImage(
-                          'https://cdn.flightclub.com/1800/TEMPLATE/162310/1.jpg'),
-                      NetworkImage(
-                          'https://cdn.flightclub.com/1800/TEMPLATE/247680/1.jpg'),
-                      NetworkImage(
-                          'https://cdn.flightclub.com/1800/TEMPLATE/176533/1.jpg'),
-                      // ExactAssetImage("assets/images/LaunchImage.jpg")
-                    ],
-                    dotSize: 10,
-                    dotSpacing: 25,
-                    dotColor: Colors.white,
-                    indicatorBgPadding: 5.0,
-                    dotBgColor: Colors.transparent,
-                    dotIncreasedColor: Colors.pink,
-                  )),
+            Container(
+              height: 250,
+              child: Padding(
+                padding: const EdgeInsets.all(10),
+                child: SizedBox(
+                    height: 250.0,
+                    child: Carousel(
+                      images: [
+                        NetworkImage(
+                            'https://cdn.flightclub.com/1800/TEMPLATE/181573/1.jpg'),
+                        NetworkImage(
+                            'https://cdn.flightclub.com/1800/TEMPLATE/178193/1.jpg'),
+                        NetworkImage(
+                            'https://cdn.flightclub.com/1800/TEMPLATE/162310/1.jpg'),
+                        NetworkImage(
+                            'https://cdn.flightclub.com/1800/TEMPLATE/247680/1.jpg'),
+                        NetworkImage(
+                            'https://cdn.flightclub.com/1800/TEMPLATE/176533/1.jpg'),
+                        // ExactAssetImage("assets/images/LaunchImage.jpg")
+                      ],
+                      dotSize: 10,
+                      dotSpacing: 25,
+                      dotColor: Colors.white,
+                      indicatorBgPadding: 5.0,
+                      dotBgColor: Colors.transparent,
+                      dotIncreasedColor: Colors.pink,
+                    ),
+                ),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(10),
               child: Center(
                 child: Text(
                   'SHOP BY CATEGORY',
-                  style: GoogleFonts.comfortaa(
+                  style: GoogleFonts.montserrat(
                     textStyle: TextStyle(
                         color: Colors.pink,
                         fontSize: 25,
@@ -93,88 +99,106 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            GridView.count(
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              crossAxisCount: 4,
-              children: List.generate(categoryList.length, (index) {
-                return CategoryWidget(categoryList[index]);
-              }),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: Container(
-                height: 150,
-                decoration: BoxDecoration(color:const Color((0xff7c94b6),),
-                  image:DecorationImage(image:AssetImage('assets/images/home_page_3.jpg'),
-                      fit: BoxFit.fill),
-                  border: Border.all(
-                    color: Colors.pink,
-                    width: 1,
-                  ),),
+            Container(
+              height: 195,
+              child: GridView.count(
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                crossAxisCount: 4,
+                children: List.generate(categoryList.length, (index) {
+                  return CategoryWidget(categoryList[index]);
+                }),
               ),
             ),
             Container(
-              height: 40,
-              color: Colors.pink,
-              child: Center(
-                child: Text(
-                  'MUST HAVES',
-                  style: GoogleFonts.josefinSans(
-                    textStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
+                height: 200,
+                child: HomeDashBoard(),
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Image(image:AssetImage('assets/images/home_page_1.jpg',),
-                    height: 200,
-                    width: screenWidth / 2.25,
-                      fit: BoxFit.fill
+                  padding: const EdgeInsets.all(10),
+                  child: Text(
+                    'Special for you',
+                    style: GoogleFonts.dancingScript(
+                      textStyle: TextStyle(
+                          color: Colors.pink,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Image(image:AssetImage('assets/images/last.jpg'),
-                      height: 200,
-                      width: screenWidth / 2.25,
-                    fit: BoxFit.fill
+                  padding: const EdgeInsets.only(right:10),
+                  child: FlatButton(
+                    minWidth: 8,
+                    height: 30,
+                    child: Text('See More'),
+                    color: Colors.pink,
+                    shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                    textColor: Colors.white,
+                    onPressed: () {
+
+                    },
                   ),
                 ),
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: Image(image:AssetImage('assets/images/home_page_2.jpg'),
-                fit: BoxFit.fill,),
-            ),
             Container(
-              height: 40,
-              color: Colors.pink,
-              child: Padding(
-                padding: const EdgeInsets.all(10),
-                child: Center(
-                    child: Text(
+              height:245,
+              child: HomePageSlider(),
+            ),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Text(
+                    'Trending Products',
+                    style: GoogleFonts.dancingScript(
+                      textStyle: TextStyle(
+                          color: Colors.pink,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right:10),
+                  child: FlatButton(
+                    minWidth: 8,
+                    height: 30,
+                    child: Text('See More'),
+                    color: Colors.pink,
+                    shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                    textColor: Colors.white,
+                    onPressed: () {
+
+                    },
+                  ),
+                ),
+              ],
+            ),
+             Container(
+                 height:245,
+                 child: HomePageSlider(),
+             ),
+            Container(
+              padding: const EdgeInsets.all(10),
+              child: Center(
+                child: Text(
                   'RECOMMENDED FOR YOU',
-                  style: GoogleFonts.josefinSans(
+                  style: GoogleFonts.montserrat(
                     textStyle: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
+                        color: Colors.pink,
+                        fontSize: 25,
                         fontWeight: FontWeight.bold),
                   ),
                 ),
-                ),
               ),
             ),
-            HomeDashBoard(),
           ],
         ),
       ),

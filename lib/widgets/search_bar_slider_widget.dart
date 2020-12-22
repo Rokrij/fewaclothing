@@ -19,7 +19,7 @@ class _SearchBarSliderState extends State<SearchBarSlider> {
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: <Widget>[
-                _tagItem(("Trending")),
+                _tagItem(("Featured")),
                 _tagItem("Hoodies"),
                 _tagItem("Jackets"),
                 _tagItem("Pants"),

@@ -27,7 +27,7 @@ class _LoginPageState extends State<LoginPage> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/backpage.jpg'),
+            image: AssetImage('assets/images/22.jpg'),
             fit: BoxFit.cover,
           ),
         ),
@@ -40,8 +40,9 @@ class _LoginPageState extends State<LoginPage> {
               //mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image(
-                  image: AssetImage('assets/images/logo.png',),height: 200,
-                  fit: BoxFit.cover,
+                  image: AssetImage('assets/images/3.png'),
+                  height: 220,
+                  //fit: BoxFit.fill,
                 ),
                 TextField(
                   controller: emailController,

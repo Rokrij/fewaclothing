@@ -9,6 +9,7 @@ import 'package:fewaclothing/profile_items/notification_page.dart';
 import 'package:fewaclothing/profile_page.dart';
 import 'package:fewaclothing/providers/category_provider.dart';
 import 'package:fewaclothing/providers/product_provider.dart';
+import 'package:fewaclothing/providers/trending_product_provider.dart';
 import 'package:fewaclothing/providers/user_auth_provider.dart';
 import 'package:fewaclothing/search_page.dart';
 import 'package:fewaclothing/signup_page.dart';
@@ -30,8 +31,11 @@ void main() {
       ),
       ChangeNotifierProvider.value(
         value: CategoryProvider(),
-      ),ChangeNotifierProvider.value(
+      ),
+      ChangeNotifierProvider.value(
         value: ProductProvider(),
+      ),ChangeNotifierProvider.value(
+        value: TrendingProduct(),
       ),
     ], child: MyApp()),
   );
@@ -42,6 +46,8 @@ class MyApp extends StatelessWidget {
     Provider.of<UserAuthProvider>(context,listen:false).getEmail();
     Provider.of<CategoryProvider>(context,listen:false).fetchCategory();
     Provider.of<ProductProvider>(context,listen:false).fetchProduct();
+    Provider.of<TrendingProduct>(context,listen:false).fetchTrendingProduct();
+
     return MaterialApp(
       home: SignUpPage(),
       theme: ThemeData(
