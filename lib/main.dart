@@ -36,7 +36,7 @@ void main() {
       ChangeNotifierProvider.value(
         value: ProductProvider(),
       ),ChangeNotifierProvider.value(
-        value: TrendingProduct(),
+        value: TrendingProductProvider(),
       ),
     ], child: MyApp()),
   );
@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
     Provider.of<UserAuthProvider>(context,listen:false).getEmail();
     Provider.of<CategoryProvider>(context,listen:false).fetchCategory();
     Provider.of<ProductProvider>(context,listen:false).fetchProduct();
-    Provider.of<TrendingProduct>(context,listen:false).fetchTrendingProduct();
+    Provider.of<TrendingProductProvider>(context,listen:false).fetchTrendingProduct();
 
     return MaterialApp(
       home: SignUpPage(),

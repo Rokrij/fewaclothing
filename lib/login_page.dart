@@ -2,6 +2,7 @@ import 'package:fewaclothing/providers/user_auth_provider.dart';
 import 'package:fewaclothing/utils/constants.dart';
 import 'package:fewaclothing/widgets/loading_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
@@ -126,7 +127,10 @@ class _LoginPageState extends State<LoginPage> {
     final snackBar = SnackBar(
       backgroundColor: Colors.pink,
       duration: const Duration(seconds: 3),
-      content: Text(message),
+      content: Text(message,style: GoogleFonts.dancingScript(
+        textStyle: TextStyle(
+            color: Colors.white),
+      ),),
     );
     _globalKeyScaffold.currentState.showSnackBar(snackBar);
   }
@@ -143,5 +147,4 @@ class _LoginPageState extends State<LoginPage> {
       showSnackBar("Invalid Email or Password ! Please Try  Again");
     }
   }
-
 }

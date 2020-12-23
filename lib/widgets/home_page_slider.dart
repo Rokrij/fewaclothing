@@ -9,7 +9,7 @@ class HomePageSlider extends StatelessWidget {
   List<TrendingItems> trendingProductList = [];
   @override
   Widget build(BuildContext context) {
-    trendingProductList = Provider.of<TrendingProduct>(context, listen: false).trendingProductList;
+    trendingProductList = Provider.of<TrendingProductProvider>(context, listen: false).trendingProductList;
     return ListView.builder(
       shrinkWrap: true,
       scrollDirection: Axis.horizontal,

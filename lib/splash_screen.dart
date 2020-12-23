@@ -44,7 +44,9 @@ class _SplashScreenState extends State<SplashScreen> {
               textStyle: TextStyle(
                   color: Colors.pink,
                   fontSize: 20),
-            ),)),
+            ),
+            ),
+            ),
           ),Padding(
             padding: const EdgeInsets.only(top:575),
             child: Center(child: Text('ROKRIJ SHRESTHA',style: GoogleFonts.cantarell(

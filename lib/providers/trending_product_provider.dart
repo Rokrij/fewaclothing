@@ -4,7 +4,7 @@ import 'package:fewaclothing/models/trending_items.dart';
 import 'package:fewaclothing/utils/constants.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
-class TrendingProduct extends ChangeNotifier {
+class TrendingProductProvider extends ChangeNotifier {
 
   List<TrendingItems> trendingProductList = [];
 
