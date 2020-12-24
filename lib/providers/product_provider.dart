@@ -22,4 +22,17 @@ class ProductProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  List<FewaProduct> filterProductByCategory(String category){
+
+    List<FewaProduct> filteredProduct = [];
+
+    fewaProductList.forEach((product) {
+      if(product.category == category){
+        filteredProduct.add(product);
+      }
+    });
+    return filteredProduct;
+
+  }
+
 }

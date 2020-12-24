@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:fewaclothing/providers/user_auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -180,10 +181,36 @@ class ProfilePage extends StatelessWidget {
                   ),
                 ),
                 onTap: () {
-                  Provider.of<UserAuthProvider>(context, listen: false)
-                      .saveEmail('');
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, 'login', (route) => false);
+                  AwesomeDialog(
+                    btnCancelColor: Colors.white,
+                    btnOkColor: Colors.pink,
+                    btnCancelText: 'No',
+                    btnOkText: 'Yes',
+                    context: context,
+                    dialogType: DialogType.INFO,
+                    animType: AnimType.BOTTOMSLIDE,
+                    title: 'Are you sure',
+                    desc: 'You want to logout?',
+                    body: Center(child: Text('Are You Sure?',
+                      style: GoogleFonts.poiretOne(
+                        textStyle: TextStyle(
+                            color: Colors.pink,
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold),
+                      ),)),
+                    btnCancelOnPress: () {},
+                    btnOkOnPress: () {
+                      Provider.of<UserAuthProvider>(context, listen: false)
+                          .saveEmail('');
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, 'login', (route) => false);
+
+                    },
+                  )..show();
+
+
+
+
                 },
               ),
             ),

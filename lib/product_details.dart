@@ -24,7 +24,7 @@ class _ProductDetailsState extends State<ProductDetails> {
           icon: (Icon(
             Icons.arrow_back_ios,
             color: Colors.pink,
-            size: 35,
+            size: 30,
           )),
           onPressed: () {
             Navigator.pop(context);
@@ -55,11 +55,11 @@ class _ProductDetailsState extends State<ProductDetails> {
           ),
         ],
       ),
-      // floatingActionButton: addToCartButton(),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
-      bottomNavigationBar: Container(height:50,child: addToCartButton()),
+      bottomNavigationBar: Container(color:Colors.white,
+          height:60,child: addToCartButton()),
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Stack(
               children: [
@@ -81,11 +81,12 @@ class _ProductDetailsState extends State<ProductDetails> {
                     width: 260,
                     child: Text(
                       widget.product.name,
-                      style: GoogleFonts.dancingScript(
+                      style: GoogleFonts.montserrat(
                         textStyle: TextStyle(
                             color: Colors.pink,
-                            fontSize: 35,
-                            fontWeight: FontWeight.bold),
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold
+                      ),
                       ),
                     ),
                   ),
@@ -119,6 +120,10 @@ class _ProductDetailsState extends State<ProductDetails> {
               ),
             ),
             Padding(
+              padding: const EdgeInsets.only(top: 30, left: 10),
+              child: Text('Description',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30,color: Colors.pink),),
+            ),
+            Padding(
               padding: const EdgeInsets.only(top: 10, left: 10),
               child: Text(
                 widget.product.description,
@@ -128,7 +133,6 @@ class _ProductDetailsState extends State<ProductDetails> {
               ),
             ),
             NewArrivalWidget(),
-
           ],
         ),
       ),
@@ -137,16 +141,19 @@ class _ProductDetailsState extends State<ProductDetails> {
 
 
   Widget addToCartButton(){
-    return  FlatButton(
-      color: Colors.pink,
-      textColor: Colors.white,
-      disabledColor: Colors.grey,
-      disabledTextColor: Colors.black,
-      splashColor: Colors.pinkAccent,
-      child: Text('ADD TO CART'),
-      //     onPressed: (){
-      //
-      // },
+    return  Padding(
+      padding: const EdgeInsets.only(left: 15,right: 15,top: 10, bottom: 10),
+      child: FlatButton(
+        color: Colors.pink,
+        textColor: Colors.white,
+        disabledColor: Colors.grey,
+        disabledTextColor: Colors.black,
+        splashColor: Colors.pinkAccent,
+        child: Text('ADD TO CART',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+            onPressed: (){
+              Navigator.pushNamed(context, 'cart');
+        },
+      ),
     );
   }
 }
