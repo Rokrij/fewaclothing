@@ -1,3 +1,4 @@
+import 'package:avatar_glow/avatar_glow.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:fewaclothing/providers/user_auth_provider.dart';
 import 'package:flutter/material.dart';
@@ -29,18 +30,31 @@ class ProfilePage extends StatelessWidget {
                 alignment: Alignment.bottomRight,
                 children  :[
                   ListTile(
-                    title: Padding(
-                  padding: const EdgeInsets.only(bottom: 20),
-                  child: CircleAvatar(
-                    radius: 70,
-                    backgroundImage: AssetImage('assets/images/pp.jpg'),
-                  ),
-                ),
+                    title: AvatarGlow(
+                      glowColor: Colors.pink,
+                      endRadius: 90.0,
+                      duration: Duration(milliseconds: 2000),
+                      repeat: true,
+                      showTwoGlows: true,
+                      repeatPauseDuration: Duration(milliseconds: 100),
+                      child: Material(
+                        elevation: 8.0,
+                        shape: CircleBorder(),
+                        child: CircleAvatar(
+                          backgroundColor: Colors.grey[100],
+                          child: Image.asset(
+                            'assets/images/pp.jpg',
+                            height: 60,
+                          ),
+                          radius: 40.0,
+                        ),
+                      ),
+                    ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(right:100,bottom: 25),
+                    padding: const EdgeInsets.only(right:100,bottom: 35),
                     child: IconButton(
-                      icon: (Icon(Icons.camera_alt_rounded,color: Colors.pink,size: 40,)),onPressed: () {
+                      icon: (Icon(Icons.camera_alt_rounded,color: Colors.pink,size: 25,)),onPressed: () {
                       print('Camera');
                       },
                     ),
@@ -182,7 +196,7 @@ class ProfilePage extends StatelessWidget {
                 ),
                 onTap: () {
                   AwesomeDialog(
-                    btnCancelColor: Colors.white,
+                    btnCancelColor: Colors.yellow,
                     btnOkColor: Colors.pink,
                     btnCancelText: 'No',
                     btnOkText: 'Yes',
@@ -207,10 +221,6 @@ class ProfilePage extends StatelessWidget {
 
                     },
                   )..show();
-
-
-
-
                 },
               ),
             ),

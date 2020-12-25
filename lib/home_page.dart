@@ -1,3 +1,5 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:fewaclothing/models/category.dart';
 import 'package:fewaclothing/providers/category_provider.dart';
@@ -59,20 +61,42 @@ class _HomePageState extends State<HomePage> {
               child: Padding(
                 padding: const EdgeInsets.all(10),
                 child: SizedBox(
-                    height: 250.0,
+                  height: 250.0,
+                  child: GestureDetector(
+                    onTap: (){
+
+                    },
                     child: Carousel(
                       images: [
-                        NetworkImage(
-                            'https://cdn.flightclub.com/1800/TEMPLATE/181573/1.jpg'),
-                        NetworkImage(
-                            'https://cdn.flightclub.com/1800/TEMPLATE/178193/1.jpg'),
-                        NetworkImage(
-                            'https://cdn.flightclub.com/1800/TEMPLATE/162310/1.jpg'),
-                        NetworkImage(
-                            'https://cdn.flightclub.com/1800/TEMPLATE/247680/1.jpg'),
-                        NetworkImage(
-                            'https://cdn.flightclub.com/1800/TEMPLATE/176533/1.jpg'),
-                        // ExactAssetImage("assets/images/LaunchImage.jpg")
+                        CachedNetworkImage(
+                          imageUrl: "https://inheriting-addition.000webhostapp.com/images/top_image_slider_1.jpg",
+                          //placeholder: (context, url) => CircularProgressIndicator(),
+                          errorWidget: (context, url, error) => Icon(Icons.error,color: Colors.pink,),
+                        ),CachedNetworkImage(
+                          imageUrl: "https://inheriting-addition.000webhostapp.com/images/top_image_slider_2.jpg",
+                          //placeholder: (context, url) => CircularProgressIndicator(),
+                          errorWidget: (context, url, error) => Icon(Icons.error,color: Colors.pink,),
+                        ),CachedNetworkImage(
+                          imageUrl: "https://inheriting-addition.000webhostapp.com/images/top_image_slider_3.jpg",
+                          //placeholder: (context, url) => CircularProgressIndicator(),
+                          errorWidget: (context, url, error) => Icon(Icons.error,color: Colors.pink,),
+                        ),CachedNetworkImage(
+                          imageUrl: "https://inheriting-addition.000webhostapp.com/images/top_image_slider_4.jpg",
+                          //placeholder: (context, url) => CircularProgressIndicator(),
+                          errorWidget: (context, url, error) => Icon(Icons.error,color: Colors.pink,),
+                        ),CachedNetworkImage(
+                          imageUrl: "https://inheriting-addition.000webhostapp.com/images/top_image_slider_5.jpg",
+                          //placeholder: (context, url) => CircularProgressIndicator(),
+                          errorWidget: (context, url, error) => Icon(Icons.error,color: Colors.pink,),
+                        ),CachedNetworkImage(
+                          imageUrl: "https://inheriting-addition.000webhostapp.com/images/top_image_slider_6.jpg",
+                          //placeholder: (context, url) => CircularProgressIndicator(),
+                          errorWidget: (context, url, error) => Icon(Icons.error,color: Colors.pink,),
+                        ),CachedNetworkImage(
+                          imageUrl: "https://inheriting-addition.000webhostapp.com/images/top_image_slider_7.jpg",
+                          //placeholder: (context, url) => CircularProgressIndicator(),
+                          errorWidget: (context, url, error) => Icon(Icons.error,color: Colors.pink,),
+                        ),
                       ],
                       dotSize: 10,
                       dotSpacing: 25,
@@ -81,22 +105,43 @@ class _HomePageState extends State<HomePage> {
                       dotBgColor: Colors.transparent,
                       dotIncreasedColor: Colors.pink,
                     ),
-                ),
+                  ),
+                  ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: Center(
-                child: Text(
-                  'SHOP BY CATEGORY',
-                  style: GoogleFonts.montserrat(
-                    textStyle: TextStyle(
-                        color: Colors.pink,
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left:10),
+                  child: Text(
+                    'SHOP BY CATEGORY',
+                    style: GoogleFonts.montserrat(
+                      textStyle: TextStyle(
+                          color: Colors.pink,
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold
+                      ),
+                    ),
                   ),
                 ),
-              ),
+
+                FlatButton(
+                  minWidth: 8,
+                  height: 30,
+                  child: Text('See More',style: GoogleFonts.montserrat(
+                    textStyle: TextStyle(
+                        color: Colors.pink,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                      decoration:TextDecoration.underline
+                    ),
+                  ),
+                  ),
+                  onPressed: () {print('merry christmas');
+                  },
+                ),
+              ],
             ),
             Container(
               height: 195,
@@ -109,40 +154,40 @@ class _HomePageState extends State<HomePage> {
                 }),
               ),
             ),
-            Container(
-                height: 200,
-                child: HomeDashBoard(),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Text(
-                    'Special for you',
-                    style: GoogleFonts.dancingScript(
-                      textStyle: TextStyle(
-                          color: Colors.pink,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold),
+
+            Padding(
+              padding: const EdgeInsets.only(top:20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: Text(
+                      'Special for you',
+                      style: GoogleFonts.dancingScript(
+                        textStyle: TextStyle(
+                            color: Colors.pink,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right:10),
-                  child: FlatButton(
-                    minWidth: 8,
-                    height: 30,
-                    child: Text('See More'),
-                    color: Colors.pink,
-                    shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-                    textColor: Colors.white,
-                    onPressed: () {
+                  Padding(
+                    padding: const EdgeInsets.only(right:10),
+                    child: FlatButton(
+                      minWidth: 8,
+                      height: 30,
+                      child: Text('See More'),
+                      color: Colors.pink,
+                      shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                      textColor: Colors.white,
+                      onPressed: () {
 
-                    },
+                      },
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             Container(
               height:245,
@@ -184,6 +229,35 @@ class _HomePageState extends State<HomePage> {
                  height:245,
                  child: HomePageSlider(),
              ),
+            Stack(
+              alignment: Alignment.bottomLeft
+              ,
+              children: [
+                Container(
+                height: 200,
+                child: HomeDashBoard(),
+              ),
+                Padding(
+                  padding: const EdgeInsets.only(left:30,bottom: 20),
+                  child: FlatButton(
+                    minWidth: 10,
+                    color: Colors.pink,
+                    textColor: Colors.white,
+                    disabledColor: Colors.grey,
+                    disabledTextColor: Colors.black,
+                    splashColor: Colors.pinkAccent,
+                    child: Text('SHOP NOW',style: GoogleFonts.montserrat(
+                      textStyle: TextStyle(
+                          color: Colors.white,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold),
+                    ),),
+                    onPressed: (){
+                      Navigator.pushNamed(context, 'cart');
+                    },),
+                ),
+              ],
+            ),
             Container(
               padding: const EdgeInsets.all(10),
               child: Center(

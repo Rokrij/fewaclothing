@@ -1,23 +1,20 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:fewaclothing/models/product.dart';
+import 'package:fewaclothing/models/trending_items.dart';
+import 'package:fewaclothing/product_by_category.dart';
 import 'package:fewaclothing/widgets/newarrival_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'product_by_category.dart';
-
-class ProductDetails extends StatefulWidget {
-  final FewaProduct product;
-
+class TrendingDetails extends StatefulWidget {
+  final TrendingItems trendingItems;
   @override
-  _ProductDetailsState createState() => _ProductDetailsState();
+  _TrendingDetailsState createState() => _TrendingDetailsState();
 
-  ProductDetails(this.product);
+  TrendingDetails(this.trendingItems);
 }
 
-class _ProductDetailsState extends State<ProductDetails> {
+class _TrendingDetailsState extends State<TrendingDetails> {
   bool _wishlist = true;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,7 +55,9 @@ class _ProductDetailsState extends State<ProductDetails> {
         ],
       ),
       bottomNavigationBar: Container(color:Colors.white,
-          height:60,child: addToCartButton()),
+          height:60,
+          child: addToCartButton(),
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,7 +66,7 @@ class _ProductDetailsState extends State<ProductDetails> {
               children: [
                 Center(
                   child: Image(
-                    image: CachedNetworkImageProvider(widget.product.image),
+                    image: CachedNetworkImageProvider(widget.trendingItems.image),
                     height: 350,
                     fit: BoxFit.fill,
                   ),
@@ -82,13 +81,13 @@ class _ProductDetailsState extends State<ProductDetails> {
                   child: Container(
                     width: 260,
                     child: Text(
-                      widget.product.name,
+                      widget.trendingItems.name,
                       style: GoogleFonts.montserrat(
                         textStyle: TextStyle(
                             color: Colors.pink,
                             fontSize: 30,
                             fontWeight: FontWeight.bold
-                      ),
+                        ),
                       ),
                     ),
                   ),
@@ -98,12 +97,12 @@ class _ProductDetailsState extends State<ProductDetails> {
                   child: IconButton(
                     icon: (_wishlist
                         ? Icon(Icons.favorite_border_sharp,
-                            color: Colors.pink)
+                        color: Colors.pink)
                         : Icon(Icons.favorite_sharp, color: Colors.pink)),
                     iconSize: 40,
                     onPressed: () {
                       setState(
-                        () {
+                            () {
                           _wishlist = !_wishlist;
                         },
                       );
@@ -115,7 +114,7 @@ class _ProductDetailsState extends State<ProductDetails> {
             Padding(
               padding: const EdgeInsets.only(top: 10, left: 10),
               child: Text(
-                'Rs. ${widget.product.price}',
+                'Rs. ${widget.trendingItems.price}',
                 style: GoogleFonts.montserrat(
                   textStyle: TextStyle(color: Colors.pink, fontSize: 20),
                 ),
@@ -128,7 +127,7 @@ class _ProductDetailsState extends State<ProductDetails> {
             Padding(
               padding: const EdgeInsets.only(top: 10, left: 10),
               child: Text(
-                widget.product.description,
+                widget.trendingItems.description,
                 style: GoogleFonts.montserrat(
                   textStyle: TextStyle(color: Colors.pink, fontSize: 20),
                 ),
@@ -136,13 +135,13 @@ class _ProductDetailsState extends State<ProductDetails> {
             ),Padding(
               padding: const EdgeInsets.only(top: 10, left: 10),
               child: Text(
-                widget.product.size,
+                widget.trendingItems.size,
                 style: GoogleFonts.montserrat(
                   textStyle: TextStyle(color: Colors.pink, fontSize: 20),
                 ),
               ),
             ),
-            ProductByCatWidget(widget.product.category),
+            ProductByCatWidget(widget.trendingItems.category),
           ],
         ),
       ),
@@ -158,10 +157,11 @@ class _ProductDetailsState extends State<ProductDetails> {
         disabledTextColor: Colors.black,
         splashColor: Colors.pinkAccent,
         child: Text('ADD TO CART',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
-            onPressed: (){
-              Navigator.pushNamed(context, 'cart');
+        onPressed: (){
+          Navigator.pushNamed(context, 'cart');
         },
       ),
     );
   }
+
 }

@@ -19,8 +19,8 @@ Swiper imageSlider(context) {
   return Swiper.children(
     duration: 250,
     autoplay: true,
-    viewportFraction: 0.7,
-    scale: 0.9,
+    // viewportFraction: 0.7,
+    // scale: 0.9,
     pagination: new SwiperPagination(
         margin: new EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 30.0),
         builder: new DotSwiperPaginationBuilder(
@@ -32,7 +32,7 @@ Swiper imageSlider(context) {
     children: <Widget>[
       Image.network(
           "https://mi0.rightinthebox.com/images/dfp/202005/LITB_c71_200225_992320_cp_1_en.jpg?15",
-          fit: BoxFit.cover),
+          fit: BoxFit.fill),
       Image.network(
           "https://i.pinimg.com/originals/53/4b/23/534b23f26ccba86efdf270ada6523266.jpg",
           fit: BoxFit.cover),

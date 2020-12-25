@@ -45,6 +45,8 @@ dependencies:
   animated_text_kit: ^3.1.0
   bordered_text: ^1.0.1
   awesome_dialog: ^1.2.1
+  avatar_glow: ^1.2.0
+  animated: ^1.0.1
 
 dev_dependencies:
   flutter_test:
@@ -63,6 +65,7 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/gif/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

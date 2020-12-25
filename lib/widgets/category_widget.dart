@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:fewaclothing/category_filter.dart';
+import 'package:fewaclothing/product_by_category.dart';
 import 'package:fewaclothing/models/category.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,7 +15,7 @@ class CategoryWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        Navigator.push(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: CategoryFilter(category)));
+       Navigator.push(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: ProductByCategoryPage(category)));
       },
       child: Column(
         children: [

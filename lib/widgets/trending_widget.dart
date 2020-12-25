@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fewaclothing/models/trending_items.dart';
+import 'package:fewaclothing/trending_details.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 
 class TrendingWidget extends StatefulWidget {
   final TrendingItems items;
@@ -16,7 +18,7 @@ class _TrendingWidgetState extends State<TrendingWidget> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        // go to product detail page and pass product.
+        Navigator.push(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: TrendingDetails(widget.items)));
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -47,6 +49,7 @@ class _TrendingWidgetState extends State<TrendingWidget> {
                   style: GoogleFonts.nunito(
                     textStyle: TextStyle(color: Colors.pink, fontSize: 20,fontWeight: FontWeight.bold),)),
             ),
+
           ],
         ),
       ),

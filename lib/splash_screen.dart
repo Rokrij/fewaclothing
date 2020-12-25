@@ -1,11 +1,8 @@
-
-import 'package:animated_splash_screen/animated_splash_screen.dart';
-import 'package:fewaclothing/bottom_navigator_page.dart';
-import 'package:fewaclothing/login_page.dart';
+import 'dart:async';
+import 'package:animated/animated.dart';
 import 'package:fewaclothing/providers/user_auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -14,32 +11,46 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  // String email;
+
+  startTime() async {
+    var duration = Duration(seconds: 3);
+    return Timer(duration, goToAnotherScreen);
+  }
+
+  goToAnotherScreen() {
+    if (Provider.of<UserAuthProvider>(context,listen:false).email.isEmpty) {
+      Navigator.pushReplacementNamed(context, 'login');
+    } else {
+      Navigator.pushReplacementNamed(context, 'nav');
+    }
+  }
 
   @override
   void initState() {
     super.initState();
+    startTime();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Stack(
-          children: [AnimatedSplashScreen.withScreenFunction(
-            // animationDuration: Duration(milliseconds: 500),
-              screenFunction: () async {
-                return Provider.of<UserAuthProvider>(context,listen:false).email.isEmpty ? LoginPage() : BottomNavPage();
-              },
-              splash: Image.asset(
-                'assets/images/3.png',
-                height: 200,
-                fit: BoxFit.fitWidth,
+      body: Stack(
+        children: [
+          Center(
+            child: Animated(
+              value: 1.2,
+              curve: Curves.easeInOutBack,
+              duration: Duration(milliseconds: 500),
+              builder: (context, child, animation) => Transform.scale(
+                scale: animation.value,
+                child: child,
               ),
-              centered: true,
-              splashTransition: SplashTransition.fadeTransition,
-              pageTransitionType: PageTransitionType.fade,
-              backgroundColor: Colors.white),
+              child: Image.asset('assets/images/3.png',height: 250,width: 250,),
+            ),
+          ),
           Padding(
-            padding: const EdgeInsets.only(top:500),
+            padding: const EdgeInsets.only(top:600),
             child: Center(child: Text('from',style: GoogleFonts.cantarell(
               textStyle: TextStyle(
                   color: Colors.pink,
@@ -47,18 +58,20 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
             ),
             ),
-          ),Padding(
-            padding: const EdgeInsets.only(top:575),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top:675),
             child: Center(child: Text('ROKRIJ SHRESTHA',style: GoogleFonts.cantarell(
               textStyle: TextStyle(
                   color: Colors.pink,
                   fontSize: 25,
                   fontWeight: FontWeight.bold),
-            ),)),
+            ),
+            ),
+            ),
           ),
-
-          ],
-        ),
+        ],
+      ),
     );
   }
 }
