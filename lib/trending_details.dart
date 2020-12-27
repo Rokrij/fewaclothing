@@ -15,6 +15,11 @@ class TrendingDetails extends StatefulWidget {
 
 class _TrendingDetailsState extends State<TrendingDetails> {
   bool _wishlist = true;
+
+  bool isSizeMSelected = true;
+  bool isSizeLSelected = false;
+  bool isSizeXLSelected = false;
+  bool isSizeXXLSelected = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -133,16 +138,47 @@ class _TrendingDetailsState extends State<TrendingDetails> {
                 ),
               ),
             ),Padding(
-              padding: const EdgeInsets.only(top: 10, left: 10),
-              child: Text(
-                widget.trendingItems.size,
-                style: GoogleFonts.montserrat(
-                  textStyle: TextStyle(color: Colors.pink, fontSize: 20),
-                ),
+              padding: const EdgeInsets.only(top: 15),
+              child: Row(
+                children: [
+                  sizeWidget('M', isSizeMSelected),
+                  sizeWidget('L', isSizeLSelected),
+                  sizeWidget('XL', isSizeXLSelected),
+                  sizeWidget('XXL', isSizeXXLSelected),
+                ],
               ),
             ),
             ProductByCatWidget(widget.trendingItems.category),
           ],
+        ),
+      ),
+    );
+  }
+  Widget sizeWidget(String size, bool isSelected) {
+    return GestureDetector(
+      onTap: () => selectSize(size),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          height: 45,
+          width: 45,
+          decoration: BoxDecoration(
+              border: Border.all(
+                color: isSelected ? Colors.pink : Colors.white,
+              ),
+              color: isSelected ? Colors.pink : Colors.white,
+              borderRadius: BorderRadius.all(Radius.circular(10))),
+          child: Center(
+            child: Text(
+              size,
+              style: GoogleFonts.montserrat(
+                textStyle: TextStyle(
+                    color: isSelected ? Colors.white : Colors.pink,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
         ),
       ),
     );
@@ -162,6 +198,31 @@ class _TrendingDetailsState extends State<TrendingDetails> {
         },
       ),
     );
+  }
+  void selectSize(String size) {
+    setState(() {
+      if (size == 'M') {
+        isSizeMSelected = true;
+        isSizeLSelected = false;
+        isSizeXLSelected = false;
+        isSizeXXLSelected = false;
+      }if (size == 'L') {
+        isSizeMSelected = false;
+        isSizeLSelected = true;
+        isSizeXLSelected = false;
+        isSizeXXLSelected = false;
+      }if (size == 'XL') {
+        isSizeMSelected = false;
+        isSizeLSelected = false;
+        isSizeXLSelected = true;
+        isSizeXXLSelected = false;
+      }if (size == 'XXL') {
+        isSizeMSelected = false;
+        isSizeLSelected = false;
+        isSizeXLSelected = false;
+        isSizeXXLSelected = true;
+      }
+    });
   }
 
 }

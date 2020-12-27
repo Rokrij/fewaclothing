@@ -26,8 +26,8 @@ class CategoryWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(40.0),
           ),
           Text(category.name,
-              style: GoogleFonts.nunito(
-                textStyle: TextStyle(color: Colors.pink, fontSize: 20),
+              style: GoogleFonts.montserrat(
+                textStyle: TextStyle(color: Colors.pink, fontSize: 20,fontWeight: FontWeight.bold),
               ),),
         ],
       ),

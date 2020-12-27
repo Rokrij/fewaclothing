@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
@@ -30,18 +31,10 @@ Swiper imageSlider(context) {
             activeSize: 0.0),
     ),
     children: <Widget>[
-      Image.network(
-          "https://mi0.rightinthebox.com/images/dfp/202005/LITB_c71_200225_992320_cp_1_en.jpg?15",
-          fit: BoxFit.fill),
-      Image.network(
-          "https://i.pinimg.com/originals/53/4b/23/534b23f26ccba86efdf270ada6523266.jpg",
-          fit: BoxFit.cover),
-      Image.network(
-          "https://creativemachine.co/wp-content/uploads/2020/03/ecommerce_men_s_clothing_banner_template_13_1200x628.jpg",
-          fit: BoxFit.cover),
-      Image.network(
-          "https://i.pinimg.com/originals/9a/93/ba/9a93ba70bc11f1286419b3fd82b85e09.jpg",
-          fit: BoxFit.cover),
+      CachedNetworkImage(imageUrl:  "https://inheriting-addition.000webhostapp.com/images/home_page_banner_3.png",fit: BoxFit.fill),
+      CachedNetworkImage(imageUrl:  "https://inheriting-addition.000webhostapp.com/images/home_page_banner_2.png",fit: BoxFit.fill),
+      CachedNetworkImage(imageUrl:  "https://inheriting-addition.000webhostapp.com/images/home_page_banner_4.png",fit: BoxFit.fill),
+      CachedNetworkImage(imageUrl:  "https://inheriting-addition.000webhostapp.com/images/home_page_banner_1.png",fit: BoxFit.fill),
     ],
   );
 }

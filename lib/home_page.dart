@@ -129,7 +129,7 @@ class _HomePageState extends State<HomePage> {
                 FlatButton(
                   minWidth: 8,
                   height: 30,
-                  child: Text('See More',style: GoogleFonts.montserrat(
+                  child: Text('View All',style: GoogleFonts.montserrat(
                     textStyle: TextStyle(
                         color: Colors.pink,
                         fontSize: 15,
@@ -138,7 +138,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   ),
-                  onPressed: () {print('merry christmas');
+                  onPressed: () {
+                    print('merry christmas');
                   },
                 ),
               ],
