@@ -8,34 +8,37 @@ class SearchBarSlider extends StatefulWidget {
 class _SearchBarSliderState extends State<SearchBarSlider> {
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      physics: NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      slivers:<Widget> [
-        SliverToBoxAdapter(
-          child: Container(
-            height: 25,
-            margin: EdgeInsets.only(top: 15,left: 8,right: 16),
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: <Widget>[
-                _tagItem(("Featured")),
-                _tagItem("Hoodies"),
-                _tagItem("Jackets"),
-                _tagItem("Pants"),
-                _tagItem("Shoes"),
-                _tagItem("Shirts"),
-                _tagItem("Caps"),
-                _tagItem("Tees"),
-                _tagItem("Jeans"),
-                _tagItem("Bomber"),
-                _tagItem("Watches"),
-                _tagItem("Belts")
-              ],
+    return Container(
+      height: 30,
+      child: CustomScrollView(
+        physics: NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        slivers:<Widget> [
+          SliverToBoxAdapter(
+            child: Container(
+              height: 25,
+              margin: EdgeInsets.only(top: 5,left: 8,right: 16),
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: <Widget>[
+                  _tagItem(("Featured")),
+                  _tagItem("Hoodies"),
+                  _tagItem("Jackets"),
+                  _tagItem("Pants"),
+                  _tagItem("Shoes"),
+                  _tagItem("Shirts"),
+                  _tagItem("Caps"),
+                  _tagItem("Tees"),
+                  _tagItem("Jeans"),
+                  _tagItem("Bomber"),
+                  _tagItem("Watches"),
+                  _tagItem("Belts")
+                ],
+              ),
             ),
-          ),
-        )
-      ],
+          )
+        ],
+      ),
     );
 
   }

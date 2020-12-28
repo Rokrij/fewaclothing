@@ -121,7 +121,7 @@ class _TrendingDetailsState extends State<TrendingDetails> {
               child: Text(
                 'Rs. ${widget.trendingItems.price}',
                 style: GoogleFonts.montserrat(
-                  textStyle: TextStyle(color: Colors.pink, fontSize: 20),
+                  textStyle: TextStyle(color: Colors.blueGrey, fontSize: 20,fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -134,7 +134,7 @@ class _TrendingDetailsState extends State<TrendingDetails> {
               child: Text(
                 widget.trendingItems.description,
                 style: GoogleFonts.montserrat(
-                  textStyle: TextStyle(color: Colors.pink, fontSize: 20),
+                  textStyle: TextStyle(color: Colors.blueGrey, fontSize: 20),
                 ),
               ),
             ),Padding(
@@ -194,7 +194,52 @@ class _TrendingDetailsState extends State<TrendingDetails> {
         splashColor: Colors.pinkAccent,
         child: Text('ADD TO CART',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
         onPressed: (){
-          Navigator.pushNamed(context, 'cart');
+          showDialog(context: context,builder: (context){
+            return Dialog(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20),
+              ),
+              child: Container(
+                height: 250,
+                child: Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Center(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Image(
+                          image: AssetImage('assets/gif/cart.gif'),
+                          height: 140,
+                          fit: BoxFit.fill
+                        ),
+                        Text('Added to Cart Successfully !!!',style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Colors.pink),),
+                        Padding(
+                          padding: const EdgeInsets.only(top:17),
+                          child: SizedBox(
+                            width: 150,
+                            child: RaisedButton(
+                              color: Colors.pink,
+                              onPressed: (){
+                                Navigator.pop(context);
+                              },
+                              child:Text('CONTINUE',style: GoogleFonts.montserrat(
+                                textStyle: TextStyle(color: Colors.white, fontSize: 20),
+                              ),
+                              ),
+                              elevation: 3,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            );
+          });
         },
       ),
     );

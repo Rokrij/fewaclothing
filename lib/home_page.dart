@@ -131,7 +131,7 @@ class _HomePageState extends State<HomePage> {
                   height: 30,
                   child: Text('View All',style: GoogleFonts.montserrat(
                     textStyle: TextStyle(
-                        color: Colors.pink,
+                        color: Colors.blueGrey,
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
                       decoration:TextDecoration.underline
@@ -165,9 +165,9 @@ class _HomePageState extends State<HomePage> {
                     padding: const EdgeInsets.all(10),
                     child: Text(
                       'Special for you',
-                      style: GoogleFonts.dancingScript(
+                      style: GoogleFonts.raleway(
                         textStyle: TextStyle(
-                            color: Colors.pink,
+                            color: Colors.blueGrey,
                             fontSize: 20,
                             fontWeight: FontWeight.bold),
                       ),
@@ -202,9 +202,9 @@ class _HomePageState extends State<HomePage> {
                   padding: const EdgeInsets.all(10),
                   child: Text(
                     'Trending Products',
-                    style: GoogleFonts.dancingScript(
+                    style: GoogleFonts.raleway(
                       textStyle: TextStyle(
-                          color: Colors.pink,
+                          color: Colors.blueGrey,
                           fontSize: 20,
                           fontWeight: FontWeight.bold),
                     ),
@@ -266,7 +266,7 @@ class _HomePageState extends State<HomePage> {
                   'RECOMMENDED FOR YOU',
                   style: GoogleFonts.montserrat(
                     textStyle: TextStyle(
-                        color: Colors.pink,
+                        color: Colors.blueGrey,
                         fontSize: 25,
                         fontWeight: FontWeight.bold),
                   ),

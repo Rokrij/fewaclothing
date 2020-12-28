@@ -61,9 +61,9 @@ class _ProductByCategoryPageState extends State<ProductByCategoryPage> {
       body: ListView(
         children: [
           Center(
-            child: Text('${widget.category.name}s',style: GoogleFonts.montserrat(
+            child: Text('${widget.category.name}s',style: GoogleFonts.alegreyaSansSc(
               textStyle: TextStyle(
-                  color: Colors.pink,
+                  color: Colors.blueGrey,
                   fontSize: 25,
                   fontWeight: FontWeight.bold),
             ),),

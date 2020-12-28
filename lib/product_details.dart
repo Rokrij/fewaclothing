@@ -23,6 +23,14 @@ class _ProductDetailsState extends State<ProductDetails> {
   bool isSizeXLSelected = false;
   bool isSizeXXLSelected = false;
 
+  bool isSize38Selected = true;
+  bool isSize39Selected = true;
+  bool isSize40Selected = true;
+  bool isSize41Selected = true;
+  bool isSize42Selected = true;
+  bool isSize43Selected = true;
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -120,7 +128,7 @@ class _ProductDetailsState extends State<ProductDetails> {
               child: Text(
                 'Rs. ${widget.product.price}',
                 style: GoogleFonts.montserrat(
-                  textStyle: TextStyle(color: Colors.pink, fontSize: 20),
+                  textStyle: TextStyle(color: Colors.blueGrey, fontSize: 20,fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -139,7 +147,7 @@ class _ProductDetailsState extends State<ProductDetails> {
               child: Text(
                 widget.product.description,
                 style: GoogleFonts.montserrat(
-                  textStyle: TextStyle(color: Colors.pink, fontSize: 20),
+                  textStyle: TextStyle(color: Colors.blueGrey, fontSize: 20),
                 ),
               ),
             ),
@@ -147,10 +155,10 @@ class _ProductDetailsState extends State<ProductDetails> {
               padding: const EdgeInsets.only(top: 15),
               child: Row(
                 children: [
-                  sizeWidget('M', isSizeMSelected),
-                  sizeWidget('L', isSizeLSelected),
-                  sizeWidget('XL', isSizeXLSelected),
-                  sizeWidget('XXL', isSizeXXLSelected),
+                  clothesSizeWidget('M', isSizeMSelected),
+                  clothesSizeWidget('L', isSizeLSelected),
+                  clothesSizeWidget('XL', isSizeXLSelected),
+                  clothesSizeWidget('XXL', isSizeXXLSelected),
                 ],
               ),
             ),
@@ -161,9 +169,9 @@ class _ProductDetailsState extends State<ProductDetails> {
     );
   }
 
-  Widget sizeWidget(String size, bool isSelected) {
+  Widget clothesSizeWidget(String size, bool isSelected) {
     return GestureDetector(
-      onTap: () => ClotheSelectSize(size),
+      onTap: () => ClothesSelectSize(size),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
@@ -205,13 +213,58 @@ class _ProductDetailsState extends State<ProductDetails> {
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
         ),
         onPressed: () {
-          Navigator.pushNamed(context, 'cart');
+          showDialog(context: context,builder: (context){
+            return Dialog(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20),
+              ),
+              child: Container(
+                height: 250,
+                child: Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Center(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Image(
+                            image: AssetImage('assets/gif/cart.gif'),
+                            height: 140,
+                            fit: BoxFit.fill
+                        ),
+                        Text('Added to Cart Successfully !!!',style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Colors.pink),),
+                        Padding(
+                          padding: const EdgeInsets.only(top:17),
+                          child: SizedBox(
+                            width: 150,
+                            child: RaisedButton(
+                              color: Colors.pink,
+                              onPressed: (){
+                                Navigator.pop(context);
+                              },
+                              child:Text('CONTINUE',style: GoogleFonts.montserrat(
+                                textStyle: TextStyle(color: Colors.white, fontSize: 20),
+                              ),
+                              ),
+                              elevation: 3,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            );
+          });
         },
       ),
     );
   }
 
-  void ClotheSelectSize(String clotheSize) {
+  void ClothesSelectSize(String clotheSize) {
     setState(() {
       if (clotheSize == 'M') {
         isSizeMSelected = true;
@@ -233,6 +286,53 @@ class _ProductDetailsState extends State<ProductDetails> {
         isSizeLSelected = false;
         isSizeXLSelected = false;
         isSizeXXLSelected = true;
+      }
+    });
+  }
+  void ShoesSelectSize(String shoeSize) {
+    setState(() {
+      if (shoeSize == '38') {
+        isSize38Selected = true;
+        isSize39Selected = false;
+        isSize40Selected = false;
+        isSize41Selected = false;
+        isSize42Selected = false;
+        isSize43Selected = false;
+      }if (shoeSize == '39') {
+        isSize38Selected = false;
+        isSize39Selected = true;
+        isSize40Selected = false;
+        isSize41Selected = false;
+        isSize42Selected = false;
+        isSize43Selected = false;
+      }if (shoeSize == '40') {
+        isSize38Selected = false;
+        isSize39Selected = false;
+        isSize40Selected = true;
+        isSize41Selected = false;
+        isSize42Selected = false;
+        isSize43Selected = false;
+      }if (shoeSize == '41') {
+        isSize38Selected = false;
+        isSize39Selected = false;
+        isSize40Selected = false;
+        isSize41Selected = true;
+        isSize42Selected = false;
+        isSize43Selected = false;
+      }if (shoeSize== '42') {
+        isSize38Selected = false;
+        isSize39Selected = false;
+        isSize40Selected = false;
+        isSize41Selected = false;
+        isSize42Selected = true;
+        isSize43Selected = false;
+      }if (shoeSize == '43') {
+        isSize38Selected = false;
+        isSize39Selected = false;
+        isSize40Selected = false;
+        isSize41Selected = false;
+        isSize42Selected = false;
+        isSize43Selected = true;
       }
     });
   }
