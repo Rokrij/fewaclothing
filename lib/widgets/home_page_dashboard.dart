@@ -16,26 +16,36 @@ class HomeDashBoard extends StatelessWidget {
 }
 
 Swiper imageSlider(context) {
-
   return Swiper.children(
     duration: 250,
     autoplay: true,
     // viewportFraction: 0.7,
     // scale: 0.9,
     pagination: new SwiperPagination(
-        margin: new EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 30.0),
-        builder: new DotSwiperPaginationBuilder(
-            color: Colors.white30,
-            activeColor: Colors.white,
-            size: 0.0,
-            activeSize: 0.0),
+      margin: new EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 30.0),
+      builder: new DotSwiperPaginationBuilder(
+          color: Colors.white30,
+          activeColor: Colors.white,
+          size: 0.0,
+          activeSize: 0.0),
     ),
     children: <Widget>[
-      CachedNetworkImage(imageUrl:  "https://inheriting-addition.000webhostapp.com/images/home_page_banner_3.png",fit: BoxFit.fill),
-      CachedNetworkImage(imageUrl:  "https://inheriting-addition.000webhostapp.com/images/home_page_banner_2.png",fit: BoxFit.fill),
-      CachedNetworkImage(imageUrl:  "https://inheriting-addition.000webhostapp.com/images/home_page_banner_4.png",fit: BoxFit.fill),
-      CachedNetworkImage(imageUrl:  "https://inheriting-addition.000webhostapp.com/images/home_page_banner_1.png",fit: BoxFit.fill),
+      CachedNetworkImage(
+          imageUrl:
+              "https://inheriting-addition.000webhostapp.com/images/home_page_banner_3.png",
+          fit: BoxFit.fill),
+      CachedNetworkImage(
+          imageUrl:
+              "https://inheriting-addition.000webhostapp.com/images/home_page_banner_2.png",
+          fit: BoxFit.fill),
+      CachedNetworkImage(
+          imageUrl:
+              "https://inheriting-addition.000webhostapp.com/images/home_page_banner_4.png",
+          fit: BoxFit.fill),
+      CachedNetworkImage(
+          imageUrl:
+              "https://inheriting-addition.000webhostapp.com/images/home_page_banner_1.png",
+          fit: BoxFit.fill),
     ],
   );
 }
-

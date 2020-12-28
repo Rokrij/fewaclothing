@@ -16,7 +16,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   List<FewaCategory> categoryList = [];
 
   var screenWidth;
@@ -26,9 +25,11 @@ class _HomePageState extends State<HomePage> {
     // TODO: implement initState
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-    categoryList= Provider.of<CategoryProvider>(context,listen:true).fewaCategoryList;
+    categoryList =
+        Provider.of<CategoryProvider>(context, listen: true).fewaCategoryList;
 
     screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -39,7 +40,8 @@ class _HomePageState extends State<HomePage> {
         title: Text(
           'Fewa Clothing',
           style: GoogleFonts.greatVibes(
-            textStyle: TextStyle(color: Colors.pink, fontSize: 35,fontWeight: FontWeight.bold),
+            textStyle: TextStyle(
+                color: Colors.pink, fontSize: 35, fontWeight: FontWeight.bold),
           ),
         ),
         actions: [
@@ -63,39 +65,71 @@ class _HomePageState extends State<HomePage> {
                 child: SizedBox(
                   height: 250.0,
                   child: GestureDetector(
-                    onTap: (){
-
-                    },
+                    onTap: () {},
                     child: Carousel(
                       images: [
                         CachedNetworkImage(
-                          imageUrl: "https://inheriting-addition.000webhostapp.com/images/top_image_slider_1.jpg",
+                          imageUrl:
+                              "https://inheriting-addition.000webhostapp.com/images/top_image_slider_1.jpg",
                           //placeholder: (context, url) => CircularProgressIndicator(),
-                          errorWidget: (context, url, error) => Icon(Icons.error,color: Colors.pink,),
-                        ),CachedNetworkImage(
-                          imageUrl: "https://inheriting-addition.000webhostapp.com/images/top_image_slider_2.jpg",
+                          errorWidget: (context, url, error) => Icon(
+                            Icons.error,
+                            color: Colors.pink,
+                          ),
+                        ),
+                        CachedNetworkImage(
+                          imageUrl:
+                              "https://inheriting-addition.000webhostapp.com/images/top_image_slider_2.jpg",
                           //placeholder: (context, url) => CircularProgressIndicator(),
-                          errorWidget: (context, url, error) => Icon(Icons.error,color: Colors.pink,),
-                        ),CachedNetworkImage(
-                          imageUrl: "https://inheriting-addition.000webhostapp.com/images/top_image_slider_3.jpg",
+                          errorWidget: (context, url, error) => Icon(
+                            Icons.error,
+                            color: Colors.pink,
+                          ),
+                        ),
+                        CachedNetworkImage(
+                          imageUrl:
+                              "https://inheriting-addition.000webhostapp.com/images/top_image_slider_3.jpg",
                           //placeholder: (context, url) => CircularProgressIndicator(),
-                          errorWidget: (context, url, error) => Icon(Icons.error,color: Colors.pink,),
-                        ),CachedNetworkImage(
-                          imageUrl: "https://inheriting-addition.000webhostapp.com/images/top_image_slider_4.jpg",
+                          errorWidget: (context, url, error) => Icon(
+                            Icons.error,
+                            color: Colors.pink,
+                          ),
+                        ),
+                        CachedNetworkImage(
+                          imageUrl:
+                              "https://inheriting-addition.000webhostapp.com/images/top_image_slider_4.jpg",
                           //placeholder: (context, url) => CircularProgressIndicator(),
-                          errorWidget: (context, url, error) => Icon(Icons.error,color: Colors.pink,),
-                        ),CachedNetworkImage(
-                          imageUrl: "https://inheriting-addition.000webhostapp.com/images/top_image_slider_5.jpg",
+                          errorWidget: (context, url, error) => Icon(
+                            Icons.error,
+                            color: Colors.pink,
+                          ),
+                        ),
+                        CachedNetworkImage(
+                          imageUrl:
+                              "https://inheriting-addition.000webhostapp.com/images/top_image_slider_5.jpg",
                           //placeholder: (context, url) => CircularProgressIndicator(),
-                          errorWidget: (context, url, error) => Icon(Icons.error,color: Colors.pink,),
-                        ),CachedNetworkImage(
-                          imageUrl: "https://inheriting-addition.000webhostapp.com/images/top_image_slider_6.jpg",
+                          errorWidget: (context, url, error) => Icon(
+                            Icons.error,
+                            color: Colors.pink,
+                          ),
+                        ),
+                        CachedNetworkImage(
+                          imageUrl:
+                              "https://inheriting-addition.000webhostapp.com/images/top_image_slider_6.jpg",
                           //placeholder: (context, url) => CircularProgressIndicator(),
-                          errorWidget: (context, url, error) => Icon(Icons.error,color: Colors.pink,),
-                        ),CachedNetworkImage(
-                          imageUrl: "https://inheriting-addition.000webhostapp.com/images/top_image_slider_7.jpg",
+                          errorWidget: (context, url, error) => Icon(
+                            Icons.error,
+                            color: Colors.pink,
+                          ),
+                        ),
+                        CachedNetworkImage(
+                          imageUrl:
+                              "https://inheriting-addition.000webhostapp.com/images/top_image_slider_7.jpg",
                           //placeholder: (context, url) => CircularProgressIndicator(),
-                          errorWidget: (context, url, error) => Icon(Icons.error,color: Colors.pink,),
+                          errorWidget: (context, url, error) => Icon(
+                            Icons.error,
+                            color: Colors.pink,
+                          ),
                         ),
                       ],
                       dotSize: 10,
@@ -106,37 +140,36 @@ class _HomePageState extends State<HomePage> {
                       dotIncreasedColor: Colors.pink,
                     ),
                   ),
-                  ),
+                ),
               ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left:10),
+                  padding: const EdgeInsets.only(left: 10),
                   child: Text(
                     'SHOP BY CATEGORY',
                     style: GoogleFonts.montserrat(
                       textStyle: TextStyle(
                           color: Colors.pink,
                           fontSize: 25,
-                          fontWeight: FontWeight.bold
-                      ),
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
-
                 FlatButton(
                   minWidth: 8,
                   height: 30,
-                  child: Text('View All',style: GoogleFonts.montserrat(
-                    textStyle: TextStyle(
-                        color: Colors.blueGrey,
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                      decoration:TextDecoration.underline
+                  child: Text(
+                    'View All',
+                    style: GoogleFonts.montserrat(
+                      textStyle: TextStyle(
+                          color: Colors.blueGrey,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold,
+                          decoration: TextDecoration.underline),
                     ),
-                  ),
                   ),
                   onPressed: () {
                     print('merry christmas');
@@ -155,9 +188,8 @@ class _HomePageState extends State<HomePage> {
                 }),
               ),
             ),
-
             Padding(
-              padding: const EdgeInsets.only(top:20),
+              padding: const EdgeInsets.only(top: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -174,27 +206,25 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(right:10),
+                    padding: const EdgeInsets.only(right: 10),
                     child: FlatButton(
                       minWidth: 8,
                       height: 30,
                       child: Text('See More'),
                       color: Colors.pink,
-                      shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30)),
                       textColor: Colors.white,
-                      onPressed: () {
-
-                      },
+                      onPressed: () {},
                     ),
                   ),
                 ],
               ),
             ),
             Container(
-              height:245,
+              height: 245,
               child: HomePageSlider(),
             ),
-
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -211,35 +241,33 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(right:10),
+                  padding: const EdgeInsets.only(right: 10),
                   child: FlatButton(
                     minWidth: 8,
                     height: 30,
                     child: Text('See More'),
                     color: Colors.pink,
-                    shape:RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30)),
                     textColor: Colors.white,
-                    onPressed: () {
-
-                    },
+                    onPressed: () {},
                   ),
                 ),
               ],
             ),
-             Container(
-                 height:245,
-                 child: HomePageSlider(),
-             ),
+            Container(
+              height: 245,
+              child: HomePageSlider(),
+            ),
             Stack(
-              alignment: Alignment.bottomLeft
-              ,
+              alignment: Alignment.bottomLeft,
               children: [
                 Container(
-                height: 200,
-                child: HomeDashBoard(),
-              ),
+                  height: 200,
+                  child: HomeDashBoard(),
+                ),
                 Padding(
-                  padding: const EdgeInsets.only(left:30,bottom: 20),
+                  padding: const EdgeInsets.only(left: 30, bottom: 20),
                   child: FlatButton(
                     minWidth: 10,
                     color: Colors.pink,
@@ -247,15 +275,19 @@ class _HomePageState extends State<HomePage> {
                     disabledColor: Colors.grey,
                     disabledTextColor: Colors.black,
                     splashColor: Colors.pinkAccent,
-                    child: Text('SHOP NOW',style: GoogleFonts.montserrat(
-                      textStyle: TextStyle(
-                          color: Colors.white,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold),
-                    ),),
-                    onPressed: (){
+                    child: Text(
+                      'SHOP NOW',
+                      style: GoogleFonts.montserrat(
+                        textStyle: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    onPressed: () {
                       Navigator.pushNamed(context, 'cart');
-                    },),
+                    },
+                  ),
                 ),
               ],
             ),

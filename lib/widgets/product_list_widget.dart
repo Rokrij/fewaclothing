@@ -9,7 +9,8 @@ class ProductListWidget extends StatelessWidget {
   List<FewaProduct> productList = [];
   @override
   Widget build(BuildContext context) {
-    productList=Provider.of<ProductProvider>(context,listen:false).fewaProductList;
+    productList =
+        Provider.of<ProductProvider>(context, listen: false).fewaProductList;
     return Padding(
       padding: const EdgeInsets.all(16),
       child: StaggeredGridView.countBuilder(

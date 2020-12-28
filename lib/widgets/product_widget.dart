@@ -20,8 +20,12 @@ class _ProductWidgetState extends State<ProductWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        Navigator.push(context, PageTransition(type: PageTransitionType.leftToRightWithFade, child: ProductDetails(widget.product)));
+      onTap: () {
+        Navigator.push(
+            context,
+            PageTransition(
+                type: PageTransitionType.leftToRightWithFade,
+                child: ProductDetails(widget.product)));
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -30,26 +34,26 @@ class _ProductWidgetState extends State<ProductWidget> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Stack(
-                alignment: Alignment.topRight,
+              alignment: Alignment.topRight,
               children: [
                 ClipRRect(
-                child:
-                Image(
-                  image: CachedNetworkImageProvider(widget.product.image),
-                  fit: BoxFit.fill,
-                  height: 170,
-                  width: 250,
+                  child: Image(
+                    image: CachedNetworkImageProvider(widget.product.image),
+                    fit: BoxFit.fill,
+                    height: 170,
+                    width: 250,
+                  ),
+                  borderRadius: BorderRadius.circular(30.0),
                 ),
-                borderRadius: BorderRadius.circular(30.0),
-              ),
                 IconButton(
                   icon: (_wishlist
-                      ? Icon(Icons.favorite_border_sharp,color: Colors.pink)
-                      : Icon(Icons.favorite_sharp,color: Colors.pink)),
+                      ? Icon(Icons.favorite_border_sharp, color: Colors.pink)
+                      : Icon(Icons.favorite_sharp, color: Colors.pink)),
                   onPressed: () {
-                    setState(() {
-                      _wishlist = !_wishlist;
-                    },
+                    setState(
+                      () {
+                        _wishlist = !_wishlist;
+                      },
                     );
                   },
                 ),
@@ -58,17 +62,23 @@ class _ProductWidgetState extends State<ProductWidget> {
             Container(
               width: 200,
               height: 50,
-              padding: const EdgeInsets.only(left: 10,bottom: 10),
+              padding: const EdgeInsets.only(left: 10, bottom: 10),
               child: Text(widget.product.name,
                   style: GoogleFonts.nunito(
-                    textStyle: TextStyle(color: Colors.pink, fontSize: 20,fontWeight: FontWeight.bold),)),
+                    textStyle: TextStyle(
+                        color: Colors.pink,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  )),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 10,bottom: 10),
-              child: Text('Rs. ${widget.product.price}',
-                  style: GoogleFonts.nunito(
-                    textStyle: TextStyle(color: Colors.pink, fontSize: 15),
-                  ),),
+              padding: const EdgeInsets.only(left: 10, bottom: 10),
+              child: Text(
+                'Rs. ${widget.product.price}',
+                style: GoogleFonts.nunito(
+                  textStyle: TextStyle(color: Colors.pink, fontSize: 15),
+                ),
+              ),
             ),
           ],
         ),

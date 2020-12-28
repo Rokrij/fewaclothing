@@ -33,30 +33,33 @@ void main() {
       ),
       ChangeNotifierProvider.value(
         value: ProductProvider(),
-      ),ChangeNotifierProvider.value(
+      ),
+      ChangeNotifierProvider.value(
         value: TrendingProductProvider(),
       ),
     ], child: MyApp()),
   );
 }
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Provider.of<UserAuthProvider>(context,listen:false).getEmail();
-    Provider.of<CategoryProvider>(context,listen:false).fetchCategory();
-    Provider.of<ProductProvider>(context,listen:false).fetchProduct();
-    Provider.of<TrendingProductProvider>(context,listen:false).fetchTrendingProduct();
+    Provider.of<UserAuthProvider>(context, listen: false).getEmail();
+    Provider.of<CategoryProvider>(context, listen: false).fetchCategory();
+    Provider.of<ProductProvider>(context, listen: false).fetchProduct();
+    Provider.of<TrendingProductProvider>(context, listen: false)
+        .fetchTrendingProduct();
 
     return MaterialApp(
       home: SignUpPage(),
       theme: ThemeData(
-        primaryColor: Colors.pink,
-        textTheme: GoogleFonts.josefinSansTextTheme(
-          Theme.of(context).textTheme,),
-        accentColor: Colors.pink[400],
-        accentColorBrightness: Brightness.light,
-         splashColor: Colors.transparent
-      ),
+          primaryColor: Colors.pink,
+          textTheme: GoogleFonts.josefinSansTextTheme(
+            Theme.of(context).textTheme,
+          ),
+          accentColor: Colors.pink[400],
+          accentColorBrightness: Brightness.light,
+          splashColor: Colors.transparent),
       routes: <String, WidgetBuilder>{
         'login': (BuildContext context) => LoginPage(),
         'signUp': (BuildContext context) => SignUpPage(),

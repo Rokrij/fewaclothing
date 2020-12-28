@@ -28,7 +28,7 @@ class ProfilePage extends StatelessWidget {
             Center(
               child: Stack(
                 alignment: Alignment.bottomRight,
-                children  :[
+                children: [
                   ListTile(
                     title: AvatarGlow(
                       glowColor: Colors.pink,
@@ -52,10 +52,15 @@ class ProfilePage extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(right:100,bottom: 35),
+                    padding: const EdgeInsets.only(right: 100, bottom: 35),
                     child: IconButton(
-                      icon: (Icon(Icons.camera_alt_rounded,color: Colors.pink,size: 25,)),onPressed: () {
-                      print('Camera');
+                      icon: (Icon(
+                        Icons.camera_alt_rounded,
+                        color: Colors.pink,
+                        size: 25,
+                      )),
+                      onPressed: () {
+                        print('Camera');
                       },
                     ),
                   ),
@@ -63,7 +68,7 @@ class ProfilePage extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 20.0,top: 10),
+              padding: const EdgeInsets.only(bottom: 20.0, top: 10),
               child: Column(
                 children: [
                   Text(
@@ -168,7 +173,7 @@ class ProfilePage extends StatelessWidget {
                 ),
                 onTap: () {
                   Navigator.pushNamed(context, 'aboutUs');
-              },
+                },
               ),
             ),
             SizedBox(
@@ -205,20 +210,22 @@ class ProfilePage extends StatelessWidget {
                     animType: AnimType.BOTTOMSLIDE,
                     title: 'Are you sure',
                     desc: 'You want to logout?',
-                    body: Center(child: Text('Are You Sure?',
+                    body: Center(
+                        child: Text(
+                      'Are You Sure?',
                       style: GoogleFonts.poiretOne(
                         textStyle: TextStyle(
                             color: Colors.pink,
                             fontSize: 25,
                             fontWeight: FontWeight.bold),
-                      ),)),
+                      ),
+                    )),
                     btnCancelOnPress: () {},
                     btnOkOnPress: () {
                       Provider.of<UserAuthProvider>(context, listen: false)
                           .saveEmail('');
                       Navigator.pushNamedAndRemoveUntil(
                           context, 'login', (route) => false);
-
                     },
                   )..show();
                 },

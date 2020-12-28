@@ -20,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   goToAnotherScreen() {
-    if (Provider.of<UserAuthProvider>(context,listen:false).email.isEmpty) {
+    if (Provider.of<UserAuthProvider>(context, listen: false).email.isEmpty) {
       Navigator.pushReplacementNamed(context, 'login');
     } else {
       Navigator.pushReplacementNamed(context, 'nav');
@@ -48,28 +48,36 @@ class _SplashScreenState extends State<SplashScreen> {
                 scale: animation.value,
                 child: child,
               ),
-              child: Image.asset('assets/images/3.png',height: 250,width: 250,),
+              child: Image.asset(
+                'assets/images/3.png',
+                height: 250,
+                width: 250,
+              ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top:600),
-            child: Center(child: Text('from',style: GoogleFonts.cantarell(
-              textStyle: TextStyle(
-                  color: Colors.pink,
-                  fontSize: 20),
-            ),
-            ),
+            padding: const EdgeInsets.only(top: 600),
+            child: Center(
+              child: Text(
+                'from',
+                style: GoogleFonts.cantarell(
+                  textStyle: TextStyle(color: Colors.pink, fontSize: 20),
+                ),
+              ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top:675),
-            child: Center(child: Text('ROKRIJ SHRESTHA',style: GoogleFonts.cantarell(
-              textStyle: TextStyle(
-                  color: Colors.pink,
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold),
-            ),
-            ),
+            padding: const EdgeInsets.only(top: 675),
+            child: Center(
+              child: Text(
+                'ROKRIJ SHRESTHA',
+                style: GoogleFonts.cantarell(
+                  textStyle: TextStyle(
+                      color: Colors.pink,
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
             ),
           ),
         ],

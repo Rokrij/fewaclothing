@@ -24,15 +24,24 @@ class _ProductDetailsState extends State<ProductDetails> {
   bool isSizeXXLSelected = false;
 
   bool isSize38Selected = true;
-  bool isSize39Selected = true;
-  bool isSize40Selected = true;
-  bool isSize41Selected = true;
-  bool isSize42Selected = true;
-  bool isSize43Selected = true;
+  bool isSize39Selected = false;
+  bool isSize40Selected = false;
+  bool isSize41Selected = false;
+  bool isSize42Selected = false;
+  bool isSize43Selected = false;
 
+  bool showClothesSize = false;
+  bool showShoesSize = false;
+
+  int counter = 1;
 
   @override
   Widget build(BuildContext context) {
+    if (widget.product.category.toLowerCase() == 'shoe') {
+      showShoesSize = true;
+    } else {
+      showClothesSize = true;
+    }
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -123,14 +132,66 @@ class _ProductDetailsState extends State<ProductDetails> {
                 ),
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 10, left: 10),
-              child: Text(
-                'Rs. ${widget.product.price}',
-                style: GoogleFonts.montserrat(
-                  textStyle: TextStyle(color: Colors.blueGrey, fontSize: 20,fontWeight: FontWeight.bold),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 10, left: 10),
+                  child: Text(
+                    'Rs. ${widget.product.price}',
+                    style: GoogleFonts.montserrat(
+                      textStyle: TextStyle(
+                          color: Colors.blueGrey,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
                 ),
-              ),
+                Row(
+                  children: [
+                    IconButton(
+                        icon: Icon(
+                          Icons.remove,
+                          color: Colors.blueGrey,
+                          size: 30,
+                        ),
+                        onPressed: () {
+                          if (counter > 1) {
+                            setState(() {
+                              counter = counter - 1;
+                            });
+                          }
+                        }),
+                    Text(
+                      '$counter',
+                      style: GoogleFonts.montserrat(
+                        textStyle: TextStyle(
+                            color: Colors.pink,
+                            fontSize: 40,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: IconButton(
+                          icon: Icon(
+                            Icons.add,
+                            color: Colors.blueGrey,
+                            size: 30,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              if (counter < 10) {
+                                setState(() {
+                                  counter = counter + 1;
+                                });
+                              }
+                            });
+                          }),
+                    ),
+                  ],
+                ),
+              ],
             ),
             Padding(
               padding: const EdgeInsets.only(top: 30, left: 10),
@@ -151,15 +212,34 @@ class _ProductDetailsState extends State<ProductDetails> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 15),
-              child: Row(
-                children: [
-                  clothesSizeWidget('M', isSizeMSelected),
-                  clothesSizeWidget('L', isSizeLSelected),
-                  clothesSizeWidget('XL', isSizeXLSelected),
-                  clothesSizeWidget('XXL', isSizeXXLSelected),
-                ],
+            Visibility(
+              visible: showClothesSize,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 15),
+                child: Row(
+                  children: [
+                    clothesSizeWidget('M', isSizeMSelected),
+                    clothesSizeWidget('L', isSizeLSelected),
+                    clothesSizeWidget('XL', isSizeXLSelected),
+                    clothesSizeWidget('XXL', isSizeXXLSelected),
+                  ],
+                ),
+              ),
+            ),
+            Visibility(
+              visible: showShoesSize,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 15),
+                child: Row(
+                  children: [
+                    shoesSizeWidget('38', isSize38Selected),
+                    shoesSizeWidget('39', isSize39Selected),
+                    shoesSizeWidget('40', isSize40Selected),
+                    shoesSizeWidget('41', isSize41Selected),
+                    shoesSizeWidget('42', isSize42Selected),
+                    shoesSizeWidget('43', isSize43Selected),
+                  ],
+                ),
               ),
             ),
             ProductByCatWidget(widget.product.category),
@@ -172,6 +252,36 @@ class _ProductDetailsState extends State<ProductDetails> {
   Widget clothesSizeWidget(String size, bool isSelected) {
     return GestureDetector(
       onTap: () => ClothesSelectSize(size),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          height: 45,
+          width: 45,
+          decoration: BoxDecoration(
+              border: Border.all(
+                color: isSelected ? Colors.pink : Colors.white,
+              ),
+              color: isSelected ? Colors.pink : Colors.white,
+              borderRadius: BorderRadius.all(Radius.circular(10))),
+          child: Center(
+            child: Text(
+              size,
+              style: GoogleFonts.montserrat(
+                textStyle: TextStyle(
+                    color: isSelected ? Colors.white : Colors.pink,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget shoesSizeWidget(String size, bool isSelected) {
+    return GestureDetector(
+      onTap: () => ShoesSelectSize(size),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
@@ -213,52 +323,60 @@ class _ProductDetailsState extends State<ProductDetails> {
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
         ),
         onPressed: () {
-          showDialog(context: context,builder: (context){
-            return Dialog(
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20),
-              ),
-              child: Container(
-                height: 250,
-                child: Padding(
-                  padding: EdgeInsets.all(10.0),
-                  child: Center(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Image(
-                            image: AssetImage('assets/gif/cart.gif'),
-                            height: 140,
-                            fit: BoxFit.fill
-                        ),
-                        Text('Added to Cart Successfully !!!',style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            color: Colors.pink),),
-                        Padding(
-                          padding: const EdgeInsets.only(top:17),
-                          child: SizedBox(
-                            width: 150,
-                            child: RaisedButton(
-                              color: Colors.pink,
-                              onPressed: (){
-                                Navigator.pop(context);
-                              },
-                              child:Text('CONTINUE',style: GoogleFonts.montserrat(
-                                textStyle: TextStyle(color: Colors.white, fontSize: 20),
-                              ),
-                              ),
-                              elevation: 3,
+          showDialog(
+              context: context,
+              builder: (context) {
+                return Dialog(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Container(
+                    height: 250,
+                    child: Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Center(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Image(
+                                image: AssetImage('assets/gif/cart.gif'),
+                                height: 140,
+                                fit: BoxFit.fill),
+                            Text(
+                              'Added to Cart Successfully !!!',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                  color: Colors.pink),
                             ),
-                          ),
-                        )
-                      ],
+                            Padding(
+                              padding: const EdgeInsets.only(top: 17),
+                              child: SizedBox(
+                                width: 150,
+                                child: RaisedButton(
+                                  color: Colors.pink,
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text(
+                                    'CONTINUE',
+                                    style: GoogleFonts.montserrat(
+                                      textStyle: TextStyle(
+                                          color: Colors.white, fontSize: 20),
+                                    ),
+                                  ),
+                                  elevation: 3,
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ),
-            );
-          });
+                );
+              });
         },
       ),
     );
@@ -271,17 +389,20 @@ class _ProductDetailsState extends State<ProductDetails> {
         isSizeLSelected = false;
         isSizeXLSelected = false;
         isSizeXXLSelected = false;
-      }if (clotheSize == 'L') {
+      }
+      if (clotheSize == 'L') {
         isSizeMSelected = false;
         isSizeLSelected = true;
         isSizeXLSelected = false;
         isSizeXXLSelected = false;
-      }if (clotheSize == 'XL') {
+      }
+      if (clotheSize == 'XL') {
         isSizeMSelected = false;
         isSizeLSelected = false;
         isSizeXLSelected = true;
         isSizeXXLSelected = false;
-      }if (clotheSize == 'XXL') {
+      }
+      if (clotheSize == 'XXL') {
         isSizeMSelected = false;
         isSizeLSelected = false;
         isSizeXLSelected = false;
@@ -289,6 +410,7 @@ class _ProductDetailsState extends State<ProductDetails> {
       }
     });
   }
+
   void ShoesSelectSize(String shoeSize) {
     setState(() {
       if (shoeSize == '38') {
@@ -298,35 +420,40 @@ class _ProductDetailsState extends State<ProductDetails> {
         isSize41Selected = false;
         isSize42Selected = false;
         isSize43Selected = false;
-      }if (shoeSize == '39') {
+      }
+      if (shoeSize == '39') {
         isSize38Selected = false;
         isSize39Selected = true;
         isSize40Selected = false;
         isSize41Selected = false;
         isSize42Selected = false;
         isSize43Selected = false;
-      }if (shoeSize == '40') {
+      }
+      if (shoeSize == '40') {
         isSize38Selected = false;
         isSize39Selected = false;
         isSize40Selected = true;
         isSize41Selected = false;
         isSize42Selected = false;
         isSize43Selected = false;
-      }if (shoeSize == '41') {
+      }
+      if (shoeSize == '41') {
         isSize38Selected = false;
         isSize39Selected = false;
         isSize40Selected = false;
         isSize41Selected = true;
         isSize42Selected = false;
         isSize43Selected = false;
-      }if (shoeSize== '42') {
+      }
+      if (shoeSize == '42') {
         isSize38Selected = false;
         isSize39Selected = false;
         isSize40Selected = false;
         isSize41Selected = false;
         isSize42Selected = true;
         isSize43Selected = false;
-      }if (shoeSize == '43') {
+      }
+      if (shoeSize == '43') {
         isSize38Selected = false;
         isSize39Selected = false;
         isSize40Selected = false;

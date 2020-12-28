@@ -1,12 +1,12 @@
 import 'dart:convert';
 
-import 'package:fewaclothing/models/trending_items.dart';
+import 'package:fewaclothing/models/product.dart';
 import 'package:fewaclothing/utils/constants.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
-class TrendingProductProvider extends ChangeNotifier {
 
-  List<TrendingItems> trendingProductList = [];
+class TrendingProductProvider extends ChangeNotifier {
+  List<FewaProduct> trendingProductList = [];
 
   void fetchTrendingProduct() async {
     trendingProductList = [];
@@ -14,11 +14,10 @@ class TrendingProductProvider extends ChangeNotifier {
     var response = await http.get(url);
     var result = jsonDecode(response.body);
 
-    result.forEach((c){
-      var trendingProduct = TrendingItems.fromJson(c);
+    result.forEach((c) {
+      var trendingProduct = FewaProduct.fromJson(c);
       trendingProductList.add(trendingProduct);
     });
     notifyListeners();
   }
-
 }

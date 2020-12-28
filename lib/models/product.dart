@@ -12,15 +12,15 @@ class FewaProduct {
 
   FewaProduct(
       {this.id,
-        this.name,
-        this.description,
-        this.color,
-        this.size,
-        this.price,
-        this.stock,
-        this.image,
-        this.category,
-        this.type});
+      this.name,
+      this.description,
+      this.color,
+      this.size,
+      this.price,
+      this.stock,
+      this.image,
+      this.category,
+      this.type});
 
   FewaProduct.fromJson(Map<String, dynamic> json) {
     id = json['id'];

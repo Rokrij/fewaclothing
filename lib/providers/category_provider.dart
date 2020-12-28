@@ -4,9 +4,7 @@ import 'package:fewaclothing/utils/constants.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
-
 class CategoryProvider extends ChangeNotifier {
-
   List<FewaCategory> fewaCategoryList = [];
 
   void fetchCategory() async {
@@ -15,11 +13,10 @@ class CategoryProvider extends ChangeNotifier {
     var response = await http.get(url);
     var result = jsonDecode(response.body);
 
-    result.forEach((c){
+    result.forEach((c) {
       var fewaCategory = FewaCategory.fromJson(c);
       fewaCategoryList.add(fewaCategory);
     });
     notifyListeners();
   }
-
 }

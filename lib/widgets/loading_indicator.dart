@@ -13,13 +13,13 @@ void onLoading(BuildContext context) {
 
 Widget customCupertinoActivityIndicator(bool isLight) {
   return Center(
-      child: Theme(
-          data: ThemeData(
-              cupertinoOverrideTheme: CupertinoThemeData(
-                  brightness: isLight ? Brightness.light : Brightness.dark)),
-          child: CupertinoActivityIndicator(
-            radius: 30,
-          ),
+    child: Theme(
+      data: ThemeData(
+          cupertinoOverrideTheme: CupertinoThemeData(
+              brightness: isLight ? Brightness.light : Brightness.dark)),
+      child: CupertinoActivityIndicator(
+        radius: 30,
       ),
-      );
+    ),
+  );
 }

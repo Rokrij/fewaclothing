@@ -16,11 +16,8 @@ class ProductByCategoryPage extends StatefulWidget {
 }
 
 class _ProductByCategoryPageState extends State<ProductByCategoryPage> {
-
-
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -61,12 +58,15 @@ class _ProductByCategoryPageState extends State<ProductByCategoryPage> {
       body: ListView(
         children: [
           Center(
-            child: Text('${widget.category.name}s',style: GoogleFonts.alegreyaSansSc(
-              textStyle: TextStyle(
-                  color: Colors.blueGrey,
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold),
-            ),),
+            child: Text(
+              '${widget.category.name}s',
+              style: GoogleFonts.alegreyaSansSc(
+                textStyle: TextStyle(
+                    color: Colors.blueGrey,
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
           ),
           ProductByCatWidget(widget.category.name),
         ],
@@ -75,18 +75,15 @@ class _ProductByCategoryPageState extends State<ProductByCategoryPage> {
   }
 }
 
-
 class ProductByCatWidget extends StatelessWidget {
-
-
   final String category;
   ProductByCatWidget(this.category);
 
   List<FewaProduct> productList = [];
   @override
   Widget build(BuildContext context) {
-
-    productList = Provider.of<ProductProvider>(context, listen: false).filterProductByCategory(category);
+    productList = Provider.of<ProductProvider>(context, listen: false)
+        .filterProductByCategory(category);
     return Padding(
       padding: const EdgeInsets.all(16),
       child: StaggeredGridView.countBuilder(
@@ -100,4 +97,3 @@ class ProductByCatWidget extends StatelessWidget {
     );
   }
 }
-

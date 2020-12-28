@@ -9,7 +9,8 @@ class NewArrivalWidget extends StatelessWidget {
   List<FewaProduct> productList = [];
   @override
   Widget build(BuildContext context) {
-    productList=Provider.of<ProductProvider>(context,listen:false).fewaProductList;
+    productList =
+        Provider.of<ProductProvider>(context, listen: false).fewaProductList;
     productList = new List.from(productList.reversed);
     return Padding(
       padding: const EdgeInsets.all(16),

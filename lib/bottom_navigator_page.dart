@@ -6,25 +6,24 @@ import 'package:fewaclothing/wishlist_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
 
-
 class BottomNavPage extends StatefulWidget {
   @override
   _BottomNavPageState createState() => _BottomNavPageState();
 }
 
 class _BottomNavPageState extends State<BottomNavPage> {
-  int _currentIndex=0;
+  int _currentIndex = 0;
 
   PageController _pageController = PageController(initialPage: 0);
 
   //final tabs=[
-    //];
+  //];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: PageView(
         controller: _pageController,
-        onPageChanged: (index){
+        onPageChanged: (index) {
           setState(() {
             _currentIndex = index;
           });
@@ -35,7 +34,6 @@ class _BottomNavPageState extends State<BottomNavPage> {
           Center(child: NewArrivalPage()),
           Center(child: WishListPage()),
           Center(child: ProfilePage()),
-
         ],
       ),
       bottomNavigationBar: SnakeNavigationBar.color(
@@ -44,7 +42,8 @@ class _BottomNavPageState extends State<BottomNavPage> {
         selectedItemColor: Colors.white,
         unselectedItemColor: Colors.pink,
         currentIndex: _currentIndex,
-        onTap: (index) => _pageController.animateToPage(index, duration: Duration(milliseconds: 350), curve: Curves.decelerate),
+        onTap: (index) => _pageController.animateToPage(index,
+            duration: Duration(milliseconds: 350), curve: Curves.decelerate),
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home_filled)),
           BottomNavigationBarItem(icon: Icon(Icons.search)),
@@ -54,9 +53,7 @@ class _BottomNavPageState extends State<BottomNavPage> {
         ],
       ),
     );
-
   }
 }
-
 
 // full restart gara ani check gara...video ma dekhako yeti nai ho

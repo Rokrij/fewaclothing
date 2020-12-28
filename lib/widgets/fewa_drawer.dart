@@ -34,6 +34,7 @@ Drawer fewaDrawer(BuildContext context) {
     ),
   );
 }
+
 void removeEmail() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   await prefs.setString('email', '');

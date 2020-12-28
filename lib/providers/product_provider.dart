@@ -5,8 +5,8 @@ import 'package:fewaclothing/utils/constants.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:http/http.dart' as http;
-class ProductProvider extends ChangeNotifier {
 
+class ProductProvider extends ChangeNotifier {
   List<FewaProduct> fewaProductList = [];
 
   void fetchProduct() async {
@@ -15,24 +15,21 @@ class ProductProvider extends ChangeNotifier {
     var response = await http.get(url);
     var result = jsonDecode(response.body);
 
-    result.forEach((c){
+    result.forEach((c) {
       var fewaProduct = FewaProduct.fromJson(c);
       fewaProductList.add(fewaProduct);
     });
     notifyListeners();
   }
 
-  List<FewaProduct> filterProductByCategory(String category){
-
+  List<FewaProduct> filterProductByCategory(String category) {
     List<FewaProduct> filteredProduct = [];
 
     fewaProductList.forEach((product) {
-      if(product.category == category){
+      if (product.category == category) {
         filteredProduct.add(product);
       }
     });
     return filteredProduct;
-
   }
-
 }

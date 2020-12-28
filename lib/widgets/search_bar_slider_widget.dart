@@ -13,11 +13,11 @@ class _SearchBarSliderState extends State<SearchBarSlider> {
       child: CustomScrollView(
         physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
-        slivers:<Widget> [
+        slivers: <Widget>[
           SliverToBoxAdapter(
             child: Container(
               height: 25,
-              margin: EdgeInsets.only(top: 5,left: 8,right: 16),
+              margin: EdgeInsets.only(top: 5, left: 8, right: 16),
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: <Widget>[
@@ -40,16 +40,23 @@ class _SearchBarSliderState extends State<SearchBarSlider> {
         ],
       ),
     );
-
   }
-  Widget _tagItem(String title){
+
+  Widget _tagItem(String title) {
     return Container(
-      margin: EdgeInsets.only(left: 10,right: 5),
-      child: Container(child: Text(title,style: TextStyle(color: Colors.white), ),margin: EdgeInsets.all(5),),
+      margin: EdgeInsets.only(left: 10, right: 5),
+      child: Container(
+        child: Text(
+          title,
+          style: TextStyle(color: Colors.white),
+        ),
+        margin: EdgeInsets.all(5),
+      ),
       decoration: BoxDecoration(
         color: Colors.pink,
-        border:Border.all(width: 1, color: Colors.pink),
-        borderRadius: BorderRadius.all(Radius.circular(5),
+        border: Border.all(width: 1, color: Colors.pink),
+        borderRadius: BorderRadius.all(
+          Radius.circular(5),
         ),
       ),
     );
