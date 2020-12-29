@@ -16,6 +16,16 @@ class WishListPage extends StatelessWidget {
                 color: Colors.pink, fontSize: 35, fontWeight: FontWeight.bold),
           ),
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 0, 5, 0),
+            child: IconButton(
+                icon: Icon(Icons.add_shopping_cart),
+                onPressed: () {
+                  Navigator.pushNamed(context, 'cart');
+                }),
+          ),
+        ],
       ),
       body: Text('This is WishList Page'),
     );

@@ -30,8 +30,18 @@ class _ProductDetailsState extends State<ProductDetails> {
   bool isSize42Selected = false;
   bool isSize43Selected = false;
 
+
+  bool isSize28Selected = true;
+  bool isSize29Selected = false;
+  bool isSize30Selected = false;
+  bool isSize31Selected = false;
+  bool isSize32Selected = false;
+  bool isSize34Selected = false;
+
+
   bool showClothesSize = false;
   bool showShoesSize = false;
+  bool showJeansSize=false;
 
   int counter = 1;
 
@@ -39,7 +49,9 @@ class _ProductDetailsState extends State<ProductDetails> {
   Widget build(BuildContext context) {
     if (widget.product.category.toLowerCase() == 'shoe') {
       showShoesSize = true;
-    } else {
+    }else if(widget.product.category.toLowerCase() == 'jean' || widget.product.category.toLowerCase() == 'pant'){
+      showJeansSize=true;
+    }else {
       showClothesSize = true;
     }
     return Scaffold(
@@ -241,6 +253,21 @@ class _ProductDetailsState extends State<ProductDetails> {
                   ],
                 ),
               ),
+            ),Visibility(
+              visible: showJeansSize,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 15),
+                child: Row(
+                  children: [
+                    jeansSizeWidget('28', isSize28Selected),
+                    jeansSizeWidget('29', isSize29Selected),
+                    jeansSizeWidget('30', isSize30Selected),
+                    jeansSizeWidget('31', isSize31Selected),
+                    jeansSizeWidget('32', isSize32Selected),
+                    jeansSizeWidget('34', isSize34Selected),
+                  ],
+                ),
+              ),
             ),
             ProductByCatWidget(widget.product.category),
           ],
@@ -282,6 +309,35 @@ class _ProductDetailsState extends State<ProductDetails> {
   Widget shoesSizeWidget(String size, bool isSelected) {
     return GestureDetector(
       onTap: () => ShoesSelectSize(size),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          height: 45,
+          width: 45,
+          decoration: BoxDecoration(
+              border: Border.all(
+                color: isSelected ? Colors.pink : Colors.white,
+              ),
+              color: isSelected ? Colors.pink : Colors.white,
+              borderRadius: BorderRadius.all(Radius.circular(10))),
+          child: Center(
+            child: Text(
+              size,
+              style: GoogleFonts.montserrat(
+                textStyle: TextStyle(
+                    color: isSelected ? Colors.white : Colors.pink,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+  Widget jeansSizeWidget(String size, bool isSelected) {
+    return GestureDetector(
+      onTap: () => JeansSelectSize(size),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
@@ -461,6 +517,53 @@ class _ProductDetailsState extends State<ProductDetails> {
         isSize42Selected = false;
         isSize43Selected = true;
       }
+    });
+  }void JeansSelectSize(String jeanSize) {
+    setState(() {
+      if (jeanSize == '28') {
+        isSize28Selected = true;
+        isSize29Selected = false;
+        isSize30Selected = false;
+        isSize31Selected = false;
+        isSize32Selected = false;
+        isSize34Selected = false;
+      } if (jeanSize == '29') {
+        isSize28Selected = false;
+        isSize29Selected = true;
+        isSize30Selected = false;
+        isSize31Selected = false;
+        isSize32Selected = false;
+        isSize34Selected = false;
+      } if (jeanSize == '30') {
+        isSize28Selected = false;
+        isSize29Selected = false;
+        isSize30Selected =true;
+        isSize31Selected = false;
+        isSize32Selected = false;
+        isSize34Selected = false;
+      } if (jeanSize == '31') {
+        isSize28Selected = false;
+        isSize29Selected = false;
+        isSize30Selected = false;
+        isSize31Selected = true;
+        isSize32Selected = false;
+        isSize34Selected = false;
+      } if (jeanSize == '32') {
+        isSize28Selected = false;
+        isSize29Selected = false;
+        isSize30Selected = false;
+        isSize31Selected = false;
+        isSize32Selected = true;
+        isSize34Selected = false;
+      } if (jeanSize == '34') {
+        isSize28Selected = false;
+        isSize29Selected = false;
+        isSize30Selected = false;
+        isSize31Selected = false;
+        isSize32Selected = false;
+        isSize34Selected = true;
+      }
+
     });
   }
 }
