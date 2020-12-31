@@ -2,6 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fewaclothing/models/product.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'product_by_category.dart';
@@ -379,6 +381,15 @@ class _ProductDetailsState extends State<ProductDetails> {
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
         ),
         onPressed: () {
+          // Fluttertoast.showToast(
+          //     msg: "This is Center Short Toast",
+          //     toastLength: Toast.LENGTH_SHORT,
+          //     gravity: ToastGravity.CENTER,
+          //     timeInSecForIosWeb: 1,
+          //     backgroundColor: Colors.pink,
+          //     textColor: Colors.white,
+          //     fontSize: 16.0
+          // );
           showDialog(
               context: context,
               builder: (context) {

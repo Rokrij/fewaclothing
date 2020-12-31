@@ -47,7 +47,8 @@ dependencies:
   awesome_dialog: ^1.2.1
   avatar_glow: ^1.2.0
   animated: ^1.0.1
-
+  flutter_slidable: ^0.5.7
+  fluttertoast: ^7.1.6
 
 dev_dependencies:
   flutter_test:
