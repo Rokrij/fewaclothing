@@ -51,6 +51,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   //fit: BoxFit.fill
                 ),
                 TextField(
+                  autofocus: true,
                   controller: nameController,
                   decoration: InputDecoration(
                       icon: Icon(Icons.person), labelText: 'Name'),

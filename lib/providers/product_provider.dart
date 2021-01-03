@@ -32,4 +32,14 @@ class ProductProvider extends ChangeNotifier {
     });
     return filteredProduct;
   }
+  List<FewaProduct> filterProduct(String query) {
+    List<FewaProduct> filteredProduct = [];
+
+    fewaProductList.forEach((product) {
+      if (product.name.toLowerCase().contains(query.toLowerCase() )) {
+        filteredProduct.add(product);
+      }
+    });
+    return filteredProduct;
+  }
 }

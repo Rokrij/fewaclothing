@@ -2,10 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fewaclothing/models/product.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import 'product_by_category.dart';
 
 class ProductDetails extends StatefulWidget {
@@ -19,7 +16,6 @@ class ProductDetails extends StatefulWidget {
 
 class _ProductDetailsState extends State<ProductDetails> {
   bool _wishlist = true;
-
   bool isSizeMSelected = true;
   bool isSizeLSelected = false;
   bool isSizeXLSelected = false;

@@ -17,7 +17,7 @@ class NewArrivalWidget extends StatelessWidget {
       child: StaggeredGridView.countBuilder(
         physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
-        itemCount: 10,
+        itemCount: 20,
         crossAxisCount: 4,
         itemBuilder: (context, index) => ProductWidget(productList[index]),
         staggeredTileBuilder: (index) => StaggeredTile.fit(2),

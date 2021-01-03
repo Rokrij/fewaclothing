@@ -1,7 +1,9 @@
+import 'package:fewaclothing/search_details_page.dart';
 import 'package:fewaclothing/widgets/product_list_widget.dart';
 import 'package:fewaclothing/widgets/search_bar_slider_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:page_transition/page_transition.dart';
 
 class SearchPage extends StatelessWidget {
   @override
@@ -28,8 +30,19 @@ class SearchPage extends StatelessWidget {
                 SizedBox(
                   width: 100,
                   child: TextField(
+                    onTap: (){
+                      Navigator.push(
+                          context,
+                          PageTransition(
+                              type: PageTransitionType.fade,
+                              child: SearchDetails()));
+                    },
                     decoration: InputDecoration(
                       hintText: 'Search',
+                      hintStyle: TextStyle(
+                          color: Colors.blueGrey,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold),
                       border: InputBorder.none,
                     ),
                   ),

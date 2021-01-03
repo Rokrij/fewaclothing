@@ -12,6 +12,7 @@ import 'package:fewaclothing/providers/category_provider.dart';
 import 'package:fewaclothing/providers/product_provider.dart';
 import 'package:fewaclothing/providers/trending_product_provider.dart';
 import 'package:fewaclothing/providers/user_auth_provider.dart';
+import 'package:fewaclothing/search_details_page.dart';
 import 'package:fewaclothing/search_page.dart';
 import 'package:fewaclothing/signup_page.dart';
 import 'package:fewaclothing/splash_screen.dart';
@@ -68,6 +69,7 @@ class MyApp extends StatelessWidget {
         'splash': (BuildContext context) => SplashScreen(),
         'wishList': (BuildContext context) => WishListPage(),
         'search': (BuildContext context) => SearchPage(),
+        'searchDetail': (BuildContext context) => SearchDetails(),
         'profile': (BuildContext context) => ProfilePage(),
         'cart': (BuildContext context) => CartPage(),
         'new': (BuildContext context) => NewArrivalPage(),
