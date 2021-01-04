@@ -1,13 +1,15 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:fewaclothing/models/category.dart';
+import 'package:fewaclothing/product_by_category.dart';
 import 'package:fewaclothing/providers/category_provider.dart';
 import 'package:fewaclothing/widgets/category_widget.dart';
 import 'package:fewaclothing/widgets/home_page_dashboard.dart';
 import 'package:fewaclothing/widgets/home_page_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -65,13 +67,18 @@ class _HomePageState extends State<HomePage> {
                 child: SizedBox(
                   height: 250.0,
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          PageTransition(
+                              type: PageTransitionType.leftToRightWithFade,
+                              child: ProductByCategoryPage(categoryList[0])));
+                    },
                     child: Carousel(
                       images: [
                         CachedNetworkImage(
                           imageUrl:
                               "https://inheriting-addition.000webhostapp.com/images/top_image_slider_1.jpg",
-                          //placeholder: (context, url) => CircularProgressIndicator(),
                           errorWidget: (context, url, error) => Icon(
                             Icons.error,
                             color: Colors.pink,

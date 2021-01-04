@@ -8,6 +8,9 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
+  List<CartPage> cartItems = [];
+
+
   final _globalKeyScaffold = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
@@ -44,7 +47,7 @@ class _CartPageState extends State<CartPage> {
             child: IconButton(
                 icon: Icon(Icons.favorite_outline_sharp),
                 onPressed: () {
-                  Navigator.pushNamed(context, 'wishList');
+                  Navigator.pushReplacementNamed(context, 'wishList');
                 }),
           ),
         ],

@@ -16,7 +16,7 @@ class SearchPage extends StatelessWidget {
           iconTheme: IconThemeData(color: Colors.pink),
           title: Container(
             decoration: BoxDecoration(
-              border: Border.all(color: Colors.pink, width: 1),
+              border: Border.all(color: Colors.pink, width: 2),
               borderRadius: BorderRadius.all(
                 Radius.circular(20),
               ),
@@ -29,21 +29,28 @@ class SearchPage extends StatelessWidget {
                 ),
                 SizedBox(
                   width: 100,
-                  child: TextField(
+                  child: GestureDetector(
                     onTap: (){
                       Navigator.push(
                           context,
                           PageTransition(
                               type: PageTransitionType.fade,
+                              duration: Duration(milliseconds: 50),
                               child: SearchDetails()));
                     },
-                    decoration: InputDecoration(
-                      hintText: 'Search',
-                      hintStyle: TextStyle(
-                          color: Colors.blueGrey,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold),
-                      border: InputBorder.none,
+                    child: TextField(
+                      enabled: false,
+                      onTap: (){
+
+                      },
+                      decoration: InputDecoration(
+                        hintText: 'Search',
+                        hintStyle: TextStyle(
+                            color: Colors.blueGrey,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold),
+                        border: InputBorder.none,
+                      ),
                     ),
                   ),
                 ),
@@ -61,7 +68,6 @@ class SearchPage extends StatelessWidget {
             )
           ],
         ),
-        //body: Center(child: Text('Search Page')),
         body: SingleChildScrollView(
           child: Column(
             children: [

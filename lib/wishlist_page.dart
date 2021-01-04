@@ -22,7 +22,7 @@ class WishListPage extends StatelessWidget {
             child: IconButton(
                 icon: Icon(Icons.add_shopping_cart),
                 onPressed: () {
-                  Navigator.pushNamed(context, 'cart');
+                  Navigator.pushReplacementNamed(context, 'cart');
                 }),
           ),
         ],
