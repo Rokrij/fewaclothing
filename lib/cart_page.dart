@@ -1,19 +1,28 @@
+
+import 'package:fewaclothing/models/cart.dart';
+import 'package:fewaclothing/providers/cart_provider.dart';
+import 'package:fewaclothing/widgets/cartWidget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:provider/provider.dart';
+
 
 class CartPage extends StatefulWidget {
+
   @override
   _CartPageState createState() => _CartPageState();
 }
 
 class _CartPageState extends State<CartPage> {
-  List<CartPage> cartItems = [];
+  List<FewaCart> cartItems = [];
 
 
   final _globalKeyScaffold = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
+    cartItems = Provider.of<CartProvider>(context, listen: false).fewaCartList;
     return Scaffold(
       key: _globalKeyScaffold,
       appBar: AppBar(
@@ -52,167 +61,48 @@ class _CartPageState extends State<CartPage> {
           ),
         ],
       ),
-      bottomNavigationBar: Container(color: Colors.white, height: 60, child: checkOutButton()),
-      body: Padding(
-        padding: const EdgeInsets.only(top:20, left:25,right: 25),
-        child: 
-        Slidable(
-          actionPane: SlidableDrawerActionPane(),
-          actionExtentRatio: 0.25,
-          child: Container(
-            height: 145,
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: Colors.pink,
-                width: 2,
-              ),
-              color: Colors.white,
+      bottomNavigationBar: Container(
+          color: Colors.white, height: 60, child: checkOutButton()),
+      body:
+      // GridView.count(
+      //   // physics: NeverScrollableScrollPhysics(),
+      //   shrinkWrap: true,
+      //   crossAxisCount: 1,
+      //   children: List.generate(10, (index) {
+      //     return Container(
+      //         height:200,
+      //         child: CartWidget());
+      //   }
+      //   ),
+      // ),
+      ListView.builder
+        (
+          itemCount: cartItems.length,
+          itemBuilder: (BuildContext ctxt, int index) {
+            return CartWidget(cartItems[index]);
+          }
+      )
+    );
+  }
 
-            ),
-            child: Row(
-              children: [
-                Image(
-                  image: AssetImage('assets/images/3.png'),
-                  height: 125,
-                  fit: BoxFit.fill
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top:20),
-                      child: Container(
-                        height: 35,
-                        width: 200,
-
-                        child: Text(
-                          'Nameeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee',
-                          style: GoogleFonts.montserrat(
-                            textStyle: TextStyle(
-                                color: Colors.pink,
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Text(
-                      'Description',
-                      style: GoogleFonts.montserrat(
-                        textStyle: TextStyle(
-                            color: Colors.blueGrey,
-                            fontSize: 13,
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top:10),
-                      child: Text(
-                        'Size: 7',
-                        style: GoogleFonts.montserrat(
-                          textStyle: TextStyle(
-                            color: Colors.blueGrey,
-                            fontSize: 13,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top:5),
-                      child: Text(
-                        'Red',
-                        style: GoogleFonts.montserrat(
-                          textStyle: TextStyle(
-                              color: Colors.blueGrey,
-                              fontSize: 13,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top:5),
-                          child: Text(
-                            'Quantity: 7',
-                            style: GoogleFonts.montserrat(
-                              textStyle: TextStyle(
-                                  color: Colors.blueGrey,
-                                  fontSize: 13,
-
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(width: 85,),
-                        Padding(
-                          padding: const EdgeInsets.only(top:5),
-                          child: Text(
-                            'Rs. 2000',
-                            style: GoogleFonts.montserrat(
-                              textStyle: TextStyle(
-                                  color: Colors.pink,
-                                  fontSize: 15,
-                                fontWeight: FontWeight.bold
-                              ),
-                            ),
-                          ),
-                        ),
-
-                      ],
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          secondaryActions: <Widget>[
-            IconSlideAction(
-              caption: 'Delete',
-              color: Colors.pink,
-              icon: Icons.delete,
-              onTap: () => showSnackBar("Item Removed !",_globalKeyScaffold),
-            ),
-          ],
+  Widget checkOutButton() {
+    return Padding(
+      padding: const EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 10),
+      child: FlatButton(
+        color: Colors.pink,
+        textColor: Colors.white,
+        disabledColor: Colors.grey,
+        disabledTextColor: Colors.black,
+        splashColor: Colors.pinkAccent,
+        child: Text(
+          'CHECKOUT (10)',
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
         ),
+        onPressed: () {
+          print('Success');
+        },
       ),
     );
   }
-}
-Widget checkOutButton() {
-  return Padding(
-    padding: const EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 10),
-    child: FlatButton(
-      color: Colors.pink,
-      textColor: Colors.white,
-      disabledColor: Colors.grey,
-      disabledTextColor: Colors.black,
-      splashColor: Colors.pinkAccent,
-      child: Text(
-        'CHECKOUT (10)',
-        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-      ),
-      onPressed: () {
-        print('Success');
-      },
-    ),
-  );
-}
-void showSnackBar(String message,GlobalKey<ScaffoldState> _globalKeyScaffold) {
-  final snackBar = SnackBar(
-    elevation: 6.0,
-    behavior: SnackBarBehavior.floating,
-    duration: const Duration(seconds: 3),
-    backgroundColor: Colors.blueGrey,
-    content: Text(
-      message,
-      style: GoogleFonts.montserrat(
-        textStyle: TextStyle(color: Colors.white),
-      ),
-    ),
-  );
-  _globalKeyScaffold.currentState.showSnackBar(snackBar);
 }
 

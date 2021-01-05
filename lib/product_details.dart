@@ -1,8 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fewaclothing/models/cart.dart';
 import 'package:fewaclothing/models/product.dart';
+import 'package:fewaclothing/providers/cart_provider.dart';
+import 'package:fewaclothing/providers/user_auth_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'product_by_category.dart';
 
 class ProductDetails extends StatefulWidget {
@@ -42,15 +46,19 @@ class _ProductDetailsState extends State<ProductDetails> {
   bool showJeansSize=false;
 
   int counter = 1;
+  String productSize='';
 
   @override
   Widget build(BuildContext context) {
     if (widget.product.category.toLowerCase() == 'shoe') {
       showShoesSize = true;
+      productSize='38';
     }else if(widget.product.category.toLowerCase() == 'jean' || widget.product.category.toLowerCase() == 'pant'){
+      productSize='28';
       showJeansSize=true;
     }else {
       showClothesSize = true;
+      productSize='M';
     }
     return Scaffold(
       appBar: AppBar(
@@ -377,6 +385,7 @@ class _ProductDetailsState extends State<ProductDetails> {
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
         ),
         onPressed: () {
+          addToCart();
           // Fluttertoast.showToast(
           //     msg: "This is Center Short Toast",
           //     toastLength: Toast.LENGTH_SHORT,
@@ -386,60 +395,60 @@ class _ProductDetailsState extends State<ProductDetails> {
           //     textColor: Colors.white,
           //     fontSize: 16.0
           // );
-          showDialog(
-              context: context,
-              builder: (context) {
-                return Dialog(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Container(
-                    height: 250,
-                    child: Padding(
-                      padding: EdgeInsets.all(10.0),
-                      child: Center(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Image(
-                                image: AssetImage('assets/gif/cart.gif'),
-                                height: 140,
-                                fit: BoxFit.fill),
-                            Text(
-                              'Added to Cart Successfully !!!',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                  color: Colors.pink),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 17),
-                              child: SizedBox(
-                                width: 150,
-                                child: RaisedButton(
-                                  color: Colors.pink,
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: Text(
-                                    'CONTINUE',
-                                    style: GoogleFonts.montserrat(
-                                      textStyle: TextStyle(
-                                          color: Colors.white, fontSize: 20),
-                                    ),
-                                  ),
-                                  elevation: 3,
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                );
-              });
+          // showDialog(
+          //     context: context,
+          //     builder: (context) {
+          //       return Dialog(
+          //         shape: RoundedRectangleBorder(
+          //           borderRadius: BorderRadius.circular(20),
+          //         ),
+          //         child: Container(
+          //           height: 250,
+          //           child: Padding(
+          //             padding: EdgeInsets.all(10.0),
+          //             child: Center(
+          //               child: Column(
+          //                 crossAxisAlignment: CrossAxisAlignment.center,
+          //                 mainAxisAlignment: MainAxisAlignment.center,
+          //                 children: <Widget>[
+          //                   Image(
+          //                       image: AssetImage('assets/gif/cart.gif'),
+          //                       height: 140,
+          //                       fit: BoxFit.fill),
+          //                   Text(
+          //                     'Added to Cart Successfully !!!',
+          //                     style: TextStyle(
+          //                         fontWeight: FontWeight.bold,
+          //                         fontSize: 20,
+          //                         color: Colors.pink),
+          //                   ),
+          //                   Padding(
+          //                     padding: const EdgeInsets.only(top: 17),
+          //                     child: SizedBox(
+          //                       width: 150,
+          //                       child: RaisedButton(
+          //                         color: Colors.pink,
+          //                         onPressed: () {
+          //                           Navigator.pop(context);
+          //                         },
+          //                         child: Text(
+          //                           'CONTINUE',
+          //                           style: GoogleFonts.montserrat(
+          //                             textStyle: TextStyle(
+          //                                 color: Colors.white, fontSize: 20),
+          //                           ),
+          //                         ),
+          //                         elevation: 3,
+          //                       ),
+          //                     ),
+          //                   )
+          //                 ],
+          //               ),
+          //             ),
+          //           ),
+          //         ),
+          //       );
+          //     });
         },
       ),
     );
@@ -448,24 +457,28 @@ class _ProductDetailsState extends State<ProductDetails> {
   void ClothesSelectSize(String clotheSize) {
     setState(() {
       if (clotheSize == 'M') {
+        productSize='M';
         isSizeMSelected = true;
         isSizeLSelected = false;
         isSizeXLSelected = false;
         isSizeXXLSelected = false;
       }
       if (clotheSize == 'L') {
+        productSize='L';
         isSizeMSelected = false;
         isSizeLSelected = true;
         isSizeXLSelected = false;
         isSizeXXLSelected = false;
       }
       if (clotheSize == 'XL') {
+        productSize='XL';
         isSizeMSelected = false;
         isSizeLSelected = false;
         isSizeXLSelected = true;
         isSizeXXLSelected = false;
       }
       if (clotheSize == 'XXL') {
+        productSize='XXL';
         isSizeMSelected = false;
         isSizeLSelected = false;
         isSizeXLSelected = false;
@@ -477,6 +490,7 @@ class _ProductDetailsState extends State<ProductDetails> {
   void ShoesSelectSize(String shoeSize) {
     setState(() {
       if (shoeSize == '38') {
+        productSize='38';
         isSize38Selected = true;
         isSize39Selected = false;
         isSize40Selected = false;
@@ -485,6 +499,7 @@ class _ProductDetailsState extends State<ProductDetails> {
         isSize43Selected = false;
       }
       if (shoeSize == '39') {
+        productSize='39';
         isSize38Selected = false;
         isSize39Selected = true;
         isSize40Selected = false;
@@ -493,6 +508,7 @@ class _ProductDetailsState extends State<ProductDetails> {
         isSize43Selected = false;
       }
       if (shoeSize == '40') {
+        productSize='40';
         isSize38Selected = false;
         isSize39Selected = false;
         isSize40Selected = true;
@@ -501,6 +517,7 @@ class _ProductDetailsState extends State<ProductDetails> {
         isSize43Selected = false;
       }
       if (shoeSize == '41') {
+        productSize='41';
         isSize38Selected = false;
         isSize39Selected = false;
         isSize40Selected = false;
@@ -509,6 +526,7 @@ class _ProductDetailsState extends State<ProductDetails> {
         isSize43Selected = false;
       }
       if (shoeSize == '42') {
+        productSize='42';
         isSize38Selected = false;
         isSize39Selected = false;
         isSize40Selected = false;
@@ -517,6 +535,7 @@ class _ProductDetailsState extends State<ProductDetails> {
         isSize43Selected = false;
       }
       if (shoeSize == '43') {
+        productSize='43';
         isSize38Selected = false;
         isSize39Selected = false;
         isSize40Selected = false;
@@ -528,6 +547,7 @@ class _ProductDetailsState extends State<ProductDetails> {
   }void JeansSelectSize(String jeanSize) {
     setState(() {
       if (jeanSize == '28') {
+        productSize='28';
         isSize28Selected = true;
         isSize29Selected = false;
         isSize30Selected = false;
@@ -535,6 +555,7 @@ class _ProductDetailsState extends State<ProductDetails> {
         isSize32Selected = false;
         isSize34Selected = false;
       } if (jeanSize == '29') {
+        productSize='29';
         isSize28Selected = false;
         isSize29Selected = true;
         isSize30Selected = false;
@@ -542,6 +563,7 @@ class _ProductDetailsState extends State<ProductDetails> {
         isSize32Selected = false;
         isSize34Selected = false;
       } if (jeanSize == '30') {
+        productSize='30';
         isSize28Selected = false;
         isSize29Selected = false;
         isSize30Selected =true;
@@ -549,6 +571,7 @@ class _ProductDetailsState extends State<ProductDetails> {
         isSize32Selected = false;
         isSize34Selected = false;
       } if (jeanSize == '31') {
+        productSize='31';
         isSize28Selected = false;
         isSize29Selected = false;
         isSize30Selected = false;
@@ -556,6 +579,7 @@ class _ProductDetailsState extends State<ProductDetails> {
         isSize32Selected = false;
         isSize34Selected = false;
       } if (jeanSize == '32') {
+        productSize='32';
         isSize28Selected = false;
         isSize29Selected = false;
         isSize30Selected = false;
@@ -563,6 +587,7 @@ class _ProductDetailsState extends State<ProductDetails> {
         isSize32Selected = true;
         isSize34Selected = false;
       } if (jeanSize == '34') {
+        productSize='34';
         isSize28Selected = false;
         isSize29Selected = false;
         isSize30Selected = false;
@@ -572,5 +597,13 @@ class _ProductDetailsState extends State<ProductDetails> {
       }
 
     });
+  }
+  void addToCart(){
+    var price=counter*int.parse(widget.product.price);
+    FewaCart cart=FewaCart(productName:widget.product.name,image: widget.product.image,
+        email: Provider.of<UserAuthProvider>(context, listen: false).email,price: price.toString(),
+        quantity: counter.toString(),size: productSize);
+    Provider.of<CartProvider>(context,listen: false).addToCart(cart);
+    Navigator.pop(context);
   }
 }
