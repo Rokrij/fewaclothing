@@ -5,6 +5,7 @@ import 'package:fewaclothing/providers/cart_provider.dart';
 import 'package:fewaclothing/providers/user_auth_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'product_by_category.dart';
@@ -47,9 +48,9 @@ class _ProductDetailsState extends State<ProductDetails> {
 
   int counter = 1;
   String productSize='';
-
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    // TODO: implement initState
     if (widget.product.category.toLowerCase() == 'shoe') {
       showShoesSize = true;
       productSize='38';
@@ -60,6 +61,12 @@ class _ProductDetailsState extends State<ProductDetails> {
       showClothesSize = true;
       productSize='M';
     }
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -386,69 +393,15 @@ class _ProductDetailsState extends State<ProductDetails> {
         ),
         onPressed: () {
           addToCart();
-          // Fluttertoast.showToast(
-          //     msg: "This is Center Short Toast",
-          //     toastLength: Toast.LENGTH_SHORT,
-          //     gravity: ToastGravity.CENTER,
-          //     timeInSecForIosWeb: 1,
-          //     backgroundColor: Colors.pink,
-          //     textColor: Colors.white,
-          //     fontSize: 16.0
-          // );
-          // showDialog(
-          //     context: context,
-          //     builder: (context) {
-          //       return Dialog(
-          //         shape: RoundedRectangleBorder(
-          //           borderRadius: BorderRadius.circular(20),
-          //         ),
-          //         child: Container(
-          //           height: 250,
-          //           child: Padding(
-          //             padding: EdgeInsets.all(10.0),
-          //             child: Center(
-          //               child: Column(
-          //                 crossAxisAlignment: CrossAxisAlignment.center,
-          //                 mainAxisAlignment: MainAxisAlignment.center,
-          //                 children: <Widget>[
-          //                   Image(
-          //                       image: AssetImage('assets/gif/cart.gif'),
-          //                       height: 140,
-          //                       fit: BoxFit.fill),
-          //                   Text(
-          //                     'Added to Cart Successfully !!!',
-          //                     style: TextStyle(
-          //                         fontWeight: FontWeight.bold,
-          //                         fontSize: 20,
-          //                         color: Colors.pink),
-          //                   ),
-          //                   Padding(
-          //                     padding: const EdgeInsets.only(top: 17),
-          //                     child: SizedBox(
-          //                       width: 150,
-          //                       child: RaisedButton(
-          //                         color: Colors.pink,
-          //                         onPressed: () {
-          //                           Navigator.pop(context);
-          //                         },
-          //                         child: Text(
-          //                           'CONTINUE',
-          //                           style: GoogleFonts.montserrat(
-          //                             textStyle: TextStyle(
-          //                                 color: Colors.white, fontSize: 20),
-          //                           ),
-          //                         ),
-          //                         elevation: 3,
-          //                       ),
-          //                     ),
-          //                   )
-          //                 ],
-          //               ),
-          //             ),
-          //           ),
-          //         ),
-          //       );
-          //     });
+          Fluttertoast.showToast(
+              msg: "Added to Cart Successfully",
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.CENTER,
+              timeInSecForIosWeb: 1,
+              backgroundColor: Colors.blueGrey,
+              textColor: Colors.white,
+              fontSize: 16.0
+          );
         },
       ),
     );
@@ -599,11 +552,11 @@ class _ProductDetailsState extends State<ProductDetails> {
     });
   }
   void addToCart(){
-    var price=counter*int.parse(widget.product.price);
+
     FewaCart cart=FewaCart(productName:widget.product.name,image: widget.product.image,
-        email: Provider.of<UserAuthProvider>(context, listen: false).email,price: price.toString(),
-        quantity: counter.toString(),size: productSize);
+        email: Provider.of<UserAuthProvider>(context, listen: false).email,price: widget.product.price,
+        quantity: counter.toString(),size: productSize,
+    );
     Provider.of<CartProvider>(context,listen: false).addToCart(cart);
-    Navigator.pop(context);
   }
 }

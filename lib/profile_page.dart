@@ -1,11 +1,17 @@
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:fewaclothing/providers/user_auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,50 +46,55 @@ class ProfilePage extends StatelessWidget {
                       child: Material(
                         elevation: 8.0,
                         shape: CircleBorder(),
-                        child: CircleAvatar(
-                          backgroundColor: Colors.grey[100],
-                          child: Image.asset(
-                            'assets/images/pp.jpg',
-                            height: 60,
+                        child: CircularProfileAvatar(
+                          "",
+                          errorWidget: (context, url, error) => Container(
+                            child: Icon(Icons.error),
                           ),
-                          radius: 40.0,
+                          placeHolder: (context, url) => Container(
+                            width: 50,
+                            height: 50,
+                            child: CircularProgressIndicator(),
+                          ),
+                          radius: 50,
+                          backgroundColor: Colors.transparent,
+                          borderWidth: 10,
+                 initialsText: Text(
+                   Provider.of<UserAuthProvider>(context, listen: true).getEmailFirstLetter().toString(),
+                   style: TextStyle(fontSize: 40, color: Colors.white),
+                 ),
+                          borderColor: Colors.blueGrey,
+                          elevation: 5.0,
+                          cacheImage: true,
+                          showInitialTextAbovePicture: false,
                         ),
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 100, bottom: 35),
-                    child: IconButton(
-                      icon: (Icon(
-                        Icons.camera_alt_rounded,
-                        color: Colors.pink,
-                        size: 25,
-                      )),
-                      onPressed: () {
-                        print('Camera');
-                      },
-                    ),
-                  ),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(right: 100, bottom: 35),
+                  //   child: IconButton(
+                  //     icon: (Icon(
+                  //       Icons.camera_alt_rounded,
+                  //       color: Colors.pink,
+                  //       size: 25,
+                  //     )),
+                  //     onPressed: () {
+                  //       print('Camera');
+                  //     },
+                  //   ),
+                  // ),
                 ],
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 20.0, top: 10),
+              padding: const EdgeInsets.only(bottom: 20),
               child: Column(
                 children: [
-                  Text(
-                    '@rokrij',
-                    style: GoogleFonts.comfortaa(
-                      textStyle: TextStyle(
-                          color: Colors.pink,
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
                   Padding(
                     padding: const EdgeInsets.only(top: 15),
                     child: Text(
-                      'srokrij@gmail.com',
+                      Provider.of<UserAuthProvider>(context, listen: true).email,
                       style: GoogleFonts.comfortaa(
                         textStyle: TextStyle(
                             color: Colors.pink,

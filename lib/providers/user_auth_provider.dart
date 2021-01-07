@@ -9,6 +9,10 @@ class UserAuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  String getEmailFirstLetter(){
+    return email[0].toUpperCase();
+  }
+
   void saveEmail(String email) async {
     this.email = email;
     SharedPreferences prefs = await SharedPreferences.getInstance();

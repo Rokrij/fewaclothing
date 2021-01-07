@@ -22,7 +22,8 @@ class _CartPageState extends State<CartPage> {
 
   @override
   Widget build(BuildContext context) {
-    cartItems = Provider.of<CartProvider>(context, listen: false).fewaCartList;
+    cartItems = Provider.of<CartProvider>(context, listen: true).fewaCartList;
+
     return Scaffold(
       key: _globalKeyScaffold,
       appBar: AppBar(
@@ -62,26 +63,43 @@ class _CartPageState extends State<CartPage> {
         ],
       ),
       bottomNavigationBar: Container(
-          color: Colors.white, height: 60, child: checkOutButton()),
+        height: 120,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right:20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right:10),
+                    child: Text('Products Total:',style: GoogleFonts.waitingForTheSunrise(
+                      textStyle: TextStyle(
+                          color: Colors.pink,
+                          fontSize: 35,
+                          fontWeight: FontWeight.bold),
+                    ),),
+                  ),
+                  Text('Rs. ${Provider.of<CartProvider>(context, listen: true).totalPrice.toString()}',style:TextStyle(fontWeight: FontWeight.bold, fontSize: 30,color: Colors.blueGrey) ,),
+                ],
+              ),
+            ),
+            Container(
+                color: Colors.white,width: 450,height: 60, child: checkOutButton()),
+          ],
+        ),
+      ),
       body:
-      // GridView.count(
-      //   // physics: NeverScrollableScrollPhysics(),
-      //   shrinkWrap: true,
-      //   crossAxisCount: 1,
-      //   children: List.generate(10, (index) {
-      //     return Container(
-      //         height:200,
-      //         child: CartWidget());
-      //   }
-      //   ),
-      // ),
-      ListView.builder
+       cartItems.isNotEmpty?
+    ListView.builder
         (
           itemCount: cartItems.length,
           itemBuilder: (BuildContext ctxt, int index) {
             return CartWidget(cartItems[index]);
           }
-      )
+      ): Center(child: Text("No Found")),
     );
   }
 
@@ -95,7 +113,7 @@ class _CartPageState extends State<CartPage> {
         disabledTextColor: Colors.black,
         splashColor: Colors.pinkAccent,
         child: Text(
-          'CHECKOUT (10)',
+          'CHECKOUT (${Provider.of<CartProvider>(context,listen: false).totalQuantity})',
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
         ),
         onPressed: () {

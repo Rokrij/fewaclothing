@@ -14,8 +14,7 @@ class _SearchDetailsState extends State<SearchDetails> {
   List<FewaProduct> productList = [];
   @override
   void initState() {
-    productList=Provider.of<ProductProvider>(context, listen: false)
-        .filterProduct('');
+    productList= Provider.of<ProductProvider>(context, listen: false).filterProduct('');
     super.initState();
   }
 
@@ -97,11 +96,11 @@ class _SearchDetailsState extends State<SearchDetails> {
   }
 
   Widget trendingListWidget() {
+
     List <FewaProduct> trending = new List.from(productList.reversed);
     return Padding(
       padding: const EdgeInsets.all(16),
       child: StaggeredGridView.countBuilder(
-        // physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemCount: trending.length,
         crossAxisCount: 4,
@@ -116,7 +115,6 @@ class _SearchDetailsState extends State<SearchDetails> {
     return Padding(
       padding: const EdgeInsets.all(16),
       child: StaggeredGridView.countBuilder(
-        // physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemCount: productList.length,
         crossAxisCount: 4,
