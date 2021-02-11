@@ -1,9 +1,10 @@
-
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:fewaclothing/models/cart.dart';
 import 'package:fewaclothing/providers/cart_provider.dart';
-import 'package:fewaclothing/widgets/cartWidget.dart';
+import 'package:fewaclothing/widgets/cart_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_khalti/flutter_khalti.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -16,7 +17,18 @@ class CartPage extends StatefulWidget {
 
 class _CartPageState extends State<CartPage> {
   List<FewaCart> cartItems = [];
+  int selectedRadio;
 
+  @override
+void initState() {
+    super.initState();
+    selectedRadio=0;
+  }
+  setSelectedRadio(int val){
+    setState(() {
+      selectedRadio=val;
+    });
+  }
 
   final _globalKeyScaffold = GlobalKey<ScaffoldState>();
 
@@ -25,6 +37,7 @@ class _CartPageState extends State<CartPage> {
     cartItems = Provider.of<CartProvider>(context, listen: true).fewaCartList;
 
     return Scaffold(
+
       key: _globalKeyScaffold,
       appBar: AppBar(
         leading: IconButton(
@@ -70,19 +83,45 @@ class _CartPageState extends State<CartPage> {
           children: [
             Padding(
               padding: const EdgeInsets.only(right:20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+              child: Column(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right:10),
-                    child: Text('Products Total:',style: GoogleFonts.waitingForTheSunrise(
-                      textStyle: TextStyle(
-                          color: Colors.pink,
-                          fontSize: 35,
-                          fontWeight: FontWeight.bold),
-                    ),),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right:10),
+                        child: Text('Products Total:',
+                          style: TextStyle(
+                              color: Colors.pink,
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold),),
+                      ),
+                      Text('Rs. ${Provider.of<CartProvider>(context, listen: true).totalPrice.toString()}',style:TextStyle(fontWeight: FontWeight.bold, fontSize: 30,color: Colors.blueGrey) ,),
+                    ],
                   ),
-                  Text('Rs. ${Provider.of<CartProvider>(context, listen: true).totalPrice.toString()}',style:TextStyle(fontWeight: FontWeight.bold, fontSize: 30,color: Colors.blueGrey) ,),
+              // ButtonBar(
+              //   alignment: MainAxisAlignment.center,
+              //   children: [
+              //     RadioListTile(
+              //       title: Text("Cash on Delivery"),
+              //       value: 1,
+              //       groupValue: selectedRadio,
+              //       activeColor: Colors.blueGrey,
+              //       onChanged:(val){
+              //       setSelectedRadio(val);
+              //       },
+              //     ),
+              //     RadioListTile(
+              //       title: Text("Cash on Delivery"),
+              //       value: 2,
+              //       groupValue: selectedRadio,
+              //       activeColor: Colors.blueGrey,
+              //       onChanged:(val){
+              //         setSelectedRadio(val);
+              //       },
+              //     )
+              //   ],
+              // )
                 ],
               ),
             ),
@@ -99,7 +138,27 @@ class _CartPageState extends State<CartPage> {
           itemBuilder: (BuildContext ctxt, int index) {
             return CartWidget(cartItems[index]);
           }
-      ): Center(child: Text("No Found")),
+      ): Center(
+           child: Opacity(
+             opacity: 0.75,
+             child: Column(
+         mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image(
+              image: AssetImage('assets/gif/1.gif'),
+              height: 125,
+          ),
+          Text("No items in your cart !!!",
+            style: GoogleFonts.raleway(
+              textStyle: TextStyle(
+                  color: Colors.blueGrey,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
+          ),
+          ),
+        ],
+      ),
+           )),
     );
   }
 
@@ -117,10 +176,33 @@ class _CartPageState extends State<CartPage> {
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
         ),
         onPressed: () {
-          print('Success');
+              khaltiPay();
         },
       ),
     );
+
   }
+}
+void khaltiPay(){
+  FlutterKhalti _flutterKhalti = FlutterKhalti.configure(
+    publicKey: "test_public_key_eacadfb91994475d8bebfa577b0bca68",
+    urlSchemeIOS: "KhaltiPayFlutterExampleScheme",
+  );
+
+  KhaltiProduct product = KhaltiProduct(
+    id: "test",
+    amount: 1000,
+    name: "Hello Product",
+  );
+
+  _flutterKhalti.startPayment(
+    product: product,
+    onSuccess: (data) {
+      print("Success message here");
+    },
+    onFaliure: (error) {
+      print("Error message here");
+    },
+  );
 }
 

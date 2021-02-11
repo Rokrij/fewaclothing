@@ -29,7 +29,7 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(25, 40, 25, 0),
-        child: Column(
+        child: ListView(
           children: [
             Center(
               child: Stack(
@@ -60,7 +60,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           backgroundColor: Colors.transparent,
                           borderWidth: 10,
                  initialsText: Text(
-                   Provider.of<UserAuthProvider>(context, listen: true).getEmailFirstLetter().toString(),
+                   Provider.of<UserAuthProvider>(context, listen: true).getEmailFirstLetter().toString() ?? '',
                    style: TextStyle(fontSize: 40, color: Colors.white),
                  ),
                           borderColor: Colors.blueGrey,

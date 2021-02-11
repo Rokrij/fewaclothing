@@ -55,5 +55,3 @@ class _BottomNavPageState extends State<BottomNavPage> {
     );
   }
 }
-
-// full restart gara ani check gara...video ma dekhako yeti nai ho

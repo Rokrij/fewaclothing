@@ -10,6 +10,9 @@ class UserAuthProvider extends ChangeNotifier {
   }
 
   String getEmailFirstLetter(){
+    if(email==''){
+      return "";
+    }
     return email[0].toUpperCase();
   }
 

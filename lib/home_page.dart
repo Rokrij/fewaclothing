@@ -179,7 +179,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   onPressed: () {
-                    print('merry christmas');
+                    Navigator.pushNamed(context, 'allCategory');
                   },
                 ),
               ],
@@ -292,7 +292,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     onPressed: () {
-                      Navigator.pushNamed(context, 'cart');
+                      Navigator.pushNamed(context, 'searchDetail');
                     },
                   ),
                 ),

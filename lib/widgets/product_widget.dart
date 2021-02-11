@@ -76,7 +76,7 @@ class _ProductWidgetState extends State<ProductWidget> {
               child: Text(
                 'Rs. ${widget.product.price}',
                 style: GoogleFonts.nunito(
-                  textStyle: TextStyle(color: Colors.pink, fontSize: 15),
+                  textStyle: TextStyle(color: Colors.blueGrey, fontSize: 15),
                 ),
               ),
             ),

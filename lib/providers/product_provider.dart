@@ -36,7 +36,7 @@ class ProductProvider extends ChangeNotifier {
     List<FewaProduct> filteredProduct = [];
 
     fewaProductList.forEach((product) {
-      if (product.name.toLowerCase().contains(query.toLowerCase() )) {
+      if (product.name.toLowerCase().contains(query.toLowerCase())) {
         filteredProduct.add(product);
       }
     });

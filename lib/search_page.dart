@@ -28,7 +28,7 @@ class SearchPage extends StatelessWidget {
                   child: Icon(Icons.search),
                 ),
                 SizedBox(
-                  width: 100,
+                  width: 250,
                   child: GestureDetector(
                     onTap: (){
                       Navigator.push(
