@@ -51,6 +51,7 @@ dependencies:
   fluttertoast: ^7.1.6
   circular_profile_avatar: ^1.0.6
   flutter_khalti: ^1.0.0
+  modal_bottom_sheet: ^1.0.0+1
 
 dev_dependencies:
   flutter_test:

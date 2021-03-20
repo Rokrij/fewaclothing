@@ -51,8 +51,9 @@ class MyApp extends StatelessWidget {
     Provider.of<UserAuthProvider>(context, listen: false).getEmail();
     Provider.of<CategoryProvider>(context, listen: false).fetchCategory();
     Provider.of<ProductProvider>(context, listen: false).fetchProduct();
+    Provider.of<ProductProvider>(context, listen: false).fetchFavList();
     Provider.of<TrendingProductProvider>(context, listen: false).fetchTrendingProduct();
-    //Provider.of<CartProvider>(context, listen: false).fetchCart();
+
 
     return MaterialApp(
       home: SignUpPage(),

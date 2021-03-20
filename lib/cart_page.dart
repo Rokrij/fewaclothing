@@ -4,8 +4,10 @@ import 'package:fewaclothing/providers/cart_provider.dart';
 import 'package:fewaclothing/widgets/cart_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_khalti/flutter_khalti.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 
 
@@ -176,33 +178,99 @@ void initState() {
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
         ),
         onPressed: () {
-              khaltiPay();
+              displayPaymentOption();
         },
       ),
     );
 
   }
-}
-void khaltiPay(){
-  FlutterKhalti _flutterKhalti = FlutterKhalti.configure(
-    publicKey: "test_public_key_eacadfb91994475d8bebfa577b0bca68",
-    urlSchemeIOS: "KhaltiPayFlutterExampleScheme",
-  );
+  void displayPaymentOption(){
+    showMaterialModalBottomSheet(
+      context: context,
+      builder: (context) => Container(
+        height: 200,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 10,right: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Payment Methods :',style: GoogleFonts.raleway(
+                  textStyle: TextStyle(
+                  color: Colors.pink,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
+              ),),
+                  IconButton(
+                    icon: (Icon(
+                      Icons.clear,
+                      color: Colors.pink,
+                      size: 30,
+                    )),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  )
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top:20,left: 10),
+              child: Row(
+                children: [
+                  GestureDetector(child: RaisedButton(  
+                    child: Text('Khalti',
+                      style: GoogleFonts.raleway(
+                    textStyle: TextStyle(
+                    color: Colors.blueGrey,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                    ),),
+                  ), onTap: (){
+                    khaltiPay();
+                  },),
 
-  KhaltiProduct product = KhaltiProduct(
-    id: "test",
-    amount: 1000,
-    name: "Hello Product",
-  );
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top:40,left: 10),
+              child: Text('Cash on Delivery',style: GoogleFonts.raleway(
+                textStyle: TextStyle(
+                    color: Colors.blueGrey,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
+              ),),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 
-  _flutterKhalti.startPayment(
-    product: product,
-    onSuccess: (data) {
-      print("Success message here");
-    },
-    onFaliure: (error) {
-      print("Error message here");
-    },
-  );
+  void khaltiPay(){
+    FlutterKhalti _flutterKhalti = FlutterKhalti.configure(
+      publicKey: "test_public_key_eacadfb91994475d8bebfa577b0bca68",
+      urlSchemeIOS: "KhaltiPayFlutterExampleScheme",
+    );
+
+    KhaltiProduct product = KhaltiProduct(
+      id: "test",
+      amount: Provider.of<CartProvider>(context, listen: false).totalPrice * 100.0,
+      name: "Hello Product",
+    );
+
+    _flutterKhalti.startPayment(
+      product: product,
+      onSuccess: (data) {
+        print("Payment Successful");
+      },
+      onFaliure: (error) {
+        print("There was an error !");
+      },
+    );
+  }
 }
 

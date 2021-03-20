@@ -49,7 +49,6 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 TextField(
-                  autofocus: true,
                   controller: emailController,
                   decoration: InputDecoration(
                       icon: Icon(Icons.mail), labelText: 'Email'),

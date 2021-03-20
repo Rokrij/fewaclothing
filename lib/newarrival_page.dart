@@ -49,6 +49,7 @@ class _NewArrivalPageState extends State<NewArrivalPage> {
                 pause: Duration(milliseconds: 1000),
               ),
             ),
+
             NewArrivalWidget(),
           ],
         ),

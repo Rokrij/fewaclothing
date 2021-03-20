@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fewaclothing/models/cart.dart';
 import 'package:fewaclothing/models/product.dart';
 import 'package:fewaclothing/providers/cart_provider.dart';
+import 'package:fewaclothing/providers/product_provider.dart';
 import 'package:fewaclothing/providers/user_auth_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,8 +20,8 @@ class ProductDetails extends StatefulWidget {
   ProductDetails(this.product);
 }
 
-class _ProductDetailsState extends State<ProductDetails> {
-  bool _wishlist = true;
+class _ProductDetailsState extends State<ProductDetails>  {
+  bool _wishlist = false;
   bool isSizeMSelected = true;
   bool isSizeLSelected = false;
   bool isSizeXLSelected = false;
@@ -51,6 +52,8 @@ class _ProductDetailsState extends State<ProductDetails> {
   @override
   void initState() {
     // TODO: implement initState
+    // _wishlist = Provider.of<ProductProvider>(context, listen: false).isFav(widget.product.id);
+
     if (widget.product.category.toLowerCase() == 'shoe') {
       showShoesSize = true;
       productSize='38';
@@ -61,12 +64,23 @@ class _ProductDetailsState extends State<ProductDetails> {
       showClothesSize = true;
       productSize='M';
     }
+
     super.initState();
   }
 
+  // @override
+  // void didChangeAppLifecycleState(AppLifecycleState state) {
+  //   _wishlist = Provider.of<ProductProvider>(context, listen: false).isFav(widget.product.id);
+  //
+  //   super.didChangeAppLifecycleState(state);
+  // }
+
   @override
   Widget build(BuildContext context) {
-
+    _wishlist = Provider.of<ProductProvider>(context, listen: true).isFav(widget.product.id);
+    print('Helllo');
+    print(_wishlist);
+    //
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -143,13 +157,15 @@ class _ProductDetailsState extends State<ProductDetails> {
                   padding: const EdgeInsets.only(right: 5),
                   child: IconButton(
                     icon: (_wishlist
-                        ? Icon(Icons.favorite_border_sharp, color: Colors.pink)
-                        : Icon(Icons.favorite_sharp, color: Colors.pink)),
+                        ?
+                    Icon(Icons.favorite_sharp, color: Colors.pink):
+                    Icon(Icons.favorite_border_sharp, color: Colors.pink)),
                     iconSize: 40,
                     onPressed: () {
                       setState(
                         () {
-                          _wishlist = !_wishlist;
+                          // _wishlist = !_wishlist;
+                          Provider.of<ProductProvider>(context, listen: false).favClick(widget.product.id);
                         },
                       );
                     },

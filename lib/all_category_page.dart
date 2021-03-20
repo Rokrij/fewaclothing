@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'widgets/all_category_widget.dart';
+
 
 class AllCategory extends StatelessWidget {
   @override
@@ -42,10 +44,8 @@ class AllCategory extends StatelessWidget {
           ),
         ],
       ),
-      body: Center(
-        child: Container(
-          child: Text('hohohoho'),
-        ),
+      body: SingleChildScrollView(
+        child: AllCategoryWidget(),
       ),
     );
   }

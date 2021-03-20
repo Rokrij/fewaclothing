@@ -1,9 +1,20 @@
+import 'package:fewaclothing/models/product.dart';
+import 'package:fewaclothing/providers/product_provider.dart';
+import 'package:fewaclothing/widgets/product_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
-class WishListPage extends StatelessWidget {
+class WishListPage extends StatelessWidget{
+
+  List<FewaProduct> productList = [];
+
   @override
   Widget build(BuildContext context) {
+
+    productList = Provider.of<ProductProvider>(context, listen: false).filterProductByFav();
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -27,7 +38,23 @@ class WishListPage extends StatelessWidget {
           ),
         ],
       ),
-      body: Text('This is WishList Page'),
+      body: SingleChildScrollView(
+        child:
+        productList.isEmpty ?
+            Center(child: Text('No fav found'),)
+        :
+        Padding(
+          padding: const EdgeInsets.all(16),
+          child: StaggeredGridView.countBuilder(
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: productList.length,
+            crossAxisCount: 4,
+            itemBuilder: (context, index) => ProductWidget(productList[index]),
+            staggeredTileBuilder: (index) => StaggeredTile.fit(2),
+          ),
+        ),
+      ),
     );
   }
 }
