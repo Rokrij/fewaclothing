@@ -78,8 +78,6 @@ class _ProductDetailsState extends State<ProductDetails>  {
   @override
   Widget build(BuildContext context) {
     _wishlist = Provider.of<ProductProvider>(context, listen: true).isFav(widget.product.id);
-    print('Helllo');
-    print(_wishlist);
     //
     return Scaffold(
       appBar: AppBar(
@@ -164,7 +162,6 @@ class _ProductDetailsState extends State<ProductDetails>  {
                     onPressed: () {
                       setState(
                         () {
-                          // _wishlist = !_wishlist;
                           Provider.of<ProductProvider>(context, listen: false).favClick(widget.product.id);
                         },
                       );

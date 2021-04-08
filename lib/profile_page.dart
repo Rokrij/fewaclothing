@@ -71,19 +71,19 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                     ),
                   ),
-                  // Padding(
-                  //   padding: const EdgeInsets.only(right: 100, bottom: 35),
-                  //   child: IconButton(
-                  //     icon: (Icon(
-                  //       Icons.camera_alt_rounded,
-                  //       color: Colors.pink,
-                  //       size: 25,
-                  //     )),
-                  //     onPressed: () {
-                  //       print('Camera');
-                  //     },
-                  //   ),
-                  // ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 100, bottom: 35),
+                    child: IconButton(
+                      icon: (Icon(
+                        Icons.camera_alt_rounded,
+                        color: Colors.pink,
+                        size: 25,
+                      )),
+                      onPressed: () {
+                        print('Camera');
+                      },
+                    ),
+                  ),
                 ],
               ),
             ),

@@ -1,6 +1,5 @@
 import 'package:fewaclothing/search_details_page.dart';
 import 'package:fewaclothing/widgets/product_list_widget.dart';
-import 'package:fewaclothing/widgets/search_bar_slider_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:page_transition/page_transition.dart';
@@ -71,7 +70,6 @@ class SearchPage extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              SearchBarSlider(),
               ProductListWidget(),
             ],
           ),

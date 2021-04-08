@@ -101,29 +101,6 @@ void initState() {
                       Text('Rs. ${Provider.of<CartProvider>(context, listen: true).totalPrice.toString()}',style:TextStyle(fontWeight: FontWeight.bold, fontSize: 30,color: Colors.blueGrey) ,),
                     ],
                   ),
-              // ButtonBar(
-              //   alignment: MainAxisAlignment.center,
-              //   children: [
-              //     RadioListTile(
-              //       title: Text("Cash on Delivery"),
-              //       value: 1,
-              //       groupValue: selectedRadio,
-              //       activeColor: Colors.blueGrey,
-              //       onChanged:(val){
-              //       setSelectedRadio(val);
-              //       },
-              //     ),
-              //     RadioListTile(
-              //       title: Text("Cash on Delivery"),
-              //       value: 2,
-              //       groupValue: selectedRadio,
-              //       activeColor: Colors.blueGrey,
-              //       onChanged:(val){
-              //         setSelectedRadio(val);
-              //       },
-              //     )
-              //   ],
-              // )
                 ],
               ),
             ),
@@ -178,7 +155,7 @@ void initState() {
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
         ),
         onPressed: () {
-              displayPaymentOption();
+          cartItems.isNotEmpty?displayPaymentOption():displayNoOption();
         },
       ),
     );
@@ -188,68 +165,168 @@ void initState() {
     showMaterialModalBottomSheet(
       context: context,
       builder: (context) => Container(
-        height: 200,
+        height: 170,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
               padding: const EdgeInsets.only(left: 10,right: 10),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom:10),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('Payment Method:',style: GoogleFonts.montserrat(
+                          textStyle: TextStyle(
+                          color: Colors.blueGrey,
+                          fontSize: 20,
+
+                          ),
+              ),), IconButton(
+                            icon: (Icon(
+                              Icons.clear,
+                              color: Colors.pink,
+                              size: 30,
+                            )),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 10,right: 20,bottom: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Payment Methods :',style: GoogleFonts.raleway(
-                  textStyle: TextStyle(
-                  color: Colors.pink,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold),
-              ),),
-                  IconButton(
-                    icon: (Icon(
-                      Icons.clear,
-                      color: Colors.pink,
-                      size: 30,
-                    )),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top:20,left: 10),
-              child: Row(
-                children: [
-                  GestureDetector(child: RaisedButton(  
-                    child: Text('Khalti',
-                      style: GoogleFonts.raleway(
-                    textStyle: TextStyle(
-                    color: Colors.blueGrey,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                    ),),
+                  GestureDetector(child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.purple,
+                        borderRadius: BorderRadius.circular(15)
+                    ),
+
+                    child: FlatButton(
+                      child: Text('Khalti',
+                        style: GoogleFonts.raleway(
+                      textStyle: TextStyle(
+                      color: Colors.white,
+                          fontSize: 20,
+                          ),
+                      ),),
+                    ),
                   ), onTap: (){
                     khaltiPay();
                   },),
-
+                  GestureDetector(
+                    child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.pink,
+                      borderRadius: BorderRadius.circular(15)
+                    ),
+                    child: FlatButton(
+                      child: Text('Cash on Delivery',
+                        style: GoogleFonts.raleway(
+                          textStyle: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
+                        ),),
+                    ),
+                  ), onTap: (){
+                    showMaterialModalBottomSheet(
+                      context: context,
+                      builder: (context) => Container(
+                        height: 170,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10,right: 10),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Center(
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text('Order Status:',style: GoogleFonts.montserrat(
+                                          textStyle: TextStyle(
+                                            color: Colors.pink,
+                                            fontSize: 20,
+                                          ),
+                                        ),), IconButton(
+                                          icon: (Icon(
+                                            Icons.clear,
+                                            color: Colors.pink,
+                                            size: 30,
+                                          )),
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  Text('Your order has been confirmed successfully.',
+                                    style: GoogleFonts.montserrat(
+                                    textStyle: TextStyle(
+                                      color: Colors.blueGrey,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),),
+                                  Text('Thankyou for choosing us.',style: GoogleFonts.montserrat(
+                                    textStyle: TextStyle(
+                                      color: Colors.blueGrey,
+                                      fontSize: 12,
+                                    ),
+                                  ),),
+                                  Text('#SHOPWITHFEWA',style: GoogleFonts.montserrat(
+                                    textStyle: TextStyle(
+                                      color: Colors.pink,
+                                      fontSize: 12,
+                                    ),
+                                  ),),
+                                  Image(
+                                    image: AssetImage('assets/gif/1.gif'),
+                                    height: 55,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },),
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top:40,left: 10),
-              child: Text('Cash on Delivery',style: GoogleFonts.raleway(
+            Center(
+              child: Text('* choose one of the payment options !',style: GoogleFonts.montserrat(
                 textStyle: TextStyle(
-                    color: Colors.blueGrey,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold),
+                  color: Colors.blueGrey,
+                  fontSize: 10,
+                ),
               ),),
-            ),
+            )
           ],
         ),
       ),
     );
   }
-
+  void displayNoOption(){
+    showSnackBar("No transaction can be done !!!");
+  }
   void khaltiPay(){
     FlutterKhalti _flutterKhalti = FlutterKhalti.configure(
       publicKey: "test_public_key_eacadfb91994475d8bebfa577b0bca68",
@@ -271,6 +348,20 @@ void initState() {
         print("There was an error !");
       },
     );
+  }
+
+  void showSnackBar(String message) {
+    final snackBar = SnackBar(
+      duration: const Duration(seconds: 3),
+      backgroundColor: Colors.blueGrey,
+      content: Text(
+        message,
+        style: GoogleFonts.montserrat(
+          textStyle: TextStyle(color: Colors.white),
+        ),
+      ),
+    );
+    _globalKeyScaffold.currentState.showSnackBar(snackBar);
   }
 }
 

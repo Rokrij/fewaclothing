@@ -212,55 +212,9 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: FlatButton(
-                      minWidth: 8,
-                      height: 30,
-                      child: Text('See More'),
-                      color: Colors.pink,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30)),
-                      textColor: Colors.white,
-                      onPressed: () {},
-                    ),
-                  ),
+
                 ],
               ),
-            ),
-            Container(
-              height: 245,
-              child: HomePageSlider(),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Text(
-                    'Trending Products',
-                    style: GoogleFonts.raleway(
-                      textStyle: TextStyle(
-                          color: Colors.blueGrey,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 10),
-                  child: FlatButton(
-                    minWidth: 8,
-                    height: 30,
-                    child: Text('See More'),
-                    color: Colors.pink,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30)),
-                    textColor: Colors.white,
-                    onPressed: () {},
-                  ),
-                ),
-              ],
             ),
             Container(
               height: 245,

@@ -41,7 +41,24 @@ class WishListPage extends StatelessWidget{
       body: SingleChildScrollView(
         child:
         productList.isEmpty ?
-            Center(child: Text('No fav found'),)
+            Center(child: Column(
+              children: [
+                SizedBox(height: 300),
+                Text('Oops, there is nothing to show here !',
+                  style: GoogleFonts.montserrat(
+            textStyle: TextStyle(
+            color: Colors.blueGrey, fontSize: 15, fontWeight: FontWeight.bold),
+            ),),
+                Padding(
+                  padding: const EdgeInsets.only(top:15),
+                  child: Text('There are 0 items in your wishlist',
+                    style: GoogleFonts.montserrat(
+                    textStyle: TextStyle(
+                        color: Colors.pink, fontSize: 15),
+                  ),),
+                ),
+              ],
+            ),)
         :
         Padding(
           padding: const EdgeInsets.all(16),
