@@ -30,10 +30,10 @@ class MyAccount extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text('Personal Information',
-                      style: GoogleFonts.poiretOne(
+                      style: GoogleFonts.montserrat(
                   textStyle: TextStyle(
                   color: Colors.pink,
-                      fontSize: 35,
+                      fontSize: 25,
                       fontWeight: FontWeight.bold),
                   ),),
                   IconButton(
@@ -45,11 +45,11 @@ class MyAccount extends StatelessWidget {
               ),
               SizedBox(height: 40,),
               Text('Name',
-                style: GoogleFonts.poiretOne(
+                style: GoogleFonts.montserrat(
                   textStyle: TextStyle(
                       color: Colors.blueGrey,
                       fontSize: 25,
-                      fontWeight: FontWeight.bold),
+                      ),
                 ),),
               Padding(
                 padding: const EdgeInsets.only(right:20),
@@ -58,11 +58,11 @@ class MyAccount extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top:30),
                 child: Text('Email',
-                  style: GoogleFonts.poiretOne(
+                  style: GoogleFonts.montserrat(
                     textStyle: TextStyle(
                         color: Colors.blueGrey,
                         fontSize: 25,
-                        fontWeight: FontWeight.bold),
+                        ),
                   ),),
               ),
               Padding(

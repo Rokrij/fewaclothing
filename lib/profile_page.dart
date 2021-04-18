@@ -5,6 +5,7 @@ import 'package:fewaclothing/providers/user_auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -12,6 +13,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,63 +34,40 @@ class _ProfilePageState extends State<ProfilePage> {
         child: ListView(
           children: [
             Center(
-              child: Stack(
-                alignment: Alignment.bottomRight,
-                children: [
-                  ListTile(
-                    title: AvatarGlow(
-                      glowColor: Colors.pink,
-                      endRadius: 90.0,
-                      duration: Duration(milliseconds: 2000),
-                      repeat: true,
-                      showTwoGlows: true,
-                      repeatPauseDuration: Duration(milliseconds: 100),
-                      child: Material(
-                        elevation: 8.0,
-                        shape: CircleBorder(),
-                        child: CircularProfileAvatar(
-                          "",
-                          errorWidget: (context, url, error) => Container(
-                            child: Icon(Icons.error),
-                          ),
-                          placeHolder: (context, url) => Container(
-                            width: 50,
-                            height: 50,
-                            child: CircularProgressIndicator(),
-                          ),
-                          radius: 50,
-                          backgroundColor: Colors.transparent,
-                          borderWidth: 10,
-                 initialsText: Text(
-                   Provider.of<UserAuthProvider>(context, listen: true).getEmailFirstLetter().toString() ?? '',
-                   style: TextStyle(fontSize: 40, color: Colors.white),
-                 ),
-                          borderColor: Colors.blueGrey,
-                          elevation: 5.0,
-                          cacheImage: true,
-                          showInitialTextAbovePicture: false,
-                        ),
+              child: ListTile(
+                title: AvatarGlow(
+                  endRadius: 90.0,
+                  child: Material(
+                    elevation: 8.0,
+                    shape: CircleBorder(),
+                    child: CircularProfileAvatar(
+                      "",
+                      errorWidget: (context, url, error) => Container(
+                        child: Icon(Icons.error),
                       ),
+                      placeHolder: (context, url) => Container(
+                        width: 50,
+                        height: 50,
+                        child: CircularProgressIndicator(),
+                      ),
+                      radius: 50,
+                      backgroundColor: Colors.transparent,
+                      borderWidth: 10,
+                 initialsText: Text(
+               Provider.of<UserAuthProvider>(context, listen: true).getEmailFirstLetter().toString() ?? '',
+               style: TextStyle(fontSize: 40, color: Colors.white),
+                 ),
+                      borderColor: Colors.blueGrey,
+                      elevation: 5.0,
+                      cacheImage: true,
+                      showInitialTextAbovePicture: false,
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 100, bottom: 35),
-                    child: IconButton(
-                      icon: (Icon(
-                        Icons.camera_alt_rounded,
-                        color: Colors.pink,
-                        size: 25,
-                      )),
-                      onPressed: () {
-                        print('Camera');
-                      },
-                    ),
-                  ),
-                ],
+                ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 20),
+              padding: const EdgeInsets.only(bottom: 10),
               child: Column(
                 children: [
                   Padding(
@@ -146,7 +125,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   size: 15,
                 ),
                 title: Text(
-                  'Notifications',
+                  'Feedback',
                   style: GoogleFonts.poiretOne(
                     textStyle: TextStyle(
                         color: Colors.pink,
@@ -155,7 +134,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 ),
                 onTap: () {
-                  Navigator.pushNamed(context, 'notification');
+                  sendEmail("fewaclothingstore@gmail.com");
+                  //Navigator.pushNamed(context, 'notification');
                 },
               ),
             ),
@@ -247,4 +227,5 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
     );
   }
+  void sendEmail(String email) => launch("mailto:$email");
 }

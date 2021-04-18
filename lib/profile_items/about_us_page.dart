@@ -20,42 +20,34 @@ class AboutUs extends StatelessWidget {
         elevation: 0,
         iconTheme: IconThemeData(color: Colors.pink),
       ),
-      body: Center(
-        child: Column(
-          children: [
-            Image(
-              image: AssetImage('assets/images/3.png'),
-              height: 150,
-              //fit: BoxFit.fill
-            ),
-          SizedBox(height: 20),
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              children: [
-            Text(
-              'Using this application, people can shop in the morning using the app or in their free time',
-              style: GoogleFonts.poiretOne(
-                textStyle: TextStyle(
-                    color: Colors.blueGrey,
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold),
-              ),
-            ),Text(
-              'and the product will be delivered within small amount of time which will save the customer time as well as money they would have spent on unnecessary products will be convenient to use for the people who have tight schedule and cannot go for shopping.',
-              style: GoogleFonts.poiretOne(
-                textStyle: TextStyle(
-                    color: Colors.blueGrey,
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold),
-              ),
-            )
-
-          ],),
+      body: Column(
+        children: [
+          Image(
+            image: AssetImage('assets/images/3.png'),
+            height: 250,
+            //fit: BoxFit.fill
           ),
+        SizedBox(height: 20),
+        Padding(
+          padding: const EdgeInsets.all(30),
+          child: Column(
+            children: [
+          Container(
+            child: Text(
+                  'Using this application, people can shop in the morning using the app or in their free time and the product will be delivered within small amount of time which will save the customer time as well as money they would have spent on unnecessary products will be convenient to use for the people who have tight schedule and cannot go for shopping.',
+              style: GoogleFonts.montserrat(
+                textStyle: TextStyle(
+                    color: Colors.blueGrey,
+                    fontSize: 15,
+                   ),
+              ),
+            ),
+          )
 
-          ],
+        ],),
         ),
+
+        ],
       ),
     );
   }

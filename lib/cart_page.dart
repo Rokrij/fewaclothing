@@ -18,6 +18,8 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
+  var phoneController = TextEditingController();
+  var deliveryAddressController = TextEditingController();
   List<FewaCart> cartItems = [];
   int selectedRadio;
 
@@ -155,17 +157,19 @@ void initState() {
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
         ),
         onPressed: () {
-          cartItems.isNotEmpty?displayPaymentOption():displayNoOption();
+          cartItems.isNotEmpty?displayCheckOutDetailsOption():displayNoOption();
         },
       ),
     );
 
   }
-  void displayPaymentOption(){
+  void displayCheckOutDetailsOption(){
     showMaterialModalBottomSheet(
+
       context: context,
+
       builder: (context) => Container(
-        height: 170,
+        height: 300,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -180,13 +184,13 @@ void initState() {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('Payment Method:',style: GoogleFonts.montserrat(
+                          Text('Fill up the form to confirm your order:',style: GoogleFonts.montserrat(
                           textStyle: TextStyle(
                           color: Colors.blueGrey,
-                          fontSize: 20,
-
+                          fontSize: 15,
                           ),
-              ),), IconButton(
+                          ),
+                          ), IconButton(
                             icon: (Icon(
                               Icons.clear,
                               color: Colors.pink,
@@ -199,29 +203,44 @@ void initState() {
                         ],
                       ),
                     ),
+
+                  ),
+                  TextField(
+                    autofocus: true,
+                    controller: phoneController,
+                    decoration: InputDecoration(
+                        icon: Icon(Icons.phone), labelText: 'Phone Number', fillColor: Colors.pink),
+                  ),
+                  TextField(
+                    controller:deliveryAddressController,
+                    decoration: InputDecoration(
+                        icon: Icon(Icons.location_pin), labelText: 'Delivery Address', fillColor: Colors.pink),
                   ),
                 ],
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 10,right: 20,bottom: 20),
+              padding: const EdgeInsets.only(left: 10,right: 20,bottom: 20,top:40),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  GestureDetector(child: Container(
-                    decoration: BoxDecoration(
-                        color: Colors.purple,
-                        borderRadius: BorderRadius.circular(15)
-                    ),
+                  GestureDetector(child: Padding(
+                    padding: const EdgeInsets.only(left:40),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Colors.purple,
+                          borderRadius: BorderRadius.circular(15)
+                      ),
 
-                    child: FlatButton(
-                      child: Text('Khalti',
-                        style: GoogleFonts.raleway(
-                      textStyle: TextStyle(
-                      color: Colors.white,
-                          fontSize: 20,
-                          ),
-                      ),),
+                      child: FlatButton(
+                        child: Text('Khalti',
+                          style: GoogleFonts.raleway(
+                        textStyle: TextStyle(
+                        color: Colors.white,
+                            fontSize: 20,
+                            ),
+                        ),),
+                      ),
                     ),
                   ), onTap: (){
                     khaltiPay();

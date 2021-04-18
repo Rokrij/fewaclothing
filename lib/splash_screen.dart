@@ -43,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
             child: Animated(
               value: 1.2,
               curve: Curves.easeInOutBack,
-              duration: Duration(milliseconds: 500),
+              duration: Duration(milliseconds: 1500),
               builder: (context, child, animation) => Transform.scale(
                 scale: animation.value,
                 child: child,
