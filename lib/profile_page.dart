@@ -98,11 +98,11 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 title: Text(
                   'My Account',
-                  style: GoogleFonts.poiretOne(
+                  style: GoogleFonts.raleway(
                     textStyle: TextStyle(
                         color: Colors.pink,
                         fontSize: 25,
-                        fontWeight: FontWeight.bold),
+                        ),
                   ),
                 ),
                 onTap: () {
@@ -126,11 +126,11 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 title: Text(
                   'Feedback',
-                  style: GoogleFonts.poiretOne(
+                  style: GoogleFonts.raleway(
                     textStyle: TextStyle(
                         color: Colors.pink,
                         fontSize: 25,
-                        fontWeight: FontWeight.bold),
+                       ),
                   ),
                 ),
                 onTap: () {
@@ -155,11 +155,11 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 title: Text(
                   'About Us',
-                  style: GoogleFonts.poiretOne(
+                  style: GoogleFonts.raleway(
                     textStyle: TextStyle(
                         color: Colors.pink,
                         fontSize: 25,
-                        fontWeight: FontWeight.bold),
+                        ),
                   ),
                 ),
                 onTap: () {
@@ -183,11 +183,11 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 title: Text(
                   'Log Out',
-                  style: GoogleFonts.poiretOne(
+                  style: GoogleFonts.raleway(
                     textStyle: TextStyle(
                         color: Colors.pink,
                         fontSize: 25,
-                        fontWeight: FontWeight.bold),
+                       ),
                   ),
                 ),
                 onTap: () {

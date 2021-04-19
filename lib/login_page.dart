@@ -49,11 +49,25 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 TextField(
+                  style:GoogleFonts.montserrat(
+                    textStyle: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                        fontWeight: FontWeight.bold
+                    ),
+                  ),
                   controller: emailController,
                   decoration: InputDecoration(
                       icon: Icon(Icons.mail), labelText: 'Email'),
                 ),
                 TextField(
+                  style:GoogleFonts.montserrat(
+                    textStyle: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold
+                    ),
+                  ),
                   controller: passwordController,
                   decoration: InputDecoration(
                     icon: Icon(Icons.lock_rounded),
@@ -134,7 +148,7 @@ class _LoginPageState extends State<LoginPage> {
       duration: const Duration(seconds: 3),
       content: Text(
         message,
-        style: GoogleFonts.dancingScript(
+        style: GoogleFonts.montserrat(
           textStyle: TextStyle(color: Colors.white),
         ),
       ),

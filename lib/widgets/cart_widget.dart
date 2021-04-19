@@ -5,6 +5,7 @@ import 'package:fewaclothing/providers/cart_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -117,6 +118,15 @@ class CartWidget extends StatelessWidget {
               icon: Icons.delete,
               onTap: () {
                 Provider.of<CartProvider>(context,listen: false).removeFromCart(cart);
+                Fluttertoast.showToast(
+                    msg: "Item removed from the cart",
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.CENTER,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: Colors.blueGrey,
+                    textColor: Colors.white,
+                    fontSize: 16.0
+                );
               }
                   // showSnackBar("Item Removed !",_globalKeyScaffold),
             ),

@@ -1,6 +1,10 @@
+import 'package:fewaclothing/providers/user_auth_provider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class MyAccount extends StatelessWidget {
   @override
@@ -25,7 +29,7 @@ class MyAccount extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 150,),
+              SizedBox(height: 120,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -34,12 +38,20 @@ class MyAccount extends StatelessWidget {
                   textStyle: TextStyle(
                   color: Colors.pink,
                       fontSize: 25,
-                      fontWeight: FontWeight.bold),
+                      ),
                   ),),
                   IconButton(
                       icon: Icon(Icons.create,color: Colors.pink,),
                       onPressed: () {
-                        Navigator.pushNamed(context, 'cart');
+                        Fluttertoast.showToast(
+                            msg: "Sorry Email Cannot be Edited !",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: Colors.blueGrey,
+                            textColor: Colors.white,
+                            fontSize: 16.0
+                        );
                       }),
                 ],
               ),
@@ -48,12 +60,21 @@ class MyAccount extends StatelessWidget {
                 style: GoogleFonts.montserrat(
                   textStyle: TextStyle(
                       color: Colors.blueGrey,
-                      fontSize: 25,
+                      fontSize: 15,
+                    fontWeight: FontWeight.bold
                       ),
                 ),),
               Padding(
                 padding: const EdgeInsets.only(right:20),
-                child: TextField(),
+                child: TextField(style:GoogleFonts.montserrat(
+                  textStyle: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                  ),
+                ),enabled: false,
+                    decoration: InputDecoration(
+                    hintText: 'Rokrij'
+                ),),
               ),
               Padding(
                 padding: const EdgeInsets.only(top:30),
@@ -61,14 +82,45 @@ class MyAccount extends StatelessWidget {
                   style: GoogleFonts.montserrat(
                     textStyle: TextStyle(
                         color: Colors.blueGrey,
-                        fontSize: 25,
+                        fontSize: 15,
+                      fontWeight: FontWeight.bold
                         ),
                   ),),
               ),
               Padding(
                 padding: const EdgeInsets.only(right:20),
-                child: TextField(),
+                child: TextField(style:GoogleFonts.montserrat(
+                  textStyle: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                  ),
+                ) , enabled: false, decoration: InputDecoration(
+                    hintText: Provider.of<UserAuthProvider>(context, listen: true).email
+                ),),
               ),
+
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.only(top:40),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('2020-2021 \u00a9 ', style: GoogleFonts.montserrat(
+                        textStyle: TextStyle(
+                          color: Colors.blueGrey,
+                          fontSize: 20,
+                        ),
+                      ) ,),
+                      Text('Fewa Clothing', style: GoogleFonts.montserrat(
+                        textStyle: TextStyle(
+                          color: Colors.pink,
+                          fontSize: 20,
+                        ),
+                      ) ,),
+                    ],
+                  ),
+                ),
+              )
             ],
           ),
         ),

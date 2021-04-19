@@ -179,7 +179,7 @@ void initState() {
       context: context,
 
       builder: (context) => Container(
-        height: 250,
+        height: 270,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -215,15 +215,29 @@ void initState() {
                     ),
                   ),
                   TextField(
-                    autofocus: true,
+                    style:GoogleFonts.montserrat(
+                    textStyle: TextStyle(
+                        color: Colors.blueGrey,
+                        fontSize: 20,
+                    ),
+                  ),
                     controller: phoneController,
                     decoration: InputDecoration(
                         icon: Icon(Icons.phone), labelText: 'Phone Number', fillColor: Colors.pink),
                   ),
-                  TextField(
-                    controller:deliveryAddressController,
-                    decoration: InputDecoration(
-                        icon: Icon(Icons.location_pin), labelText: 'Delivery Address', fillColor: Colors.pink),
+                  Padding(
+                    padding: const EdgeInsets.only(top:10),
+                    child: TextField(
+                      style:GoogleFonts.montserrat(
+                        textStyle: TextStyle(
+                          color: Colors.blueGrey,
+                          fontSize: 20,
+                        ),
+                      ),
+                      controller:deliveryAddressController,
+                      decoration: InputDecoration(
+                          icon: Icon(Icons.location_pin), labelText: 'Delivery Address', fillColor: Colors.pink),
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top:15.0, left:30),
@@ -240,7 +254,7 @@ void initState() {
                           if (phoneController.text.isEmpty ||
                               deliveryAddressController.text.isEmpty) {
                             Fluttertoast.showToast(
-                                msg: "All fields required !!!",
+                                msg: "All fields are required before ordering!!!",
                                 toastLength: Toast.LENGTH_SHORT,
                                 gravity: ToastGravity.CENTER,
                                 timeInSecForIosWeb: 1,
@@ -253,7 +267,7 @@ void initState() {
                           showMaterialModalBottomSheet(
                             context: context,
                             builder: (context) => Container(
-                              height: 250,
+                              height: 270,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -310,7 +324,7 @@ void initState() {
                                           showMaterialModalBottomSheet(
                                             context: context,
                                             builder: (context) => Container(
-                                              height: 250,
+                                              height: 270,
                                               child: Column(
                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [

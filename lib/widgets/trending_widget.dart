@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fewaclothing/models/product.dart';
 import 'package:fewaclothing/product_details.dart';
-import 'package:fewaclothing/trending_details.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';

@@ -42,7 +42,29 @@ class AboutUs extends StatelessWidget {
                    ),
               ),
             ),
-          )
+          ),
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.only(top:40),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('2020-2021 \u00a9 ', style: GoogleFonts.montserrat(
+                        textStyle: TextStyle(
+                          color: Colors.blueGrey,
+                          fontSize: 20,
+                        ),
+                      ) ,),
+                      Text('Fewa Clothing', style: GoogleFonts.montserrat(
+                        textStyle: TextStyle(
+                          color: Colors.pink,
+                          fontSize: 20,
+                        ),
+                      ) ,),
+                    ],
+                  ),
+                ),
+              )
 
         ],),
         ),

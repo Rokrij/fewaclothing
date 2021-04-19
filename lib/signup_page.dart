@@ -51,11 +51,26 @@ class _SignUpPageState extends State<SignUpPage> {
                   //fit: BoxFit.fill
                 ),
                 TextField(
+                  style:GoogleFonts.montserrat(
+                  textStyle: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                      fontWeight: FontWeight.bold
+                  ),
+                ),
                   controller: nameController,
                   decoration: InputDecoration(
                       icon: Icon(Icons.person), labelText: 'Name'),
+
                 ),
-                TextField(
+                TextFormField(
+                  style:GoogleFonts.montserrat(
+                    textStyle: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                        fontWeight: FontWeight.bold
+                    ),
+                  ),
                   controller: emailController,
                   decoration: InputDecoration(
                     icon: Icon(
@@ -63,8 +78,16 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                     labelText: 'Email',
                   ),
+
                 ),
                 TextField(
+                  style:GoogleFonts.montserrat(
+                    textStyle: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                        fontWeight: FontWeight.bold
+                    ),
+                  ),
                   controller: passwordController,
                   decoration: InputDecoration(
                       icon: Icon(Icons.lock_rounded),
@@ -82,6 +105,13 @@ class _SignUpPageState extends State<SignUpPage> {
                   obscureText: _obsecurePassword,
                 ),
                 TextField(
+                  style:GoogleFonts.montserrat(
+                    textStyle: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                        fontWeight: FontWeight.bold
+                    ),
+                  ),
                   controller: confirmPasswordController,
                   decoration: InputDecoration(
                       icon: Icon(Icons.lock_rounded),
@@ -165,7 +195,7 @@ class _SignUpPageState extends State<SignUpPage> {
       backgroundColor: Colors.pink,
       content: Text(
         message,
-        style: GoogleFonts.dancingScript(
+        style: GoogleFonts.montserrat(
           textStyle: TextStyle(color: Colors.white),
         ),
       ),

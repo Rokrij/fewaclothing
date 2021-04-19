@@ -8,9 +8,7 @@ class HomePageSlider extends StatelessWidget {
   List<FewaProduct> trendingProductList = [];
   @override
   Widget build(BuildContext context) {
-    trendingProductList =
-        Provider.of<TrendingProductProvider>(context, listen: false)
-            .trendingProductList;
+    trendingProductList = Provider.of<TrendingProductProvider>(context, listen: true).trendingProductList;
     return ListView.builder(
       shrinkWrap: true,
       scrollDirection: Axis.horizontal,
