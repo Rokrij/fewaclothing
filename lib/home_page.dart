@@ -7,6 +7,7 @@ import 'package:fewaclothing/providers/category_provider.dart';
 import 'package:fewaclothing/widgets/category_widget.dart';
 import 'package:fewaclothing/widgets/home_page_dashboard.dart';
 import 'package:fewaclothing/widgets/home_page_slider.dart';
+import 'package:fewaclothing/widgets/newarrival_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
@@ -266,6 +267,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
+            NewArrivalWidget(),
           ],
         ),
       ),

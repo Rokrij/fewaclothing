@@ -6,7 +6,6 @@ import 'package:fewaclothing/newarrival_page.dart';
 import 'package:fewaclothing/all_category_page.dart';
 import 'package:fewaclothing/profile_items/about_us_page.dart';
 import 'package:fewaclothing/profile_items/my_account_page.dart';
-import 'package:fewaclothing/profile_items/notification_page.dart';
 import 'package:fewaclothing/profile_page.dart';
 import 'package:fewaclothing/providers/cart_provider.dart';
 import 'package:fewaclothing/providers/category_provider.dart';
@@ -78,7 +77,6 @@ class MyApp extends StatelessWidget {
         'cart': (BuildContext context) => CartPage(),
         'new': (BuildContext context) => NewArrivalPage(),
         'account': (BuildContext context) => MyAccount(),
-        'notification': (BuildContext context) => NotificationPage(),
         'aboutUs': (BuildContext context) => AboutUs(),
         'allCategory': (BuildContext context) => AllCategory(),
       },

@@ -1,4 +1,5 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:fewaclothing/mail.dart';
 import 'package:fewaclothing/models/cart.dart';
 import 'package:fewaclothing/providers/cart_provider.dart';
 import 'package:fewaclothing/widgets/cart_widget.dart';
@@ -6,6 +7,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_khalti/flutter_khalti.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
@@ -18,14 +21,20 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
+  FlutterLocalNotificationsPlugin localNotification;
   var phoneController = TextEditingController();
   var deliveryAddressController = TextEditingController();
   List<FewaCart> cartItems = [];
   int selectedRadio;
-
+  var phone;
+  var deliveryAddress;
   @override
 void initState() {
     super.initState();
+    var andriodInitialize= new AndroidInitializationSettings('@mipmap/ic_launcher');
+    var initialzationSettings=new InitializationSettings(android: andriodInitialize);
+    localNotification=new FlutterLocalNotificationsPlugin();
+    localNotification.initialize(initialzationSettings);
     selectedRadio=0;
   }
   setSelectedRadio(int val){
@@ -164,12 +173,13 @@ void initState() {
 
   }
   void displayCheckOutDetailsOption(){
+
     showMaterialModalBottomSheet(
 
       context: context,
 
       builder: (context) => Container(
-        height: 300,
+        height: 250,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -203,7 +213,6 @@ void initState() {
                         ],
                       ),
                     ),
-
                   ),
                   TextField(
                     autofocus: true,
@@ -216,135 +225,198 @@ void initState() {
                     decoration: InputDecoration(
                         icon: Icon(Icons.location_pin), labelText: 'Delivery Address', fillColor: Colors.pink),
                   ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 10,right: 20,bottom: 20,top:40),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GestureDetector(child: Padding(
-                    padding: const EdgeInsets.only(left:40),
+                  Padding(
+                    padding: const EdgeInsets.only(top:15.0, left:30),
                     child: Container(
+                      width: 335,
                       decoration: BoxDecoration(
-                          color: Colors.purple,
+                          color: Colors.pink,
                           borderRadius: BorderRadius.circular(15)
                       ),
-
                       child: FlatButton(
-                        child: Text('Khalti',
-                          style: GoogleFonts.raleway(
-                        textStyle: TextStyle(
-                        color: Colors.white,
-                            fontSize: 20,
-                            ),
-                        ),),
-                      ),
-                    ),
-                  ), onTap: (){
-                    khaltiPay();
-                  },),
-                  GestureDetector(
-                    child: Container(
-                    decoration: BoxDecoration(
-                        color: Colors.pink,
-                      borderRadius: BorderRadius.circular(15)
-                    ),
-                    child: FlatButton(
-                      child: Text('Cash on Delivery',
-                        style: GoogleFonts.raleway(
-                          textStyle: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                          ),
-                        ),),
-                    ),
-                  ), onTap: (){
-                    showMaterialModalBottomSheet(
-                      context: context,
-                      builder: (context) => Container(
-                        height: 170,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 10,right: 10),
+                        onPressed: () {
+                          phone = phoneController.text;
+                          deliveryAddress = deliveryAddressController.text;
+                          if (phoneController.text.isEmpty ||
+                              deliveryAddressController.text.isEmpty) {
+                            Fluttertoast.showToast(
+                                msg: "All fields required !!!",
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.CENTER,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: Colors.blueGrey,
+                                textColor: Colors.white,
+                                fontSize: 16.0
+                            );
+                          } else {
+                            sendMail();
+                          showMaterialModalBottomSheet(
+                            context: context,
+                            builder: (context) => Container(
+                              height: 250,
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Center(
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 20, top:20),
+                                    child: Text('Payment Methods:',style: GoogleFonts.montserrat(
+                                      textStyle: TextStyle(
+                                        color: Colors.blueGrey,
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 20,right: 20,bottom: 20,top:20),
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text('Order Status:',style: GoogleFonts.montserrat(
-                                          textStyle: TextStyle(
-                                            color: Colors.pink,
-                                            fontSize: 20,
+                                        GestureDetector(child: Container(
+                                          decoration: BoxDecoration(
+                                              color: Colors.purple,
+                                              borderRadius: BorderRadius.circular(15)
                                           ),
-                                        ),), IconButton(
-                                          icon: (Icon(
-                                            Icons.clear,
-                                            color: Colors.pink,
-                                            size: 30,
-                                          )),
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                          },
-                                        )
+
+                                          child: FlatButton(
+                                            child: Text('Khalti',
+                                              style: GoogleFonts.raleway(
+                                                textStyle: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 20,
+                                                ),
+                                              ),),
+                                          ),
+                                        ), onTap: (){
+                                          khaltiPay();
+                                        },),
+                                        GestureDetector(
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                                color: Colors.pink,
+                                                borderRadius: BorderRadius.circular(15)
+                                            ),
+                                            child: FlatButton(
+                                              child: Text('Cash on Delivery',
+                                                style: GoogleFonts.raleway(
+                                                  textStyle: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 20,
+                                                  ),
+                                                ),),
+                                            ),
+                                          ), onTap: (){
+                                          _showNotification;
+                                          showMaterialModalBottomSheet(
+                                            context: context,
+                                            builder: (context) => Container(
+                                              height: 250,
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Padding(
+                                                    padding: const EdgeInsets.only(left: 10,right: 10),
+                                                    child: Column(
+                                                      mainAxisAlignment: MainAxisAlignment.start,
+                                                      children: [
+                                                        Image(
+                                                          image: AssetImage('assets/images/3.png'),
+                                                          height: 100,
+                                                          //fit: BoxFit.fill,
+                                                        ),
+                                                        Center(
+                                                          child: Padding(
+                                                            padding: const EdgeInsets.only(bottom:10),
+                                                            child: Text('Order Status:',style: GoogleFonts.montserrat(
+                                                              textStyle: TextStyle(
+                                                                color: Colors.pink,
+                                                                fontSize: 20,
+                                                              ),
+                                                            ),),
+                                                          ),
+                                                        ),
+                                                        Text('Your order has been confirmed successfully.',
+                                                          style: GoogleFonts.montserrat(
+                                                            textStyle: TextStyle(
+                                                              color: Colors.blueGrey,
+                                                              fontSize: 12,
+                                                              fontWeight: FontWeight.bold,
+                                                            ),
+                                                          ),),
+                                                        Text('Thankyou for choosing us.',style: GoogleFonts.montserrat(
+                                                          textStyle: TextStyle(
+                                                            color: Colors.blueGrey,
+                                                            fontSize: 12,
+                                                          ),
+                                                        ),),
+                                                        Text('#SHOPWITHFEWA',style: GoogleFonts.montserrat(
+                                                          textStyle: TextStyle(
+                                                            color: Colors.pink,
+                                                            fontSize: 12,
+                                                          ),
+                                                        ),),
+                                                        Image(
+                                                          image: AssetImage('assets/gif/1.gif'),
+                                                          height: 55,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          );
+                                        },),
                                       ],
                                     ),
                                   ),
-                                  Text('Your order has been confirmed successfully.',
-                                    style: GoogleFonts.montserrat(
-                                    textStyle: TextStyle(
-                                      color: Colors.blueGrey,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold,
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 20),
+                                    child: Text('* choose one of the payment options !',
+                                      style: GoogleFonts.montserrat(
+                                      textStyle: TextStyle(
+                                        color: Colors.blueGrey,
+                                        fontSize: 15,
+                                      ),
+                                    ),),
+                                  ),
+                                  Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 20, top:20),
+                                      child: Text('#SHOPWITHFEWA',style: GoogleFonts.montserrat(
+                                        textStyle: TextStyle(
+                                          color: Colors.pink,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold
+                                        ),
+                                      ),),
                                     ),
-                                  ),),
-                                  Text('Thankyou for choosing us.',style: GoogleFonts.montserrat(
-                                    textStyle: TextStyle(
-                                      color: Colors.blueGrey,
-                                      fontSize: 12,
-                                    ),
-                                  ),),
-                                  Text('#SHOPWITHFEWA',style: GoogleFonts.montserrat(
-                                    textStyle: TextStyle(
-                                      color: Colors.pink,
-                                      fontSize: 12,
-                                    ),
-                                  ),),
-                                  Image(
-                                    image: AssetImage('assets/gif/1.gif'),
-                                    height: 55,
                                   ),
                                 ],
                               ),
                             ),
-                          ],
-                        ),
+                          );}
+                        },
+                        child: Text('Confirm',
+                          style: GoogleFonts.raleway(
+                            textStyle: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                            ),
+                          ),),
                       ),
-                    );
-                  },),
+                    ),
+                  ),
                 ],
               ),
             ),
-            Center(
-              child: Text('* choose one of the payment options !',style: GoogleFonts.montserrat(
-                textStyle: TextStyle(
-                  color: Colors.blueGrey,
-                  fontSize: 10,
-                ),
-              ),),
-            )
           ],
         ),
       ),
     );
   }
   void displayNoOption(){
-    showSnackBar("No transaction can be done !!!");
+    showSnackBar("No items to check out !!!");
   }
   void khaltiPay(){
     FlutterKhalti _flutterKhalti = FlutterKhalti.configure(
@@ -382,5 +454,12 @@ void initState() {
     );
     _globalKeyScaffold.currentState.showSnackBar(snackBar);
   }
+  Future _showNotification() async{
+var androidDetails=new AndroidNotificationDetails("channelId", "Local Notification", "channelDescription",
+    importance: Importance.high);
+var generalNotificationDetails=new NotificationDetails(android: androidDetails);
+ await localNotification.show(0, "title", "body", generalNotificationDetails);
+  }
+
 }
 
