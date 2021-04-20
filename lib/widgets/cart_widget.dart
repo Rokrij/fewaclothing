@@ -1,4 +1,3 @@
-import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fewaclothing/models/cart.dart';
 import 'package:fewaclothing/providers/cart_provider.dart';
@@ -128,7 +127,6 @@ class CartWidget extends StatelessWidget {
                     fontSize: 16.0
                 );
               }
-                  // showSnackBar("Item Removed !",_globalKeyScaffold),
             ),
           ],
         ),

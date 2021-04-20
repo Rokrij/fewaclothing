@@ -1,5 +1,6 @@
 import 'package:fewaclothing/bottom_navigator_page.dart';
 import 'package:fewaclothing/cart_page.dart';
+import 'package:fewaclothing/confirmation_page.dart';
 import 'package:fewaclothing/home_page.dart';
 import 'package:fewaclothing/login_page.dart';
 import 'package:fewaclothing/newarrival_page.dart';
@@ -79,6 +80,7 @@ class MyApp extends StatelessWidget {
         'account': (BuildContext context) => MyAccount(),
         'aboutUs': (BuildContext context) => AboutUs(),
         'allCategory': (BuildContext context) => AllCategory(),
+        'confirmation': (BuildContext context) => ConfirmationPage(),
       },
       initialRoute: 'splash',
       debugShowCheckedModeBanner: false,

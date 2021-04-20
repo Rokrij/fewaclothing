@@ -565,7 +565,6 @@ class _ProductDetailsState extends State<ProductDetails>  {
     });
   }
   void addToCart(){
-
     FewaCart cart=FewaCart(productName:widget.product.name,image: widget.product.image,
         email: Provider.of<UserAuthProvider>(context, listen: false).email,price: widget.product.price,
         quantity: counter.toString(),size: productSize,

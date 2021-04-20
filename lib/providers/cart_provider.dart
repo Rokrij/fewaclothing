@@ -9,6 +9,11 @@ class CartProvider extends ChangeNotifier {
 
   int totalPrice=0;
   int totalQuantity=0;
+  var image;
+  var name;
+  String price;
+  var size;
+
 
 
   void fetchCart() async {
@@ -16,7 +21,6 @@ class CartProvider extends ChangeNotifier {
     var url = '$READ_CART_URL';
     var response = await http.get(url);
     var result = jsonDecode(response.body);
-
     result.forEach((c) {
       var fewaCart = FewaCart.fromJson(c);
       fewaCartList.add(fewaCart);
@@ -28,6 +32,9 @@ class CartProvider extends ChangeNotifier {
     var price=int.parse(cart.quantity) *int.parse(cart.price);
     totalPrice += price;
     fewaCartList.add(cart);
+    image=cart.image;
+    name=cart.productName;
+    size=cart.size;
     notifyListeners();
 
   }
@@ -36,6 +43,12 @@ class CartProvider extends ChangeNotifier {
     totalQuantity -=int.parse(cart.quantity);
     var price=int.parse(cart.quantity) *int.parse(cart.price);
     totalPrice -= price;
+    notifyListeners();
+  }
+  void emptyFromCart(){
+    fewaCartList=[];
+    totalQuantity =0;
+    totalPrice = 0;
     notifyListeners();
   }
 }

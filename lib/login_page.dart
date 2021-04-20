@@ -49,6 +49,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 TextField(
+                  autofillHints:[AutofillHints.email],
                   style:GoogleFonts.montserrat(
                     textStyle: TextStyle(
                       color: Colors.black,

@@ -1,8 +1,10 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:fewaclothing/mail.dart';
 import 'package:fewaclothing/models/cart.dart';
 import 'package:fewaclothing/providers/cart_provider.dart';
+import 'package:fewaclothing/providers/user_auth_provider.dart';
+import 'package:fewaclothing/utils/constants.dart';
 import 'package:fewaclothing/widgets/cart_widget.dart';
+import 'package:fewaclothing/widgets/loading_indicator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -12,7 +14,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
-
+import 'package:http/http.dart' as http;
 
 class CartPage extends StatefulWidget {
 
@@ -48,7 +50,6 @@ void initState() {
   @override
   Widget build(BuildContext context) {
     cartItems = Provider.of<CartProvider>(context, listen: true).fewaCartList;
-
     return Scaffold(
 
       key: _globalKeyScaffold,
@@ -252,9 +253,9 @@ void initState() {
                           phone = phoneController.text;
                           deliveryAddress = deliveryAddressController.text;
                           if (phoneController.text.isEmpty ||
-                              deliveryAddressController.text.isEmpty) {
+                              deliveryAddressController.text.isEmpty || phoneController.text.length!=10) {
                             Fluttertoast.showToast(
-                                msg: "All fields are required before ordering!!!",
+                                msg: "Data Incorrect/Invalid!!!",
                                 toastLength: Toast.LENGTH_SHORT,
                                 gravity: ToastGravity.CENTER,
                                 timeInSecForIosWeb: 1,
@@ -263,8 +264,10 @@ void initState() {
                                 fontSize: 16.0
                             );
                           } else {
+                            addCart();
                             sendMail();
                           showMaterialModalBottomSheet(
+                            isDismissible: false,
                             context: context,
                             builder: (context) => Container(
                               height: 270,
@@ -303,6 +306,10 @@ void initState() {
                                           ),
                                         ), onTap: (){
                                           khaltiPay();
+                                          cartItems=[];
+                                          Provider.of<CartProvider>(context,listen: false).emptyFromCart();
+                                          Navigator.pushNamedAndRemoveUntil(
+                                              context, 'confirmation', (route) => false);
                                         },),
                                         GestureDetector(
                                           child: Container(
@@ -320,66 +327,11 @@ void initState() {
                                                 ),),
                                             ),
                                           ), onTap: (){
+                                          cartItems=[];
+                                          Provider.of<CartProvider>(context,listen: false).emptyFromCart();
+                                          Navigator.pushNamedAndRemoveUntil(
+                                              context, 'confirmation', (route) => false);
                                           _showNotification;
-                                          showMaterialModalBottomSheet(
-                                            context: context,
-                                            builder: (context) => Container(
-                                              height: 270,
-                                              child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                children: [
-                                                  Padding(
-                                                    padding: const EdgeInsets.only(left: 10,right: 10),
-                                                    child: Column(
-                                                      mainAxisAlignment: MainAxisAlignment.start,
-                                                      children: [
-                                                        Image(
-                                                          image: AssetImage('assets/images/3.png'),
-                                                          height: 100,
-                                                          //fit: BoxFit.fill,
-                                                        ),
-                                                        Center(
-                                                          child: Padding(
-                                                            padding: const EdgeInsets.only(bottom:10),
-                                                            child: Text('Order Status:',style: GoogleFonts.montserrat(
-                                                              textStyle: TextStyle(
-                                                                color: Colors.pink,
-                                                                fontSize: 20,
-                                                              ),
-                                                            ),),
-                                                          ),
-                                                        ),
-                                                        Text('Your order has been confirmed successfully.',
-                                                          style: GoogleFonts.montserrat(
-                                                            textStyle: TextStyle(
-                                                              color: Colors.blueGrey,
-                                                              fontSize: 12,
-                                                              fontWeight: FontWeight.bold,
-                                                            ),
-                                                          ),),
-                                                        Text('Thankyou for choosing us.',style: GoogleFonts.montserrat(
-                                                          textStyle: TextStyle(
-                                                            color: Colors.blueGrey,
-                                                            fontSize: 12,
-                                                          ),
-                                                        ),),
-                                                        Text('#SHOPWITHFEWA',style: GoogleFonts.montserrat(
-                                                          textStyle: TextStyle(
-                                                            color: Colors.pink,
-                                                            fontSize: 12,
-                                                          ),
-                                                        ),),
-                                                        Image(
-                                                          image: AssetImage('assets/gif/1.gif'),
-                                                          height: 55,
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          );
                                         },),
                                       ],
                                     ),
@@ -396,7 +348,7 @@ void initState() {
                                   ),
                                   Center(
                                     child: Padding(
-                                      padding: const EdgeInsets.only(left: 20, top:20),
+                                      padding: const EdgeInsets.only(left: 20, top:50),
                                       child: Text('#SHOPWITHFEWA',style: GoogleFonts.montserrat(
                                         textStyle: TextStyle(
                                           color: Colors.pink,
@@ -439,9 +391,9 @@ void initState() {
     );
 
     KhaltiProduct product = KhaltiProduct(
-      id: "test",
+      id: "Fewa Clothing",
       amount: Provider.of<CartProvider>(context, listen: false).totalPrice * 100.0,
-      name: "Hello Product",
+      name: "Clothing Item",
     );
 
     _flutterKhalti.startPayment(
@@ -475,5 +427,9 @@ var generalNotificationDetails=new NotificationDetails(android: androidDetails);
  await localNotification.show(0, "title", "body", generalNotificationDetails);
   }
 
+  void addCart() async {
+    var url = "$ADD_CART_URL?phonenumber=$phone&deliveryaddress=$deliveryAddress";
+    var response = await http.get(url);
+  }
 }
 

@@ -1,6 +1,7 @@
 import 'package:fewaclothing/providers/user_auth_provider.dart';
 import 'package:fewaclothing/utils/constants.dart';
 import 'package:fewaclothing/widgets/loading_indicator.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
@@ -64,6 +65,8 @@ class _SignUpPageState extends State<SignUpPage> {
 
                 ),
                 TextFormField(
+                    keyboardType:TextInputType.emailAddress,
+                  autofillHints:[AutofillHints.email],
                   style:GoogleFonts.montserrat(
                     textStyle: TextStyle(
                       color: Colors.black,
@@ -73,6 +76,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   controller: emailController,
                   decoration: InputDecoration(
+
                     icon: Icon(
                       Icons.mail,
                     ),
@@ -218,5 +222,3 @@ class _SignUpPageState extends State<SignUpPage> {
     }
   }
 }
-
-// https://inheriting-addition.000webhostapp.com/booking.php?name=bla&price=bla&size=m&quantity=10&email=srokrij@gmail.com&image=1111
