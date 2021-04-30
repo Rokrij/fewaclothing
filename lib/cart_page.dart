@@ -178,7 +178,6 @@ void initState() {
     showMaterialModalBottomSheet(
 
       context: context,
-
       builder: (context) => Container(
         height: 270,
         child: Column(
@@ -267,6 +266,7 @@ void initState() {
                             addCart();
                             sendMail();
                           showMaterialModalBottomSheet(
+                            enableDrag:false,
                             isDismissible: false,
                             context: context,
                             builder: (context) => Container(
