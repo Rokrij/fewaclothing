@@ -432,4 +432,5 @@ var generalNotificationDetails=new NotificationDetails(android: androidDetails);
     var response = await http.get(url);
   }
 }
+//https://inheriting-addition.000webhostapp.com/add_cart.php?name=FOX%20HOODIE&price=2250&size=m&quantity=1&email=srokrij@gmail.com&image=http://inheriting-addition.000webhostapp.com/images/product_hoodie_1.jpg&payment_method=cash&phonenumber=9805812407&deliveryaddress=Chipledhunga,pokhara
 
