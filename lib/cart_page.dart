@@ -1,10 +1,8 @@
 import 'package:fewaclothing/mail.dart';
 import 'package:fewaclothing/models/cart.dart';
 import 'package:fewaclothing/providers/cart_provider.dart';
-import 'package:fewaclothing/providers/user_auth_provider.dart';
 import 'package:fewaclothing/utils/constants.dart';
 import 'package:fewaclothing/widgets/cart_widget.dart';
-import 'package:fewaclothing/widgets/loading_indicator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -12,12 +10,11 @@ import 'package:flutter_khalti/flutter_khalti.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart' as http;
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
-import 'package:http/http.dart' as http;
 
 class CartPage extends StatefulWidget {
-
   @override
   _CartPageState createState() => _CartPageState();
 }
@@ -30,18 +27,24 @@ class _CartPageState extends State<CartPage> {
   int selectedRadio;
   var phone;
   var deliveryAddress;
+
+  String paymentMethod = '';
+
   @override
-void initState() {
+  void initState() {
     super.initState();
-    var andriodInitialize= new AndroidInitializationSettings('@mipmap/ic_launcher');
-    var initialzationSettings=new InitializationSettings(android: andriodInitialize);
-    localNotification=new FlutterLocalNotificationsPlugin();
+    var andriodInitialize =
+    new AndroidInitializationSettings('@mipmap/ic_launcher');
+    var initialzationSettings =
+    new InitializationSettings(android: andriodInitialize);
+    localNotification = new FlutterLocalNotificationsPlugin();
     localNotification.initialize(initialzationSettings);
-    selectedRadio=0;
+    selectedRadio = 0;
   }
-  setSelectedRadio(int val){
+
+  setSelectedRadio(int val) {
     setState(() {
-      selectedRadio=val;
+      selectedRadio = val;
     });
   }
 
@@ -51,7 +54,6 @@ void initState() {
   Widget build(BuildContext context) {
     cartItems = Provider.of<CartProvider>(context, listen: true).fewaCartList;
     return Scaffold(
-
       key: _globalKeyScaffold,
       appBar: AppBar(
         leading: IconButton(
@@ -96,60 +98,70 @@ void initState() {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Padding(
-              padding: const EdgeInsets.only(right:20),
+              padding: const EdgeInsets.only(right: 20),
               child: Column(
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(right:10),
-                        child: Text('Products Total:',
+                        padding: const EdgeInsets.only(right: 10),
+                        child: Text(
+                          'Products Total:',
                           style: TextStyle(
                               color: Colors.pink,
                               fontSize: 30,
-                              fontWeight: FontWeight.bold),),
+                              fontWeight: FontWeight.bold),
+                        ),
                       ),
-                      Text('Rs. ${Provider.of<CartProvider>(context, listen: true).totalPrice.toString()}',style:TextStyle(fontWeight: FontWeight.bold, fontSize: 30,color: Colors.blueGrey) ,),
+                      Text(
+                        'Rs. ${Provider.of<CartProvider>(context, listen: true).totalPrice.toString()}',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 30,
+                            color: Colors.blueGrey),
+                      ),
                     ],
                   ),
                 ],
               ),
             ),
             Container(
-                color: Colors.white,width: 450,height: 60, child: checkOutButton()),
+                color: Colors.white,
+                width: 450,
+                height: 60,
+                child: checkOutButton()),
           ],
         ),
       ),
-      body:
-       cartItems.isNotEmpty?
-    ListView.builder
-        (
+      body: cartItems.isNotEmpty
+          ? ListView.builder(
           itemCount: cartItems.length,
           itemBuilder: (BuildContext ctxt, int index) {
             return CartWidget(cartItems[index]);
-          }
-      ): Center(
-           child: Opacity(
-             opacity: 0.75,
-             child: Column(
-         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image(
-              image: AssetImage('assets/gif/1.gif'),
-              height: 125,
-          ),
-          Text("No items in your cart !!!",
-            style: GoogleFonts.raleway(
-              textStyle: TextStyle(
-                  color: Colors.blueGrey,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold),
-          ),
-          ),
-        ],
-      ),
-           )),
+          })
+          : Center(
+          child: Opacity(
+            opacity: 0.75,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image(
+                  image: AssetImage('assets/gif/1.gif'),
+                  height: 125,
+                ),
+                Text(
+                  "No items in your cart !!!",
+                  style: GoogleFonts.raleway(
+                    textStyle: TextStyle(
+                        color: Colors.blueGrey,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ),
+          )),
     );
   }
 
@@ -163,20 +175,20 @@ void initState() {
         disabledTextColor: Colors.black,
         splashColor: Colors.pinkAccent,
         child: Text(
-          'CHECKOUT (${Provider.of<CartProvider>(context,listen: false).totalQuantity})',
+          'CHECKOUT (${Provider.of<CartProvider>(context, listen: false).totalQuantity})',
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
         ),
         onPressed: () {
-          cartItems.isNotEmpty?displayCheckOutDetailsOption():displayNoOption();
+          cartItems.isNotEmpty
+              ? displayCheckOutDetailsOption()
+              : displayNoOption();
         },
       ),
     );
-
   }
-  void displayCheckOutDetailsOption(){
 
+  void displayCheckOutDetailsOption() {
     showMaterialModalBottomSheet(
-
       context: context,
       builder: (context) => Container(
         height: 270,
@@ -184,23 +196,26 @@ void initState() {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 10,right: 10),
+              padding: const EdgeInsets.only(left: 10, right: 10),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Center(
                     child: Padding(
-                      padding: const EdgeInsets.only(bottom:10),
+                      padding: const EdgeInsets.only(bottom: 10),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('Fill up the form to confirm your order:',style: GoogleFonts.montserrat(
-                          textStyle: TextStyle(
-                          color: Colors.blueGrey,
-                          fontSize: 15,
+                          Text(
+                            'Fill up the form to confirm your order:',
+                            style: GoogleFonts.montserrat(
+                              textStyle: TextStyle(
+                                color: Colors.blueGrey,
+                                fontSize: 15,
+                              ),
+                            ),
                           ),
-                          ),
-                          ), IconButton(
+                          IconButton(
                             icon: (Icon(
                               Icons.clear,
                               color: Colors.pink,
@@ -215,44 +230,48 @@ void initState() {
                     ),
                   ),
                   TextField(
-                    style:GoogleFonts.montserrat(
-                    textStyle: TextStyle(
+                    style: GoogleFonts.montserrat(
+                      textStyle: TextStyle(
                         color: Colors.blueGrey,
                         fontSize: 20,
+                      ),
                     ),
-                  ),
                     controller: phoneController,
                     decoration: InputDecoration(
-                        icon: Icon(Icons.phone), labelText: 'Phone Number', fillColor: Colors.pink),
+                        icon: Icon(Icons.phone),
+                        labelText: 'Phone Number',
+                        fillColor: Colors.pink),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top:10),
+                    padding: const EdgeInsets.only(top: 10),
                     child: TextField(
-                      style:GoogleFonts.montserrat(
+                      style: GoogleFonts.montserrat(
                         textStyle: TextStyle(
                           color: Colors.blueGrey,
                           fontSize: 20,
                         ),
                       ),
-                      controller:deliveryAddressController,
+                      controller: deliveryAddressController,
                       decoration: InputDecoration(
-                          icon: Icon(Icons.location_pin), labelText: 'Delivery Address', fillColor: Colors.pink),
+                          icon: Icon(Icons.location_pin),
+                          labelText: 'Delivery Address',
+                          fillColor: Colors.pink),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top:15.0, left:30),
+                    padding: const EdgeInsets.only(top: 15.0, left: 30),
                     child: Container(
                       width: 335,
                       decoration: BoxDecoration(
                           color: Colors.pink,
-                          borderRadius: BorderRadius.circular(15)
-                      ),
+                          borderRadius: BorderRadius.circular(15)),
                       child: FlatButton(
                         onPressed: () {
                           phone = phoneController.text;
                           deliveryAddress = deliveryAddressController.text;
                           if (phoneController.text.isEmpty ||
-                              deliveryAddressController.text.isEmpty || phoneController.text.length!=10) {
+                              deliveryAddressController.text.isEmpty ||
+                              phoneController.text.length != 10) {
                             Fluttertoast.showToast(
                                 msg: "Data Incorrect/Invalid!!!",
                                 toastLength: Toast.LENGTH_SHORT,
@@ -260,116 +279,154 @@ void initState() {
                                 timeInSecForIosWeb: 1,
                                 backgroundColor: Colors.blueGrey,
                                 textColor: Colors.white,
-                                fontSize: 16.0
-                            );
+                                fontSize: 16.0);
                           } else {
-                            addCart();
-                            sendMail();
-                          showMaterialModalBottomSheet(
-                            enableDrag:false,
-                            isDismissible: false,
-                            context: context,
-                            builder: (context) => Container(
-                              height: 270,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 20, top:20),
-                                    child: Text('Payment Methods:',style: GoogleFonts.montserrat(
-                                      textStyle: TextStyle(
-                                        color: Colors.blueGrey,
-                                        fontSize: 20,
-                                      ),
-                                    ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 20,right: 20,bottom: 20,top:20),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        GestureDetector(child: Container(
-                                          decoration: BoxDecoration(
-                                              color: Colors.purple,
-                                              borderRadius: BorderRadius.circular(15)
+                            // addCart();
+                            sendMail(context);
+                            showMaterialModalBottomSheet(
+                              enableDrag: false,
+                              isDismissible: false,
+                              context: context,
+                              builder: (context) => Container(
+                                height: 270,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 20, top: 20),
+                                      child: Text(
+                                        'Payment Methods:',
+                                        style: GoogleFonts.montserrat(
+                                          textStyle: TextStyle(
+                                            color: Colors.blueGrey,
+                                            fontSize: 20,
                                           ),
-
-                                          child: FlatButton(
-                                            child: Text('Khalti',
-                                              style: GoogleFonts.raleway(
-                                                textStyle: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 20,
-                                                ),
-                                              ),),
-                                          ),
-                                        ), onTap: (){
-                                          khaltiPay();
-                                          cartItems=[];
-                                          Provider.of<CartProvider>(context,listen: false).emptyFromCart();
-                                          Navigator.pushNamedAndRemoveUntil(
-                                              context, 'confirmation', (route) => false);
-                                        },),
-                                        GestureDetector(
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                                color: Colors.pink,
-                                                borderRadius: BorderRadius.circular(15)
-                                            ),
-                                            child: FlatButton(
-                                              child: Text('Cash on Delivery',
-                                                style: GoogleFonts.raleway(
-                                                  textStyle: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 20,
-                                                  ),
-                                                ),),
-                                            ),
-                                          ), onTap: (){
-                                          cartItems=[];
-                                          Provider.of<CartProvider>(context,listen: false).emptyFromCart();
-                                          Navigator.pushNamedAndRemoveUntil(
-                                              context, 'confirmation', (route) => false);
-                                          _showNotification;
-                                        },),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 20),
-                                    child: Text('* choose one of the payment options !',
-                                      style: GoogleFonts.montserrat(
-                                      textStyle: TextStyle(
-                                        color: Colors.blueGrey,
-                                        fontSize: 15,
-                                      ),
-                                    ),),
-                                  ),
-                                  Center(
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(left: 20, top:50),
-                                      child: Text('#SHOPWITHFEWA',style: GoogleFonts.montserrat(
-                                        textStyle: TextStyle(
-                                          color: Colors.pink,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold
                                         ),
-                                      ),),
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 20,
+                                          right: 20,
+                                          bottom: 20,
+                                          top: 20),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          GestureDetector(
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                  color: Colors.purple,
+                                                  borderRadius:
+                                                  BorderRadius.circular(
+                                                      15)),
+                                              child: FlatButton(
+                                                child: Text(
+                                                  'Khalti',
+                                                  style: GoogleFonts.raleway(
+                                                    textStyle: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 20,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            onTap: () {
+                                              khaltiPay();
+                                              Navigator.pop(context);
+                                              // cartItems = [];
+                                              // Provider.of<CartProvider>(context,
+                                              //         listen: false)
+                                              //     .emptyFromCart();
+                                              // Navigator.pushNamedAndRemoveUntil(
+                                              //     context,
+                                              //     'confirmation',
+                                              //     (route) => false);
+                                            },
+                                          ),
+                                          GestureDetector(
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                  color: Colors.pink,
+                                                  borderRadius:
+                                                  BorderRadius.circular(
+                                                      15)),
+                                              child: FlatButton(
+                                                child: Text(
+                                                  'Cash on Delivery',
+                                                  style: GoogleFonts.raleway(
+                                                    textStyle: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 20,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            onTap: () {
+                                              paymentMethod = 'COD';
+                                              addCart();
+                                              Navigator.pop(context);
+                                              // cartItems = [];
+                                              // Provider.of<CartProvider>(context,
+                                              //         listen: false)
+                                              //     .emptyFromCart();
+                                              // Navigator.pushNamedAndRemoveUntil(
+                                              //     context,
+                                              //     'confirmation',
+                                              //     (route) => false);
+                                              // _showNotification;
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 20),
+                                      child: Text(
+                                        '* choose one of the payment options !',
+                                        style: GoogleFonts.montserrat(
+                                          textStyle: TextStyle(
+                                            color: Colors.blueGrey,
+                                            fontSize: 15,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Center(
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 20, top: 50),
+                                        child: Text(
+                                          '#SHOPWITHFEWA',
+                                          style: GoogleFonts.montserrat(
+                                            textStyle: TextStyle(
+                                                color: Colors.pink,
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          );}
+                            );
+                            // Navigator.pop(context);
+                          }
                         },
-                        child: Text('Confirm',
+                        child: Text(
+                          'Confirm',
                           style: GoogleFonts.raleway(
                             textStyle: TextStyle(
                               color: Colors.white,
                               fontSize: 20,
                             ),
-                          ),),
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -381,10 +438,12 @@ void initState() {
       ),
     );
   }
-  void displayNoOption(){
+
+  void displayNoOption() {
     showSnackBar("No items to check out !!!");
   }
-  void khaltiPay(){
+
+  void khaltiPay() {
     FlutterKhalti _flutterKhalti = FlutterKhalti.configure(
       publicKey: "test_public_key_eacadfb91994475d8bebfa577b0bca68",
       urlSchemeIOS: "KhaltiPayFlutterExampleScheme",
@@ -392,7 +451,8 @@ void initState() {
 
     KhaltiProduct product = KhaltiProduct(
       id: "Fewa Clothing",
-      amount: Provider.of<CartProvider>(context, listen: false).totalPrice * 100.0,
+      amount:
+      Provider.of<CartProvider>(context, listen: false).totalPrice * 100.0,
       name: "Clothing Item",
     );
 
@@ -400,6 +460,8 @@ void initState() {
       product: product,
       onSuccess: (data) {
         print("Payment Successful");
+        paymentMethod = 'Khalti';
+        addCart();
       },
       onFaliure: (error) {
         print("There was an error !");
@@ -420,17 +482,32 @@ void initState() {
     );
     _globalKeyScaffold.currentState.showSnackBar(snackBar);
   }
-  Future _showNotification() async{
-var androidDetails=new AndroidNotificationDetails("channelId", "Local Notification", "channelDescription",
-    importance: Importance.high);
-var generalNotificationDetails=new NotificationDetails(android: androidDetails);
- await localNotification.show(0, "title", "body", generalNotificationDetails);
+
+  Future _showNotification() async {
+    var androidDetails = new AndroidNotificationDetails(
+        "channelId", "Local Notification", "channelDescription",
+        importance: Importance.high);
+    var generalNotificationDetails =
+    new NotificationDetails(android: androidDetails);
+    await localNotification.show(
+        0, "title", "body", generalNotificationDetails);
   }
 
   void addCart() async {
-    var url = "$ADD_CART_URL?phonenumber=$phone&deliveryaddress=$deliveryAddress";
-    var response = await http.get(url);
+    cartItems.forEach((e) async {
+      var url =
+          "$ADD_CART_URL?name=${e.productName}&price=${e.price}&size=${e.size}&payment_method=$paymentMethod&quantity=${e.quantity}&email=${e.email}&image=${e.image}&phonenumber=$phone&deliveryaddress=$deliveryAddress";
+      var response = await http.get(url);
+      print(url);
+      print(response.body.toString());
+      if (response.body.toLowerCase().contains('success')) {
+        Provider.of<CartProvider>(context, listen: false).removeFromCart(e);
+        Navigator.pushNamedAndRemoveUntil(
+            context,
+            'confirmation',
+                (route) => false);
+      }
+    });
+    Navigator.pop(context);
   }
 }
-//https://inheriting-addition.000webhostapp.com/add_cart.php?name=FOX%20HOODIE&price=2250&size=m&quantity=1&email=srokrij@gmail.com&image=http://inheriting-addition.000webhostapp.com/images/product_hoodie_1.jpg&payment_method=cash&phonenumber=9805812407&deliveryaddress=Chipledhunga,pokhara
-

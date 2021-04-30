@@ -1,9 +1,12 @@
 import 'dart:io';
 
+import 'package:fewaclothing/providers/user_auth_provider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
+import 'package:provider/provider.dart';
 
-sendMail() async {
+sendMail(BuildContext context) async {
   String username = 'fewaclothingstore@gmail.com';
   String password = 'fewaclothing55';
 
@@ -11,7 +14,7 @@ sendMail() async {
   // Creating the Message
   final message = Message()
     ..from = Address(username, 'Fewa Clothing')
-    ..recipients.add('srokrij@gmail.com')
+    ..recipients.add(Provider.of<UserAuthProvider>(context, listen: false).email)
     ..subject = 'Your Order has been confirmed successfully !!'
     ..html = "<h1>Order Confirmed !!!</h1><p>Dear Customer, Your order has been confirmed.\nThankyou for shopping with us.\nIf you got any feedback, We're just one email away.\n Also you can follow us on instagram: https://www.instagram.com/fewaclothingstore </p>";
 
@@ -25,7 +28,7 @@ sendMail() async {
     }
   }
   var connection = PersistentConnection(smtpServer);
-  // Send the first message
+
   await connection.send(message);
   // close the connection
   await connection.close();
