@@ -282,7 +282,7 @@ class _CartPageState extends State<CartPage> {
                                 fontSize: 16.0);
                           } else {
                             // addCart();
-                            sendMail(context);
+
                             showMaterialModalBottomSheet(
                               enableDrag: false,
                               isDismissible: false,
@@ -445,7 +445,7 @@ class _CartPageState extends State<CartPage> {
 
   void khaltiPay() {
     FlutterKhalti _flutterKhalti = FlutterKhalti.configure(
-      publicKey: "test_public_key_eacadfb91994475d8bebfa577b0bca68",
+      publicKey: "test_public_key_5d337ff60f9e413e97c96bd2c2a97d0a",
       urlSchemeIOS: "KhaltiPayFlutterExampleScheme",
     );
 
@@ -488,12 +488,14 @@ class _CartPageState extends State<CartPage> {
         "channelId", "Local Notification", "channelDescription",
         importance: Importance.high);
     var generalNotificationDetails =
+
     new NotificationDetails(android: androidDetails);
     await localNotification.show(
         0, "title", "body", generalNotificationDetails);
   }
 
   void addCart() async {
+    sendMail(context);
     cartItems.forEach((e) async {
       var url =
           "$ADD_CART_URL?name=${e.productName}&price=${e.price}&size=${e.size}&payment_method=$paymentMethod&quantity=${e.quantity}&email=${e.email}&image=${e.image}&phonenumber=$phone&deliveryaddress=$deliveryAddress";
